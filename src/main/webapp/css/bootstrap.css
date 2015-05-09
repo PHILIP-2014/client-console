@@ -4393,6 +4393,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   }
   .navbar-right ~ .navbar-right {
     margin-right: 0;
+    margin-top: 10px;
   }
 }
 .navbar-default {

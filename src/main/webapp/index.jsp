@@ -141,46 +141,27 @@
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title" id="exampleModalLabel">New Book</h4>
+					<h4 class="modal-title" id="exampleModalLabel">New Company</h4>
 				</div>
-				<form>
-					<div class="modal-body">
-						<div class="form-group">
-							<label for="recipient-name" class="control-label">name:</label>
-							<input type="text" class="form-control" id="recipient-name">
-						</div>
-						<div class="form-group">
-							<label for="message-text" class="control-label">description:</label>
-							<textarea class="form-control" id="message-text"></textarea>
-						</div>
-						<div class="form-group">
-							<div>
-								<label for="recipient-name" class="control-label">author:</label>
-								<input type="text" class="form-control-philip" id="recipient-name">
-							</div>
-							<div>
-								<label for="recipient-name" class="control-label">editor:</label>
-								<div class="btn-group">
-								  <button class="btn dropdown-toggle" data-toggle="dropdown" href="#" value="fuyin书房">
-								    fuyin书房
-								    <span class="caret"></span>
-								  </button>
-								  <ul class="dropdown-menu">
-									<li><a tabindex="-1" href="#" value="grace书房">grace书房</a></li>
-									<li><a tabindex="-1" href="#" value="haiwai书房">haiwai书房</a></li>
-							  	</ul>
-								</div>
-							</div>
-						</div>
-						<div>
-							<label for="recipient-name" class="control-label">total:</label>
-							<input type="text" class="form-control-philip" placeholder="Type something…">
-						</div>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">close</button>
-						<button type="button" class="btn btn-primary">submit</button>
-					</div>
+				<form name="companyEditForm" class="company-edit" ng-submit="onSubmit($event)">
+				    <div class="form-group">
+				        <h4>团队名称</h4>
+				    </div>
+				    <div class="form-group">
+				        <input class="form-control px-input-base" ng-model="company.name" placeholder="请输入团队名称" ng-minlength="2" px-focus="" px-select="" required="">
+				    </div>
+				
+				    <div class="form-group">
+				        <h4>团队介绍</h4>
+				    </div>
+				    <div class="form-group">
+				        <textarea class="form-control" ng-model="company.description" placeholder="请团队介绍" ng-minlength="2"></textarea>
+				    </div>
+				
+				    <div class="form-group">
+				        <button class="px-btn px-btn-primary" type="submit" ng-disabled="companyEditForm.$invalid||submitBtn.isDisabled"><i class="icon-refresh icon-spin" ng-if="submitBtn.showLoading"></i>创建</button>
+				        <button class="px-btn" type="button" ng-click="closeWindow($event)">取消</button>
+				    </div>
 				</form>
 			</div>
 		</div>

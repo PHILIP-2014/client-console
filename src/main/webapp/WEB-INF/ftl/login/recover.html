@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8" />
+	<title>道曼派乐|Parox-在线工作协同-找回密码</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description" content="道曼派乐是全新的企业协作云平台，让你以前所未有的方式开展工作，用户可以建立工作空间，与特定的人或组织开展合作，可以将文档、任务、目标、项目等关于工作的信息，连同工作相关的人像社交网络那样组织在一起。派乐使得我们能够更加清晰地了解任务的规模、进度以及人员状态，让我们回归工作的本质要求：高效便捷地获取资源。" />
+	<meta name="keywords" content="道曼派乐,Parox,在线工作,开放,协作,资源,平台,云存储,文件,管理,分享,任务分配,评价" />
+	<meta name="robots" content="道曼派乐,注册">
+	<meta name="author" content="道曼派乐Parox">
+	<meta name="author" content="${baseAddr}">
+	<meta name="application-name" content="${baseAddr}" />
+	<link rel="shortcut icon" href="${imgRoot}/favicon.ico">
+	<link rel="stylesheet" href="${cssRoot}/css1.6/bootstrap.css" media="screen">
+	<link rel="stylesheet" href="${cssRoot}/css1.6/parox-base.css" media="screen">
+	<link rel="stylesheet" href="${cssRoot}/css1.6/parox-home.css" media="screen">
+	<link rel="stylesheet" href="${cssRoot}/css1.6/parox-dashboard.css" media="screen">
+	<!--[if lt IE 9]>
+	<script src="${jsRoot}/compatibility/ie8-responsive-file-warning.js"></script>
+	<script src="${jsRoot}/compatibility/html5shiv.min.js"></script>
+	<script src="${jsRoot}/compatibility/respond.js"></script>
+	<![endif]-->
+</head>
+<body>
+<div class="wrap">
+	<@p.Include page='base_header.ftl' />
+    <div id="p-recover" style="width: 400px; margin: 20px auto;">
+        <div class="panel" >
+            <div class="panel-body">
+                <div class="m-t-20 text-center">
+                    <img src="${imgRoot}/images1.6/login-password.png" />
+                </div>
+                <p class="m-t-20 m-l-20 m-r-20 f-s-20 text-center">
+                    忘记密码
+                </p>
+                <p class="m-20 text-center">
+                    我们将发送重置密码的说明给您。
+                </p>
+                <form id="recover" class="form" role="form" aria-label="找回密码" aria-labelledby="找回密码"
+                      action="javascript:void(0);" data-remote="true">
+                    <div class="m-30 p-relative">
+                        <label class="sr-only">输入企业邮箱</label>
+                        <span class="icon-16 icon-16-email p-absolute" style="top: 7px; left:7px;"></span>
+                        <input type="text" class="form-control t-i-2" name="email" id="email"  type="text"
+                               class="form-control" placeholder="请输入你的注册邮箱"  autofocus="ture" />
+                        <div class="verifytip bottom top-right" id="p-msg-reg">请输入你的注册邮箱</div>
+                    </div>
+                    <div class="m-30">
+                        <button class="btn btn-primary btn-block" type="submit">发送</button>
+                    </div>
+                </form>
+                <div class="text-center">
+                    <a href="${baseAddr!''}/login/">返回登录</a>
+                </div>
+            </div>
+        </div>
+    </div>
+	<!--<div class="p_m reg_block">
+		<input type="hidden" value="" id="temp-email">
+		<div class="container" id="p-recover">
+			<div class="col-sm-10 col-md-8 col-lg-6 col-sm-offset-1 col-md-offset-2 col-lg-offset-3 panel p_l_blank">
+				<div class="panel-body">
+					<div class="text-center p-b-10"><img src="${imgRoot}/images1.6/login-password.png"></div>
+					<h3 class="f-s-20 text-center p-t-10 ">忘记密码</h3>
+					<div class="f-s-14 text-center p-t-25 p-b-10">我们将发送重置密码到你的注册邮箱</div>
+					<form id="recover" class="form" role="form" aria-label="找回密码" aria-labelledby="找回密码"
+						  action="javascript:void(0);" data-remote="true">
+						<div class="form-group has-feedback m-b-30">
+							<label class="control-label sr-only" for="email">请输入你的注册邮箱</label>
+							<input name="email" id="email"  type="text"
+								   class="form-control" placeholder="请输入你的注册邮箱"  autofocus="ture">
+							<span class="icon-16 icon-16-email v-a-m form-control-feedback"></span>
+							<div class="verifytip bottom top-right" id="p-msg-reg">请输入你的注册邮箱</div>
+						</div>
+
+						<div class="">
+							<button class="btn btn-primary text-center col-xs-12 marg-10-b f-s-16" type="submit">发送</button>
+						</div>
+
+						<div class="clearfix col-xs-12 m-t-20">
+							已经想起了密码？
+							<a href="${baseAddr!''}/login/" class="f-w-n">返回登录</a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>-->
+
+	<footer class="footer hid">
+		<div class="col-lg-12">
+			<p class="text-muted pull-left">
+				<a href="${baseAddr}" class="text-info">
+					© 2014-2015 Parox
+				</a>
+				-
+				<a href="${baseAddr}/about.html" target="detail" class="text-info">
+					关于
+				</a>
+				-
+				<a href="${baseAddr}/service.html" target="detail" class="text-info">
+					服务条款
+				</a>
+				-
+				<a href="${baseAddr}/privacy.html" target="detail" class="text-info">
+					隐私条款
+				</a>
+			</p>
+		</div>
+	</footer>
+</div>
+<div id="loading-bar" class="loading-bar"></div>
+<script type="text/javascript" src="${jsRoot}/lib/seajs/sea.js" id="seajsnode"></script>
+<script type="text/javascript" src="${jsRoot}/sea.config.js"></script>
+<script type="text/javascript">
+	//调用入口文件及相关bootstrap插件
+	seajs.use(['jquery','views/login/view.login.recover.js','bootstrap'],function($){
+		$(function(){
+			$('.footer').addClass('footer p-absolute').show();
+		});
+	});
+</script>
+
+</body>
+</html>

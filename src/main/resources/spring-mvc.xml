@@ -41,14 +41,41 @@
     <mvc:resources mapping="/js/**" location="/js/" cache-period="31556926"/>
     <mvc:resources mapping="/jquery/**" location="/jquery/" cache-period="31556926"/>
 	
-	<!-- 配置JSP视图 -->
-     <bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-       <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
-        <property name="prefix" value="/WEB-INF/jsp/"/>
-        <property name="suffix" value=".jsp"/>
-        <property name="contentType" value="text/html;charset=UTF-8"/>
-        <property name="order" value="1"/>
-     </bean>
+	<!-- 配置freeMarker视图解析器 -->  
+	<bean id="freemarkerResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">		
+		<property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView"/>		
+		<property name="contentType" value="text/html;charset=utf-8" />
+		<property name="cache" value="false" />
+		<property name="suffix" value=".html" />
+		<property name="order" value="0" />
+		<property name="exposeSpringMacroHelpers" value="true" />
+		<!-- 允许访问请求属性，默认为false -->
+		<property name="exposeRequestAttributes" value="false" />
+		<!-- 允许访问会话属性，默认为false -->
+		<property name="exposeSessionAttributes" value="true" />
+		<!-- 页面上下文，类似于request.contextPath -->
+		<property name="requestContextAttribute" value="rc" />	
+	</bean>	
+	
+	<!-- 设置freeMarker的配置文件路径 -->
+	<bean id="freemarkerConfiguration" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="location" value="classpath:freemarker.properties"/>
+    </bean>
+	
+	<!-- 配置freeMarker的模板路径 -->  
+    <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+    	<property name="freemarkerSettings" ref="freemarkerConfiguration"/>
+        <property name="templateLoaderPath">
+            <value>/WEB-INF/ftl/</value>
+        </property>
+        <property name="freemarkerVariables">
+            <map>
+            </map>
+        </property>
+        <property name="defaultEncoding">
+            <value>utf-8</value>
+        </property>
+    </bean>
 	
 	<!-- 启动SpringMVC的注解功能，完成请求和注解POJO的映射 -->
 	<bean

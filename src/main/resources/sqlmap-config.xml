@@ -9,11 +9,9 @@ PUBLIC "-//ibatis.apache.org//DTD Config 3.0//EN"
         <setting name="useGeneratedKeys" value="true" /> 
         <setting name="defaultExecutorType" value="REUSE" />  
     </settings>
-    <!--
     <mappers>
-        <mapper resource="sqlmap/x.xml" />
-        <mapper resource="sqlmap/x.xml" />
-        <mapper resource="sqlmap/x.xml" />
-    </mappers>
-    -->
+	    <mapper resource="sqlmap/customerAppMapper.xml" />
+	    <mapper resource="sqlmap/customerCompanyMapper.xml" />
+	    <mapper resource="sqlmap/customerAdminMapper.xml" />
+    </mappers>   
 </configuration>

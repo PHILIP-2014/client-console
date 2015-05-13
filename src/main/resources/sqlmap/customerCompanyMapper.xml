@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.daoman.client.dao.CustomerCompanyDao">
+	<sql id="default_column">
+		customer_company.id,
+		customer_company.app_key as appKey,
+		customer_company.cid,
+		customer_company.gmt_created as gmtCreated,
+		customer_company.gmt_modified as gmtModified
+	</sql>
+	<sql id="company_column">
+		company.id as `company.id`,
+		company.name as `company.name`,
+		company.logo as `company.logo`,
+		company.description as `company.description`,
+		company.uid_created as `company.uidCreated`,
+		company.gmt_created as `company.gmtCreated`,
+		company.gmt_modified as `company.gmtModified`,
+		company.is_disabled as `company.isDisabled`,
+		company.invite_code as `company.inviteCode`
+	</sql>
+	
+	<select id="queryModel" resultType="com.daoman.client.model.CustomerCompanyModel">
+		select
+		<include refid="default_column" />
+		<include refid="company_column" />
+		from customer_company
+		inner join company on customer_company.cid = company.id
+		where customer_company.id=#{id}
+	</select>
+	
+	<insert id="insert" parameterType="com.daoman.client.model.CustomerCompany"
+		keyProperty="id">
+		insert into customer_company (
+			app_key,
+			cid,
+			gmt_created,
+			gmt_modified)
+		values(
+			#{appKey},
+			#{cid},
+			now(),now())
+	</insert>
+	<delete id="delete" parameterType="java.lang.Long">
+		delete from customer_company
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+
+	<update id="update" parameterType="com.daoman.client.model.CustomerCompany">
+		update customer_company
+		<set>
+			<if test="appKey != null">
+				app_key = #{appKey},
+			</if>
+			<if test="cid != null">
+				cid = #{cid},
+			</if>
+			`gmt_modified` = now()
+		</set>
+		where `id` = #{id}
+	</update>
+
+
+</mapper>

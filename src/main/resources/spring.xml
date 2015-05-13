@@ -8,4 +8,8 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd
 	<!-- 引入属性文件 -->
 	<context:property-placeholder location="classpath:jdbc.properties" />
 
+	<!-- 密码加密bean -->
+	<bean id="pwdEncoder" class="com.daoman.client.utils.security.Md5PwdEncoder">
+		<property name="defaultSalt" value="parox_dm606"/>
+	</bean>
 </beans>

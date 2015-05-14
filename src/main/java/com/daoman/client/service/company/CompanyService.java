@@ -1,7 +1,6 @@
 package com.daoman.client.service.company;
 
-import java.util.List;
-
+import com.daoman.client.model.company.Company;
 import com.daoman.client.model.company.CompanyModel;
 import com.daoman.client.utils.ServiceException;
 
@@ -9,18 +8,9 @@ public interface CompanyService {
 	
 	public CompanyModel queryModel(Long id);
 	
-	public CompanyModel doCreate(CompanyModel company) throws ServiceException;
+	public Company doCreate(Company company) throws ServiceException;
 	
-	
-	/**
-	 * 根据用户id查询所有他在的公司
-	 * @param userId
-	 * @return
-	 * @throws ServiceException
-	 */
-	public List<CompanyModel> queryByUserId(Long userId);
-
-	public Integer doUpdate(Long uid, CompanyModel company) throws ServiceException;
+	public Integer doUpdate(Long uid, Company company) throws ServiceException;
 
 	/**
 	 * 解析邀请码

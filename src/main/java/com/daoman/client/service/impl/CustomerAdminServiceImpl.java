@@ -4,6 +4,7 @@ import java.util.Date;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.daoman.client.dao.CustomerAdminDao;
 import com.daoman.client.model.CustomerAdmin;
@@ -13,7 +14,7 @@ import com.daoman.client.utils.SessionUser;
 import com.daoman.client.utils.security.PwdEncoder;
 import com.google.common.base.Strings;
 
-//@Component("customerAdminService")
+@Service("customerAdminService")
 public class CustomerAdminServiceImpl implements CustomerAdminService{
 	
 	@Autowired

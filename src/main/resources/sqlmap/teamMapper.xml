@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.daoman.client.dao.TeamDao" >
+
+	<sql id="default_column">
+		`team`.`id`,
+		`team`.`team_code` as teamCode,
+		`team`.`name`,
+		`team`.`description`,
+		`team`.`avatar`,
+		`team`.`is_open` as isOpen,
+		`team`.`cid`,
+		`team`.`uid_created` as uidCreated,
+		`team`.`gmt_created` as gmtCreated,
+		`team`.`gmt_modified` as gmtModified,
+		`team`.`num`,
+		`team`.`status`,
+		`team`.`is_system` as isSystem
+	</sql>
+	
+	<sql id="user_column">
+		`user_profile`.`id` as `profile.id`,
+		`user_profile`.`nick_name` as `profile.nickName`,
+		`user_profile`.`email` as `profile.email`,
+		`user_profile`.`mobile` as `profile.mobile`,
+		`user_profile`.`cid_default` as `profile.cidDefault`,
+		`user_profile`.`avatar` as `profile.avatar`,
+		`user_profile`.`gender` as `profile.gender`,
+		`user_profile`.`birthday` as `profile.birthday`,
+		`user_profile`.`old_uid` as `profile.oldUid`,
+		`user_profile`.`gmt_created` as `profile.gmtCreated`,
+		`user_profile`.`gmt_modified` as `profile.gmtModified`,
+		`user_profile`.`invite_code` as inviteCode,
+		`user_profile`.`company_name` as companyName,
+		`user_profile`.`job_position` as jobPosition,
+		`user_profile`.`address` as address
+	</sql>
+	
+	<select id="queryModel" parameterType="java.lang.Long" resultType="com.daoman.client.model.TeamModel">
+	    select
+	    <include refid="default_column"/>,
+	    <include refid="user_column"/>
+	    from `team`,`user_profile`
+	    where `team`.id = #{id} and `team`.uid_created = `user_profile`.id
+	</select>
+
+	<select id="queryById" parameterType="java.lang.Long" resultType="com.daoman.client.model.TeamModel">
+	select 
+	<include refid="default_column"/>,
+	<include refid="user_column"/>
+	from `team`
+	inner join `user_profile`on `team`.uid_created = `user_profile`.id
+	where `team`.id = #{id}
+	</select>
+	
+	<select id="queryByCond" resultType="com.daoman.client.model.TeamModel">
+		select distinct
+		<include refid="default_column" />,
+		<include refid="user_column"/>
+		from `team` 
+			inner join `user_profile`on `team`.uid_created = `user_profile`.id
+		where `team`.id in (select `team_member`.team_id from team_member where `team_member`.target_uid =#{cond.targetUid})
+		and `team`.cid=0
+		<if test="cond.cid!=null and cond.cid !='' ">
+			or `team`.cid = #{cond.cid} 
+		</if>
+		<if test="cond.nameFuzzy != null and cond.nameFuzzy !='' "> 
+			and `team`.name like CONCAT('%',#{cond.nameFuzzy},'%') 
+		</if>
+		<if test="cond.name!=null and cond.name!='' ">
+			and `team`.name = #{cond.name}
+		</if>
+		<if test="cond.nameMatchBefore!=null and cond.nameMatchBefore!='' ">
+			and `team`.name like CONCAT(#{cond.nameMatchBefore},'%') 
+		</if>
+		order by is_system desc,team.gmt_created desc
+	</select>
+	
+  <insert id="insert" parameterType="com.daoman.client.model.TeamModel"  keyProperty="id">
+  insert into team(
+ 		<if test=" teamCode != null">`team_code`,</if>
+ 		<if test=" name != null">`name`,</if>
+ 		<if test=" description != null">`description`,</if>
+ 		<if test=" avatar != null">`avatar`,</if>
+ 		<if test=" isOpen != null">`is_open`,</if>
+ 		<if test=" cid != null">`cid`,</if>
+ 		<if test=" uidCreated != null">`uid_created`,</if>
+ 		<if test=" num != null">`num`,</if>
+ 		<if test=" status != null">`status`,</if>
+		`is_system`,
+		`gmt_created`,
+		`gmt_modified` 
+		 )
+	values(
+		<if test=" teamCode != null">#{teamCode},</if>
+		<if test=" name != null">#{name},</if>
+ 		<if test=" description != null">#{description},</if>
+ 		<if test=" avatar != null">#{avatar},</if>
+ 		<if test=" isOpen != null">#{isOpen},</if>
+ 		<if test=" cid != null">#{cid},</if>
+ 		<if test=" uidCreated != null">#{uidCreated},</if>
+ 		<if test=" num != null">#{num},</if>
+ 		<if test=" status != null">#{status},</if>
+		#{isSystem},now(),now()
+	)
+  </insert>
+  
+  <update id="updateModel" parameterType="com.daoman.client.model.TeamModel">
+  update `team`
+  <set>
+		<if test=" name != null">`name` = #{name},</if>
+ 		<if test=" description != null">`description` = #{description},</if>
+ 		<if test=" avatar != null">`avatar` = #{avatar},</if>
+ 		<if test=" isOpen != null">`is_open` = #{isOpen},</if>
+ 		<if test=" num != null">`num` = #{num},</if>
+ 		<if test=" status != null">`status` = #{status},</if>
+		`gmt_modified` = now()
+ 	 </set>
+	  where `id` = #{id}
+  </update>
+  
+  <update id="update" parameterType="com.daoman.chat.model.user.Team">
+  update `team`
+  <set>
+  		<if test=" teamCode != null">`team_code` = #{teamCode},</if>
+		<if test=" name != null">`name` = #{name},</if>
+ 		<if test=" description != null">`description` = #{description},</if>
+ 		<if test=" avatar != null">`avatar` = #{avatar},</if>
+ 		<if test=" isOpen != null">`is_open` = #{isOpen},</if>
+ 		<if test=" cid != null">`cid` = #{cid},</if>
+ 		<if test=" uidCreated != null">`uid_created` = #{uidCreated},</if>
+ 		<if test=" status != null">`status` = #{status},</if>
+		`gmt_modified` = now()
+ 	 </set>
+	  where `id` = #{id}
+  </update>
+  
+  <update id="incrOrDecrTeamNum">
+  update `team`
+  <set>
+  		`num` = num + #{num},
+		`gmt_modified` = now()
+ 	 </set>
+	  where `id` = #{id}
+  </update>
+  
+  <select id="queryModelOfCompany" parameterType="java.lang.Long" resultType="com.daoman.client.model.TeamModel">
+   select
+	    <include refid="default_column"/>
+	    from `team`
+	    where `team`.cid = #{cid} and is_system=1
+	    limit 1
+  </select>
+  
+  <delete id="delete">
+  	delete
+  	from `team`
+  	where id=#{id}
+  </delete>
+  
+</mapper>

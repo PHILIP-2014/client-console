@@ -7,6 +7,8 @@ public class Team extends BaseDomain{
 
 	private static final long serialVersionUID = 1L;
 	
+	public final static String SYS_TEAM_COMPANY_NAME = "全体人员";
+	
 	public static final int STATUS_NORMAL = 0;
 	public static final int STATUS_ARCHIVE = 1;
 	public static final int STATUS_DISABLE  = 2;

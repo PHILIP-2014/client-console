@@ -7,6 +7,8 @@ public class CustomerAdmin extends BaseDomain {
 
 	private static final long serialVersionUID = 1397584736693222309L;
 	
+	public static final long CUSTOMER_UID_CREATED = 0l;
+	
 	public final static int ACTIVE_FALSE=0;
 	public final static int ACTIVE_TRUE=1;
 

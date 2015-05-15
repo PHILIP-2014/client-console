@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="/css/test.css" rel="stylesheet" media="screen">
+	<script type="text/javascript" src="/jquery/jquery.min.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="/js/test/test-data.js"></script>
+	<script type="text/javascript" src="/js/test/test-url.js"></script>
+	<script type="text/javascript" src="/js/test/test.js"></script>
+	<link rel="shortcut icon" href="/img/favicon.ico">
+</head>
+
+<body>
+<div class="container">
+</div>
+
+<div style="padding:30px; float:left; width:30%;">
+
+	<h3>URL:</h3> 
+	<input type="input" id="url" value="" style="width:100%;" />
+	<h3>METHOD:</h3>
+	<label><input type="radio" name="method" value="GET" checked="checked"/>GET </label>
+	<label><input type="radio" name="method" value="POST"/>POST </label>
+	<label><input type="radio" name="method" value="PUT"/>PUT </label>
+	<label><input type="radio" name="method" value="DELETE"/>DELETE </label>
+	
+	<h3>POST TYPE:</h3>
+	<label><input type="radio" name="postType" value="application/json" checked="checked"/>PayLoad </label>
+	<label><input type="radio" name="postType" value="application/x-www-form-urlencoded"/>FormData</label> 
+	
+	<br />
+	<h3>PATH PARAM:</h3>
+	<input id="pathparam" value="" style="width:100%;"/>
+	<br />
+	<h3>DATA:</h3>
+	<textarea rows="5" id="pushData" style="width:100%;"></textarea>
+	<br />
+	<input type="button" id="start" value="Start">
+	<select id="testLevelSel">
+		<option value="0">等待测试</option>
+		<option value="1">开发测试</option>
+		<option value="2">集成测试</option>
+	</select>
+	<h3>URL:</h3>
+	<div id="urlContent">
+	</div>
+</div>
+
+<div style="float:left; width:48%;">
+	<div style="margin:10px;" id="msg">
+	</div>
+	<div style="margin:10px; color:red;" id="errorMsg">
+	</div>
+</div>
+
+</body>
+</html>

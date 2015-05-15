@@ -6,9 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.daoman.client.model.CustomerCompanyModel;
-import com.daoman.client.model.company.Company;
+import com.daoman.client.model.company.CompanyModel;
 import com.daoman.client.service.CustomerCompanyService;
 import com.daoman.client.service.company.CompanyService;
 import com.daoman.client.utils.ServiceException;
@@ -24,7 +25,8 @@ public class CompanyController extends BaseController{
 	private CompanyService companyService;
 
 	@RequestMapping(method=RequestMethod.POST)
-	public CustomerCompanyModel createCompany(HttpServletRequest request, Company company){
+	@ResponseBody
+	public CustomerCompanyModel createCompany(HttpServletRequest request, CompanyModel company){
 		
 		SessionUser user = getSessionUser(request);
 		try {

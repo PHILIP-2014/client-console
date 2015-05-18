@@ -1,9 +1,13 @@
 package com.daoman.client.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,8 +20,8 @@ import com.daoman.client.utils.ServiceException;
 import com.daoman.client.utils.SessionUser;
 
 @Controller
-@RequestMapping("/company")
-public class CompanyController extends BaseController{
+@RequestMapping("/customerCompany")
+public class CustomerCompanyController extends BaseController{
 	
 	@Autowired
 	private CustomerCompanyService customerCompanyService;
@@ -26,7 +30,8 @@ public class CompanyController extends BaseController{
 
 	@RequestMapping(method=RequestMethod.POST)
 	@ResponseBody
-	public CustomerCompanyModel createCompany(HttpServletRequest request, CompanyModel company){
+	public CustomerCompanyModel postCompany(HttpServletRequest request, HttpServletResponse response,
+			@RequestBody CompanyModel company){
 		
 		SessionUser user = getSessionUser(request);
 		try {
@@ -40,5 +45,12 @@ public class CompanyController extends BaseController{
 		}
 		
 		return null;
+	}
+	
+	@RequestMapping(method=RequestMethod.GET)
+	@ResponseBody
+	public List<CustomerCompanyModel> queryModelsByAppKey(HttpServletRequest request, HttpServletResponse response){
+		SessionUser user = getSessionUser(request);
+		return customerCompanyService.queryModelsByAppKey(user.getAppKey());
 	}
 }

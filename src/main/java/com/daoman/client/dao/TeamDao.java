@@ -13,7 +13,7 @@ public interface TeamDao {
 	
 	public List<TeamModel> queryByCond(@Param("cond") TeamCond cond);
 
-	public Long insert(TeamModel teamModel);
+	public Integer insert(TeamModel teamModel);
 
 	public TeamModel queryById(Long id);
 	

@@ -36,7 +36,7 @@ public class CompanyServiceImpl implements CompanyService{
 		
 		teamService.doCreate(company.getId());
 
-		return company;
+		return companyDao.queryModel(company.getId());
 	}
 	
 	private Company initCompany(Company company) throws ServiceException{

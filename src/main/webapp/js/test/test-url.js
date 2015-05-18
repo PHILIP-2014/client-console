@@ -14,7 +14,7 @@ var AUTHOR={
 	philip:"王腓力"
 }
 
-var TEST_PROGRESS=["UNSTART","DEV","INTEGRATION","ALPHA","BETA","PRODUCT","BUGFIX","USELESS"]
+var TEST_PROGRESS=["DEV","INTEGRATION"]
 
 var TEST_LEVEL_COLOR=["#999999","#996666","#993300","#FFCC00","#006600","#009900","#FF0000","#FFF000"];
 
@@ -34,26 +34,26 @@ var urls={
 			}],
 			//团队模块
 			"url-company":[{
-				url:"/company",//创建公司
+				url:"/customerCompany",//创建公司
 				method:method.POST,
 				mockdata:"companyModel",
 				author:AUTHOR.philip,
 				postType: postType.PayLoad
 			},{
-				url:"/company/",//获取单个公司信息
+				url:"/customerCompany/",//获取单个公司信息
 				pathid:"id",
 				method:method.GET,
 				author:AUTHOR.philip,
 				postType: postType.PayLoad
 			},{
-				url:"/company/",//更新公司信息
+				url:"/customerCompany/",//更新公司信息
 				pathid:"id",
 				mockdata:"companyModel",
 				method:method.PUT,
 				author:AUTHOR.philip,
 				postType: postType.PayLoad
 			},{
-				url:"/company",
+				url:"/customerCompany",
 				method:method.GET,//获取公司列表
 				author:AUTHOR.philip,
 			}

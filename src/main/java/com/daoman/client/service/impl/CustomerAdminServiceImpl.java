@@ -29,7 +29,7 @@ public class CustomerAdminServiceImpl implements CustomerAdminService{
 	 */
 	public CustomerAdmin doLogin(CustomerAdmin admin) throws ServiceException{
 
-		CustomerAdmin _admin = customerAdminDao.queryModelByAppKey(admin.getAppKey());
+		CustomerAdmin _admin = customerAdminDao.queryModelByLoginName(admin.getLoginName());
 		if(_admin == null) {
 			throw new ServiceException("error.account.not.exist");
 		}

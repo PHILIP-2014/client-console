@@ -9,7 +9,7 @@ public interface CompanyDao {
 	
 	public CompanyModel queryModel(Long id);
 	
-	public Long insert(Company company);
+	public Integer insert(Company company);
 	
 	public Integer delete(Long cid);
 	

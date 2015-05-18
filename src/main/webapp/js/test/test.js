@@ -70,7 +70,7 @@ function initUrls(testLevel){
 				$("div[name='msg']").hide();
 				message.show();
 				
-				$("div[name='url-body']").css("background-color","white");
+				$("div[name='url-body']").css("background-color","#ccc");
 				urldom.css("background-color","#ccc");
 				
 				fillPost(o);

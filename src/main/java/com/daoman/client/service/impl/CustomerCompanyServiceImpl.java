@@ -1,5 +1,7 @@
 package com.daoman.client.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,11 @@ public class CustomerCompanyServiceImpl implements CustomerCompanyService{
 	public CustomerCompanyModel queryModel(Long id) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public List<CustomerCompanyModel> queryModelsByAppKey(String appKey) {
+		
+		return customerCompanyDao.queryModelsByAppKey(appKey);
 	}
 
 	public CustomerCompanyModel doCreate(SessionUser user, Long cid) {
@@ -40,5 +47,6 @@ public class CustomerCompanyServiceImpl implements CustomerCompanyService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 }

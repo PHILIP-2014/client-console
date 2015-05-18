@@ -30,7 +30,7 @@ public class AdminController extends BaseController{
 	}
 
 	/**
-	 * parox2.0统一登录接口
+	 * 登录
 	 * @param request
 	 * @param response
 	 * @param account
@@ -44,7 +44,7 @@ public class AdminController extends BaseController{
 
 		try {
 			CustomerAdmin _admin = customerAdminService.doLogin(admin);
-			SessionUser user = customerAdminService.initSessionUser(admin);
+			SessionUser user = customerAdminService.initSessionUser(_admin);
 
 			setSessionUser(request, user);
 			
@@ -54,28 +54,5 @@ public class AdminController extends BaseController{
 		}
 		return null;
 	}
-//
-//	/**
-//	 * 输入框校验
-//	 * @param request
-//	 * @param response
-//	 * @param key
-//	 * @param value
-//	 * @return
-//	 * @throws IOException
-//	 */
-//	@RequestMapping(value="/check", method=RequestMethod.GET)
-//	@ResponseBody
-//	public Map<String, Object> getCheck(HttpServletRequest request, HttpServletResponse response, String key, String value) throws IOException {
-//		Boolean result=false;
-//		try {
-//			result = customerAdminService.checkExist(key, value);
-//			//返回前端 true: 验证成功，可继续，false: 验证失败
-//			return ajaxResult(result==null?false:!result, null);
-//		} catch (ServiceException e) {
-//			sendError(request, response, e.getMessage());
-//		}
-//
-//		return ajaxResult(false, null);
-//	}
+
 }

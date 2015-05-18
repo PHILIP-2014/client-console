@@ -119,22 +119,6 @@
 	  where `id` = #{id}
   </update>
   
-  <update id="update" parameterType="com.daoman.chat.model.user.Team">
-  update `team`
-  <set>
-  		<if test=" teamCode != null">`team_code` = #{teamCode},</if>
-		<if test=" name != null">`name` = #{name},</if>
- 		<if test=" description != null">`description` = #{description},</if>
- 		<if test=" avatar != null">`avatar` = #{avatar},</if>
- 		<if test=" isOpen != null">`is_open` = #{isOpen},</if>
- 		<if test=" cid != null">`cid` = #{cid},</if>
- 		<if test=" uidCreated != null">`uid_created` = #{uidCreated},</if>
- 		<if test=" status != null">`status` = #{status},</if>
-		`gmt_modified` = now()
- 	 </set>
-	  where `id` = #{id}
-  </update>
-  
   <update id="incrOrDecrTeamNum">
   update `team`
   <set>

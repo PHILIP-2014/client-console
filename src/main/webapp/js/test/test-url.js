@@ -48,7 +48,7 @@ var urls={
 			},{
 				url:"/customerCompany/",//更新公司信息
 				pathid:"id",
-				mockdata:"companyModel",
+				mockdata:"customerCompanyModel",
 				method:method.PUT,
 				author:AUTHOR.philip,
 				postType: postType.PayLoad

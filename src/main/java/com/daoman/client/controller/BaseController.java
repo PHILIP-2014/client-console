@@ -30,6 +30,7 @@ public class BaseController {
 		return map;
 	}
 	
+	
 	public SessionUser getSessionUser(HttpServletRequest request) {
 		return (SessionUser) request.getSession().getAttribute(SESSION_KEY);
 	}

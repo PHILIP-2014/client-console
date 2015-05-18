@@ -1,5 +1,6 @@
 package com.daoman.client.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -7,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,6 +30,26 @@ public class CustomerCompanyController extends BaseController{
 	@Autowired
 	private CompanyService companyService;
 
+	/**
+	 * 根据app_key获取company
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(method=RequestMethod.GET)
+	@ResponseBody
+	public List<CustomerCompanyModel> queryModelsByAppKey(HttpServletRequest request, HttpServletResponse response){
+		SessionUser user = getSessionUser(request);
+		return customerCompanyService.queryModelsByAppKey(user.getAppKey());
+	}
+	
+	/**
+	 * 创建company
+	 * @param request
+	 * @param response
+	 * @param company
+	 * @return
+	 */
 	@RequestMapping(method=RequestMethod.POST)
 	@ResponseBody
 	public CustomerCompanyModel postCompany(HttpServletRequest request, HttpServletResponse response,
@@ -47,10 +69,29 @@ public class CustomerCompanyController extends BaseController{
 		return null;
 	}
 	
-	@RequestMapping(method=RequestMethod.GET)
+	/**
+	 * 更新company
+	 * @param request
+	 * @param response
+	 * @param id
+	 * @param customerCompanyModel
+	 * @return
+	 * @throws IOException
+	 */
+	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
 	@ResponseBody
-	public List<CustomerCompanyModel> queryModelsByAppKey(HttpServletRequest request, HttpServletResponse response){
+	public CompanyModel putCompany(HttpServletRequest request, HttpServletResponse response, 
+			@PathVariable Long id, @RequestBody CompanyModel companyModel) throws IOException {
+
 		SessionUser user = getSessionUser(request);
-		return customerCompanyService.queryModelsByAppKey(user.getAppKey());
+		try {
+			companyModel.setId(id);
+			
+			companyService.doUpdate(user.getUid(), companyModel);
+			return companyModel;
+		} catch (ServiceException e) {
+			sendError(request, response, e.getMessage());
+		}
+		return null;
 	}
 }

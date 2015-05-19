@@ -54,5 +54,10 @@ public class AdminController extends BaseController{
 		}
 		return null;
 	}
+	
+	@RequestMapping(value="/ppp", method=RequestMethod.GET)
+	public String ppp(){
+		return "login/recover";
+	}
 
 }

@@ -74,7 +74,7 @@ public class CustomerCompanyController extends BaseController{
 	 * @param request
 	 * @param response
 	 * @param id
-	 * @param customerCompanyModel
+	 * @param companyModel
 	 * @return
 	 * @throws IOException
 	 */

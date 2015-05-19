@@ -94,8 +94,8 @@
         <!-- 文件大小最大值 -->
         <property name="maxUploadSize" value="10485760000" />  
         <!-- 内存中的最大值 -->
-        <property name="maxInMemorySize" value="40960" />  
-    </bean> 
+        <property name="maxInMemorySize" value="40960" />
+    </bean>
 
 	<!-- 配置基于Session的处理,将提交上来的locale参数进行处理
 	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver"/>
@@ -115,8 +115,12 @@
 			<property name="loginUrl" value="/login" />
 			<property name="excludeUrls">
 				<list>
-					<value>/testApi.*</value>
+					<value>/testApi*</value>
 					<value>/login*</value>
+					<value>/css*</value>
+					<value>/js*</value>
+					<value>/jquery*</value>
+					<value>/img*</value>
 				</list>
 			</property>
 		</bean>

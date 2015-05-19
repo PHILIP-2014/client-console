@@ -31,10 +31,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Settings</a></li>
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">Help</a></li>
+            <li><a href="#">${admin.loginName}</a></li>
           </ul>
 			
           <form class="navbar-form navbar-right">
@@ -110,18 +107,18 @@
                 <tr>
                   <th>name</th>
                   <th>author</th>
-                  <th>description</th>
+                  <th>appkey</th>
                   <th>type</th>
-                  <th>remain</th>
+                  <th>gmtLogin</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>1,001</td>
-                  <td>Lorem</td>
-                  <td>ipsum</td>
-                  <td>dolor</td>
-                  <td>sit</td>
+                  <td>${admin.uid}</td>
+                  <td>${admin.loginName}</td>
+                  <td>${admin.appKey}</td>
+                  <td>admin</td>
+                  <td>${admin.gmtLogin?string('MM-dd HH:mm:ss')}</td>
                 </tr>
               </tbody>
             </table>

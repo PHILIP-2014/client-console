@@ -30,7 +30,7 @@ var urls={
 				method:method.POST,
 				mockdata:"admin",
 				author:AUTHOR.philip,
-				postType: postType.PayLoad
+				postType: postType.FormData
 			}],
 			//团队模块
 			"url-company":[{
@@ -38,7 +38,7 @@ var urls={
 				method:method.POST,
 				mockdata:"companyModel",
 				author:AUTHOR.philip,
-				postType: postType.PayLoad
+				postType: postType.FormData
 			},{
 				url:"/customerCompany/",//获取单个公司信息
 				pathid:"id",

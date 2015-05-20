@@ -53,7 +53,7 @@ public class CustomerCompanyController extends BaseController{
 	@RequestMapping(method=RequestMethod.POST)
 	@ResponseBody
 	public CustomerCompanyModel postCompany(HttpServletRequest request, HttpServletResponse response,
-			@RequestBody CompanyModel company){
+			CompanyModel company){
 		
 		SessionUser user = getSessionUser(request);
 		try {

@@ -36,6 +36,7 @@
 	<mvc:annotation-driven />
     <mvc:resources mapping="/*.html" location="/*.html" cache-period="0"/>
     <mvc:resources mapping="/css/**" location="/css/" cache-period="31556926"/>
+    <mvc:resources mapping="/awesome/**" location="/awesome/" cache-period="31556926"/>
     <mvc:resources mapping="/html/**" location="/html/" cache-period="31556926"/>
     <mvc:resources mapping="/img/**" location="/img/" cache-period="31556926"/>
     <mvc:resources mapping="/js/**" location="/js/" cache-period="31556926"/>
@@ -118,6 +119,7 @@
 					<value>/testApi*</value>
 					<value>/login*</value>
 					<value>/css*</value>
+					<value>/awesome*</value>
 					<value>/js*</value>
 					<value>/jquery*</value>
 					<value>/img*</value>

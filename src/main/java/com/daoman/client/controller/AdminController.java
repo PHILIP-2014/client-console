@@ -52,6 +52,11 @@ public class AdminController extends BaseController{
 		}
 		return null;
 	}
+	@RequestMapping(value="/logout", method=RequestMethod.GET)
+	public String logout(HttpServletRequest request) {
+		removeSession(request, SESSION_KEY);
+		return "redirect:/login";
+	}
 	
 	@RequestMapping(value="/app", method=RequestMethod.GET)
 	public String index(HttpServletRequest request, ModelMap model){

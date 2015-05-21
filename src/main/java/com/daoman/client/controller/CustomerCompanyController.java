@@ -1,13 +1,13 @@
 package com.daoman.client.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,10 +37,12 @@ public class CustomerCompanyController extends BaseController{
 	 * @return
 	 */
 	@RequestMapping(method=RequestMethod.GET)
-	@ResponseBody
-	public List<CustomerCompanyModel> queryModelsByAppKey(HttpServletRequest request, HttpServletResponse response){
+	public String queryModelsByAppKey(HttpServletRequest request, HttpServletResponse response, 
+			ModelMap model){
 		SessionUser user = getSessionUser(request);
-		return customerCompanyService.queryModelsByAppKey(user.getAppKey());
+		model.put("admin", user);
+		model.put("comp_list", customerCompanyService.queryModelsByAppKey(user.getAppKey()));
+		return "comp";
 	}
 	
 	/**
@@ -94,4 +96,5 @@ public class CustomerCompanyController extends BaseController{
 		}
 		return null;
 	}
+	
 }

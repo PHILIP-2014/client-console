@@ -121,8 +121,12 @@
                                             <!-- <td class="center">X</td> -->
                                             <td>
                                             <button type="button" class="btn btn-outline btn-info" data-toggle="modal"
-                                            onclick="editComp(this)" i-name="${item.company.name}" i-id="${item.company.id}" 
-                                            i-desc="${item.company.description}">修改团队信息</button>
+                                            onclick="compModal(this)" i-name="${item.company.name}" i-id="${item.company.id}" 
+                                            i-desc="${item.company.description}">修改团队</button>
+                                            <#if item.num == 0 >
+                                            <button type="button" class="btn btn-outline btn-danger" data-toggle="modal"
+                                            onclick="delModal(this)" i-id2="${item.id}" i-cid="${item.company.id}">删除团队</button>
+                                            </#if>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -137,7 +141,28 @@
                 <!-- /.col-lg-12 -->
             </div>
             
-            <!-- 创建company模态框 -->
+            <!-- 删除companyPanel -->
+			<div class="modal fade" id="delComp">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">&times;</button>
+							<h3>删除团队</h3>
+						</div>
+						<div class="modal-body">
+							<p>You sure???</p>
+						</div>
+						<div class="modal-footer">
+							<input type="hidden" id="cus_id1" />
+							<input type="hidden" id="c_id3" />
+							<a href="#" class="btn btn-default" data-dismiss="modal">取消</a> <a href="#"
+								class="btn btn-danger" data-dismiss="modal" onclick="delComp()">删除</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 创建company模态框 -->
 			<div class="modal fade" id="newComp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			  <div class="modal-dialog">
 			    <div class="modal-content">
@@ -161,7 +186,7 @@
 					    </div>
 					      <div class="modal-footer">
 					        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-					        <input type="button" class="btn btn-primary" value="创建" onclick="createComp()">
+					        <input type="button" class="btn btn-primary" data-dismiss="modal" value="创建" onclick="createComp()">
 					      </div>
 					</form>
 			      </div>
@@ -193,7 +218,7 @@
 					    </div>
 				      	<div class="modal-footer">
 					        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-					        <input type="button" class="btn btn-primary" value="保存" onclick="updateComp()">
+					        <input type="button" class="btn btn-primary" data-dismiss="modal" value="保存" onclick="updateComp()">
 				     	</div>
 					</form>
 			      </div>
@@ -211,10 +236,10 @@
 		var name = $('#c_name1').val();
 		var desc = $('#c_desc1').val();
 		AjaxPost('/customerCompany', {name:name,description:desc,uidCreated:0}, function callback(){
-			location.href=location.href;
+			//location.href=location.href;
 		});
 	};
-	function editComp(item) {
+	function compModal(item){
 		debugger;
 		var name = $(item).attr('i-name');
 		var desc = $(item).attr('i-desc');
@@ -225,12 +250,29 @@
 		//定位模态框并传值
 		$('#editComp').modal();
 	};
-	function updateComp(item){
+	function updateComp(){
 		debugger;
 		var name = $('#c_name2').val();
 		var desc = $('#c_desc2').val();
 		var cid = $('#c_id2').val();
 		AjaxPost('/customerCompany/update', {id:cid,name:name,description:desc}, function callback(){
+			//location.href=location.href;
+		});
+	};
+	function delModal(item){
+		debugger;
+		var id = $(item).attr('i-id2');
+		var cid = $(item).attr('i-cid');
+		document.getElementById('cus_id1').value=id;
+		document.getElementById('c_id3').value=cid;
+		//定位模态框并传值
+		$('#delComp').modal();
+	};
+	function delComp(){
+		debugger;
+		var id = $('#cus_id1').val();
+		var cid = $('#c_id3').val();
+		AjaxPost('/customerCompany/delete', {id:id,cid:cid}, function callback(){
 			location.href=location.href;
 		});
 	};

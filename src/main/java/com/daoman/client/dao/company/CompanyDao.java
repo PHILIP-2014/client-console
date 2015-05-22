@@ -9,6 +9,8 @@ public interface CompanyDao {
 	
 	public CompanyModel queryModel(Long id);
 	
+	public CompanyModel queryModel4App(Long id);
+	
 	public Integer insert(Company company);
 	
 	public Integer delete(Long cid);

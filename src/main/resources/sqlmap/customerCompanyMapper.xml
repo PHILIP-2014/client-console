@@ -33,12 +33,17 @@
 	<select id="queryModelsByAppKey" resultType="com.daoman.client.model.CustomerCompanyModel">
 		select
 		<include refid="default_column" />
-		,
+		, num,
 		<include refid="company_column" />
 		from customer_company
 		inner join company on customer_company.cid = company.id
-		where customer_company.app_key=#{appKey,jdbcType=VARCHAR}
-		order by customer_company.id desc
+		left join team on customer_company.cid = team.cid
+		where
+		customer_company.app_key = #{appKey,jdbcType=VARCHAR}
+		and team.is_system = 1 
+		and company.is_disabled = 0
+		order by
+		customer_company.id desc
 	</select>
 	
 	<insert id="insert" parameterType="com.daoman.client.model.CustomerCompany"

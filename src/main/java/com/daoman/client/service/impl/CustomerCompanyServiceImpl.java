@@ -39,16 +39,14 @@ public class CustomerCompanyServiceImpl implements CustomerCompanyService{
 		return customerCompanyDao.countByAppKey(appKey);
 	}
 
-	public Integer doUpdate(CustomerCompanyModel customerCompanyModel)
-			throws com.daoman.client.utils.ServiceException {
+	public Integer doUpdate(CustomerCompanyModel customerCompanyModel){
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Integer doDelete(Long id)
-			throws com.daoman.client.utils.ServiceException {
-		// TODO Auto-generated method stub
-		return null;
+	public Integer doDelete(Long id) {
+		
+		return customerCompanyDao.delete(id);
 	}
 
 

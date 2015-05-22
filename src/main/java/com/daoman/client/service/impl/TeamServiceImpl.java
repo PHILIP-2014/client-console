@@ -89,4 +89,14 @@ public class TeamServiceImpl implements TeamService{
 		return teamDao.queryById(teamId);
 	}
 
+	public Integer doDelete(Long cid) {
+		//没有成员才能删除（这是app client的方法, 删除全部成员群）
+		TeamModel teamModel = teamDao.queryModelOfCompany(cid);
+		if(teamModel == null || teamModel.getNum() > 0){
+			return null;
+		}
+		teamModel.setStatus(Team.STATUS_DISABLE);
+		return teamDao.updateModel(teamModel);
+	}
+
 }

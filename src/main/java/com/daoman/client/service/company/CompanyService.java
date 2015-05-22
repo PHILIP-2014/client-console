@@ -11,6 +11,14 @@ public interface CompanyService {
 	public Company doCreate(Company company) throws ServiceException;
 	
 	public Integer doUpdate(Long uid, Company company) throws ServiceException;
+	
+	/**
+	 * @author philip
+	 * 没有成员才能删除（这是app client的方法）
+	 * @param id
+	 * @return
+	 */
+	public Integer doDelete(Long id);
 
 	/**
 	 * 解析邀请码

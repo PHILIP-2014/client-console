@@ -1,6 +1,7 @@
 package com.daoman.client.controller;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -95,4 +96,14 @@ public class CustomerCompanyController extends BaseController{
 		return null;
 	}
 	
+	@RequestMapping(value="/delete", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> deleteCompany(HttpServletRequest request, Long id, Long cid) {
+		Integer impact = companyService.doDelete(cid);
+		if(impact == null){
+			return ajaxResult(false, "fail");
+		}
+		customerCompanyService.doDelete(id);
+		return ajaxResult(true, "succ");
+	}
 }

@@ -17,6 +17,14 @@ public interface TeamService{
 	public TeamModel queryById(Long teamId);
 	
 	public Integer doUpdate(TeamModel teamModel) throws ServiceException;
+	
+	/**
+	 * @author philip
+	 * 没有成员才能删除（这是app client的方法, 删除全部成员群）
+	 * @param cid
+	 * @return
+	 */
+	public Integer doDelete(Long cid);
 
 	public TeamModel queryModelOfCompany(Long cid);
 

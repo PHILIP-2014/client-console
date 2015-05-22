@@ -38,6 +38,12 @@
 		inner join `user_profile` on `company`.uid_created = `user_profile`.id
 		where company.id=#{id}
 	</select>
+	<select id="queryModel4App" resultType="com.daoman.client.model.company.CompanyModel">
+		select
+		<include refid="default_column" />
+		from company
+		where company.id=#{id}
+	</select>
 	
 	<insert id="insert" parameterType="com.daoman.client.model.company.Company"
 		keyProperty="id">

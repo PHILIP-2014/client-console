@@ -77,5 +77,18 @@ public class CompanyServiceImpl implements CompanyService{
 		}
 		return inviteCode;
 	}
+
+	public Integer doDelete(Long id) {
+		Company company = companyDao.queryModel4App(id);
+		if(company == null){
+			return null;
+		}
+		Integer impact = teamService.doDelete(company.getId());
+		if(impact == null){
+			return null;
+		}
+		company.setIsDisabled(Company.DISABLED_TRUE);
+		return companyDao.update(company);
+	}
 	
 }

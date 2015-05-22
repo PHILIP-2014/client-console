@@ -62,6 +62,17 @@ public class AdminController extends BaseController{
 		return null;
 	}
 	
+	@RequestMapping(value="/dashboard", method=RequestMethod.GET)
+	public String main(HttpServletRequest request, HttpServletResponse response, ModelMap model) {
+		
+		SessionUser user = getSessionUser(request);
+		model.put("admin", user);
+		model.put("countComp", customerCompanyService.countByAppKey(user.getAppKey()));
+		model.put("countAdmin", customerAdminService.countByAppKey(user.getAppKey()));
+		model.put("app", customerAppService.queryModelByAppKey(user.getAppKey()));
+		return "/app/index";
+	}
+	
 	/**
 	 * 登出
 	 * @param request

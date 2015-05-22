@@ -82,6 +82,10 @@ public class CustomerAdminServiceImpl implements CustomerAdminService{
 
 		return false;
 	}
+	
+	public Integer countByAppKey(String appKey) {
+		return customerAdminDao.countByAppKey(appKey);
+	}
 
 	public CustomerAdmin queryModel(Long id) {
 		// TODO Auto-generated method stub

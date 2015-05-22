@@ -13,6 +13,8 @@ public interface CustomerCompanyDao {
 	
 	public Integer insert(CustomerCompany customerCompany);
 	
+	public Integer countByAppKey(String appKey);
+	
 	public Integer delete(Long id);
 	
 	public Integer update(CustomerCompany customerCompany);

@@ -26,7 +26,7 @@
 		select
 		<include refid="default_column" />
 		from customer_app
-		where customer_app.app_key = #{appKey}
+		where customer_app.app_key = #{appKey,jdbcType=VARCHAR}
 	</select>
 	
 	<insert id="insert" parameterType="com.daoman.client.model.CustomerApp"

@@ -19,7 +19,6 @@ public class CustomerCompanyServiceImpl implements CustomerCompanyService{
 	private CustomerCompanyDao customerCompanyDao;
 	
 	public CustomerCompanyModel queryModel(Long id) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	
@@ -36,6 +35,10 @@ public class CustomerCompanyServiceImpl implements CustomerCompanyService{
 		return customerCompanyModel;
 	}
 	
+	public Integer countByAppKey(String appKey) {
+		return customerCompanyDao.countByAppKey(appKey);
+	}
+
 	public Integer doUpdate(CustomerCompanyModel customerCompanyModel)
 			throws com.daoman.client.utils.ServiceException {
 		// TODO Auto-generated method stub
@@ -47,6 +50,7 @@ public class CustomerCompanyServiceImpl implements CustomerCompanyService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 
 }

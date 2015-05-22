@@ -16,6 +16,8 @@ public interface CustomerCompanyService {
 	
 	public Integer doUpdate(CustomerCompanyModel customerCompanyModel) throws ServiceException;
 	
+	public Integer countByAppKey(String appKey);
+	
 	public Integer doDelete(Long id) throws ServiceException;
 	
 }

@@ -16,4 +16,6 @@ public interface CustomerAdminDao {
 	
 	public Integer update(CustomerAdmin customerAdmin);
 	
+	public Integer countByAppKey(String appKey);
+	
 }

@@ -53,6 +53,11 @@
 			#{cid},
 			now(),now())
 	</insert>
+	
+	<select id="countByAppKey" parameterType="java.lang.String" resultType="java.lang.Integer">
+		select count(*) from customer_company where `app_key` = #{appKey,jdbcType=VARCHAR};
+	</select>
+	
 	<delete id="delete" parameterType="java.lang.Long">
 		delete from customer_company
 		where id = #{id,jdbcType=BIGINT}

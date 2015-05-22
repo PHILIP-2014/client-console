@@ -70,5 +70,9 @@
 		</set>
 		where `id` = #{id}
 	</update>
+	
+	<select id="countByAppKey" parameterType="java.lang.String" resultType="java.lang.Integer">
+		select count(*) from customer_admin where `app_key` = #{appKey,jdbcType=VARCHAR};
+	</select>
 
 </mapper>

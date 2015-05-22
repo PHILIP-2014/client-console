@@ -24,4 +24,6 @@ public interface CustomerAdminService {
 	
 	public Integer doDelete(Long id) throws ServiceException;
 	
+	public Integer countByAppKey(String appKey);
+	
 }

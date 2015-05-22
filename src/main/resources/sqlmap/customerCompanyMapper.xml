@@ -38,6 +38,7 @@
 		from customer_company
 		inner join company on customer_company.cid = company.id
 		where customer_company.app_key=#{appKey,jdbcType=VARCHAR}
+		order by customer_company.id desc
 	</select>
 	
 	<insert id="insert" parameterType="com.daoman.client.model.CustomerCompany"

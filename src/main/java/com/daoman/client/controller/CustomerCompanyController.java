@@ -8,8 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -80,10 +78,10 @@ public class CustomerCompanyController extends BaseController{
 	 * @return
 	 * @throws IOException
 	 */
-	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
+	@RequestMapping(value="/update", method=RequestMethod.POST)
 	@ResponseBody
 	public CompanyModel putCompany(HttpServletRequest request, HttpServletResponse response, 
-			@PathVariable Long id, @RequestBody CompanyModel companyModel) throws IOException {
+			Long id, CompanyModel companyModel) throws IOException {
 
 		SessionUser user = getSessionUser(request);
 		try {

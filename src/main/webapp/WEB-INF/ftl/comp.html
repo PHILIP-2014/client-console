@@ -113,7 +113,7 @@
                                     </thead>
                         		<#list comp_list as item>
                                     <tbody>
-                                        <tr class="odd gradeX">
+                                        <tr class="odd gradeX" id="tr_${item.company.id}">
                                             <td>${item.company.name}</td>
                                             <td>${item.company.description}</td>
                                             <td>${item.appKey}</td>
@@ -157,7 +157,7 @@
 							<input type="hidden" id="cus_id1" />
 							<input type="hidden" id="c_id3" />
 							<a href="#" class="btn btn-default" data-dismiss="modal">取消</a> <a href="#"
-								class="btn btn-danger" data-dismiss="modal" onclick="delComp()">删除</a>
+								class="btn btn-danger" data-dismiss="modal" onclick="delComp(this)">删除</a>
 						</div>
 					</div>
 				</div>
@@ -236,7 +236,7 @@
 		var name = $('#c_name1').val();
 		var desc = $('#c_desc1').val();
 		AjaxPost('/customerCompany', {name:name,description:desc,uidCreated:0}, function callback(){
-			//location.href=location.href;
+			location.href=location.href;
 		});
 	};
 	function compModal(item){
@@ -256,7 +256,7 @@
 		var desc = $('#c_desc2').val();
 		var cid = $('#c_id2').val();
 		AjaxPost('/customerCompany/update', {id:cid,name:name,description:desc}, function callback(){
-			//location.href=location.href;
+			location.href=location.href;
 		});
 	};
 	function delModal(item){
@@ -268,12 +268,13 @@
 		//定位模态框并传值
 		$('#delComp').modal();
 	};
-	function delComp(){
+	function delComp(item){
 		debugger;
 		var id = $('#cus_id1').val();
 		var cid = $('#c_id3').val();
+		
 		AjaxPost('/customerCompany/delete', {id:id,cid:cid}, function callback(){
-			location.href=location.href;
+			$("#tr_"+cid).remove();
 		});
 	};
 	</script>

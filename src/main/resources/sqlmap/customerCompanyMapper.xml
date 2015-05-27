@@ -5,6 +5,7 @@
 		customer_company.id,
 		customer_company.app_key as appKey,
 		customer_company.cid,
+		customer_company.auth_code as authCode,
 		customer_company.gmt_created as gmtCreated,
 		customer_company.gmt_modified as gmtModified
 	</sql>
@@ -30,6 +31,16 @@
 		where customer_company.id=#{id}
 	</select>
 	
+	<select id="queryModelByCid" resultType="com.daoman.client.model.CustomerCompanyModel">
+		select
+		<include refid="default_column" />
+		,
+		<include refid="company_column" />
+		from customer_company
+		inner join company on customer_company.cid = company.id
+		where customer_company.cid=#{cid}
+	</select>
+	
 	<select id="queryModelsByAppKey" resultType="com.daoman.client.model.CustomerCompanyModel">
 		select
 		<include refid="default_column" />
@@ -51,11 +62,13 @@
 		insert into customer_company (
 			app_key,
 			cid,
+			auth_code,
 			gmt_created,
 			gmt_modified)
 		values(
 			#{appKey},
 			#{cid},
+			#{authCode},
 			now(),now())
 	</insert>
 	

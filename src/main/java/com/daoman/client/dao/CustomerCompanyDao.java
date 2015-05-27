@@ -9,6 +9,8 @@ public interface CustomerCompanyDao {
 
 	public CustomerCompanyModel queryModel(Long id);
 	
+	public CustomerCompanyModel queryModelByCid(Long cid);
+	
 	public List<CustomerCompanyModel> queryModelsByAppKey(String appKey);
 	
 	public Integer insert(CustomerCompany customerCompany);

@@ -11,7 +11,7 @@ public interface CustomerCompanyService {
 	
 	public List<CustomerCompanyModel> queryModelsByAppKey(String appKey);
 	
-	public CustomerCompanyModel doCreate(SessionUser user, Long cid);
+	public CustomerCompanyModel doCreate(SessionUser user, Long cid, String authCode);
 	
 	public Integer doUpdate(CustomerCompanyModel customerCompanyModel);
 	

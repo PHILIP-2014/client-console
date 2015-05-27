@@ -27,12 +27,13 @@ public class CustomerCompanyServiceImpl implements CustomerCompanyService{
 		return customerCompanyDao.queryModelsByAppKey(appKey);
 	}
 
-	public CustomerCompanyModel doCreate(SessionUser user, Long cid) {
+	public CustomerCompanyModel doCreate(SessionUser user, Long cid, String authCode) {
 		CustomerCompanyModel customerCompanyModel = new CustomerCompanyModel();
 		customerCompanyModel.setAppKey(user.getAppKey());
 		customerCompanyModel.setCid(cid);
+		customerCompanyModel.setAuthCode(authCode);
 		customerCompanyDao.insert(customerCompanyModel);
-		return customerCompanyModel;
+		return customerCompanyDao.queryModelByCid(cid);
 	}
 	
 	public Integer countByAppKey(String appKey) {

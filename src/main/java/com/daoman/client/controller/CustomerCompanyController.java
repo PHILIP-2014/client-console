@@ -19,6 +19,7 @@ import com.daoman.client.service.CustomerCompanyService;
 import com.daoman.client.service.company.CompanyService;
 import com.daoman.client.utils.ServiceException;
 import com.daoman.client.utils.SessionUser;
+import com.daoman.client.utils.security.PwdEncoder;
 
 @Controller
 @RequestMapping("/customerCompany")
@@ -28,6 +29,8 @@ public class CustomerCompanyController extends BaseController{
 	private CustomerCompanyService customerCompanyService;
 	@Autowired
 	private CompanyService companyService;
+	@Autowired
+	private PwdEncoder pwdEncoder;
 
 	/**
 	 * 根据app_key获取company
@@ -54,12 +57,13 @@ public class CustomerCompanyController extends BaseController{
 	@RequestMapping(method=RequestMethod.POST)
 	@ResponseBody
 	public CustomerCompanyModel postCompany(HttpServletRequest request, HttpServletResponse response,
-			CompanyModel company){
+			CompanyModel company, String authCode){
 		
 		SessionUser user = getSessionUser(request);
 		try {
 			companyService.doCreate(company);
-			CustomerCompanyModel customerCompanyModel = customerCompanyService.doCreate(user, company.getId());
+			CustomerCompanyModel customerCompanyModel = 
+					customerCompanyService.doCreate(user, company.getId(), pwdEncoder.encodePassword(authCode));
 			customerCompanyModel.setCompany(company);
 			
 			return customerCompanyModel;

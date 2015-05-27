@@ -10,6 +10,8 @@ public class CustomerCompany extends BaseDomain {
 	private String appKey;
 	
 	private Long cid;
+	
+	private String authCode;
 
 	public String getAppKey() {
 		return appKey;
@@ -25,6 +27,14 @@ public class CustomerCompany extends BaseDomain {
 
 	public void setCid(Long cid) {
 		this.cid = cid;
+	}
+	
+	public String getAuthCode() {
+		return authCode;
+	}
+	
+	public void setAuthCode(String authCode) {
+		this.authCode = authCode;
 	}
 	
 }

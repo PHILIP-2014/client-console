@@ -17,7 +17,7 @@ import com.philip.client.utils.security.PwdEncoder;
 public class AdminService {
 	
 	@Autowired
-	private AdminDao customerAdminDao;
+	private AdminDao adminDao;
 	@Autowired
 	private PwdEncoder pwdEncoder;
 	
@@ -28,7 +28,7 @@ public class AdminService {
 	 */
 	public Admin doLogin(Admin admin) throws ServiceException{
 
-		Admin _admin = customerAdminDao.queryModelByName(admin.getLoginName());
+		Admin _admin = adminDao.queryModelByName(admin.getLoginName());
 		if(_admin == null) {
 			throw new ServiceException("error.account.not.exist");
 		}
@@ -83,7 +83,7 @@ public class AdminService {
 	}
 	
 	public Integer countByAppKey(String appKey) {
-		return customerAdminDao.countByAppKey(appKey);
+		return adminDao.countByAppKey(appKey);
 	}
 
 	public Admin queryModel(Long id) {

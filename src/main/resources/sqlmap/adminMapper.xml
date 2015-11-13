@@ -6,73 +6,77 @@
 		admin.appkey,
 		admin.name,
 		admin.pwd,
-		admin.gmt_created as gmtCreated,
-		admin.gmt_modified as gmtModified,
-		admin.is_active as isActive
+		admin.is_disable as isDisable,
+		admin.gmt_create as gmtCreate,
+		admin.gmt_modify as gmtModify
 	</sql>
 	<select id="queryModel" resultType="com.philip.client.model.Admin">
 		select
 		<include refid="default_column" />
 		from admin
 		where admin.id=#{id}
+		limit 1
 	</select>
-	<select id="queryModelByLoginName" parameterType="java.lang.String"
-		resultType="com.philip.client.model.Admin">
+	<select id="queryByName" parameterType="java.lang.String" resultType="com.philip.client.model.Admin">
 		select
 		<include refid="default_column" />
 		from admin
-		where admin.login_name = #{loginName}
+		where admin.name = #{name}
+		limit 1
 	</select>
-	<select id="queryModelByAppKey" parameterType="java.lang.String"
-		resultType="com.philip.client.model.Admin">
+	<select id="queryByAppKey" parameterType="java.lang.String" resultType="com.philip.client.model.Admin">
 		select
 		<include refid="default_column" />
 		from admin
-		where admin.app_key = #{appKey}
+		where admin.appkey = #{appkey}
+		limit 1
 	</select>
 	
 	<insert id="insert" parameterType="com.philip.client.model.Admin"
 		keyProperty="id">
 		insert into admin (
-			app_key,
-			login_name,
-			`password`,
-			gmt_created,
-			gmt_modified,
-			is_active)
+			appkey,
+			name,
+			`pwd`,
+			is_disable,
+			gmt_create,
+			gmt_modify,
+			)
 		values(
-			#{appKey},
-			#{loginName},
-			#{password},
+			#{appkey},
+			#{name},
+			#{pwd},
+			#{isDisable},
 			now(),now())
 	</insert>
 	<delete id="delete" parameterType="java.lang.Long">
 		delete from admin
-		where id = #{id,jdbcType=BIGINT}
+		where id = #{id}
 	</delete>
 
 	<update id="update" parameterType="com.philip.client.model.Admin">
 		update admin
 		<set>
-			<if test="appKey != null">
-				app_key = #{appKey},
+			<if test="appkey != null">
+				appkey = #{appkey},
 			</if>
-			<if test="loginName != null">
-				login_name = #{loginName},
+			<if test="name != null">
+				name = #{name},
 			</if>
-			<if test="password != null">
-				`password` = #{password},
+			<if test="pwd != null">
+				`pwd` = #{pwd},
 			</if>
 			<if test="isActive != null">
-				is_active = #{isActive},
+				is_disable = #{isDisable},
 			</if>
-			gmt_modified = now()
+			gmt_modify = now()
 		</set>
 		where `id` = #{id}
 	</update>
 	
 	<select id="countByAppKey" parameterType="java.lang.String" resultType="java.lang.Integer">
-		select count(*) from admin where `app_key` = #{appKey,jdbcType=VARCHAR};
+		select count(*) from admin 
+		where `appkey` = #{appkey}
 	</select>
 
 </mapper>

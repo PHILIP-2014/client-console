@@ -46,7 +46,7 @@ public class AdminController extends BaseController{
 
 			setSessionUser(request, user);
 			model.put("admin", user);
-			model.put("countAdmin", adminService.countByAppKey(user.getAppKey()));
+//			model.put("countAdmin", adminService.countByAppKey(user.getAppKey()));
 			return "/app/index";
 		} catch (ServiceException e) {
 			sendError(request, response, e.getMessage());
@@ -59,7 +59,7 @@ public class AdminController extends BaseController{
 		
 		SessionUser user = getSessionUser(request);
 		model.put("admin", user);
-		model.put("countAdmin", adminService.countByAppKey(user.getAppKey()));
+//		model.put("countAdmin", adminService.countByAppKey(user.getAppKey()));
 		return "/app/index";
 	}
 	

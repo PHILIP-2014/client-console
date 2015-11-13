@@ -26,16 +26,16 @@ public class AdminService {
 	/**
 	 * 常规验证
 	 */
-	public Admin doLogin(Admin admin) throws ServiceException{
+	public Admin doLogin(Admin admin) throws ServiceException {
 
-		Admin _admin = adminDao.queryModelByName(admin.getLoginName());
+		Admin _admin = adminDao.queryByName(admin.getName());
 		if(_admin == null) {
 			throw new ServiceException("error.account.not.exist");
 		}
-		if(_admin.getIsActive() != Admin.ACTIVE_TRUE) {
+		if(_admin.getIsDisable() != Admin.IS_NORMAL) {
 			throw new ServiceException("error.account.status.not.normal");
 		}
-		if(!pwdEncoder.isPasswordValid(_admin.getPassword(), admin.getPassword())) {
+		if(!pwdEncoder.isPasswordValid(_admin.getPwd(), admin.getPwd())) {
 			throw new ServiceException("error.account.password.invalid");
 		}
 
@@ -48,8 +48,8 @@ public class AdminService {
 			return null;
 		}
 		SessionUser sessionUser = new SessionUser();
-		sessionUser.setAppKey(admin.getAppKey());
-		sessionUser.setLoginName(admin.getLoginName());
+		sessionUser.setAppKey(admin.getAppkey());
+		sessionUser.setLoginName(admin.getName());
 		sessionUser.setUid(admin.getId());
 		sessionUser.setGmtLogin(new Date());
 
@@ -73,49 +73,7 @@ public class AdminService {
 	
 	private Boolean accountExist(String loginName) {
 
-		Admin _admin = queryModelByLoginName(loginName);
-
-		if(_admin != null && _admin.getIsActive() != Admin.ACTIVE_FALSE) {
-			return true;
-		}
-
 		return false;
 	}
 	
-	public Integer countByAppKey(String appKey) {
-		return adminDao.countByAppKey(appKey);
-	}
-
-	public Admin queryModel(Long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Admin queryModelByLoginName(String loginName) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Admin queryModelByAppKey(String appKey) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Admin doCreate(Admin customerAdmin)
-			throws ServiceException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Integer doUpdate(Admin customerAdmin)
-			throws ServiceException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Integer doDelete(Long id) throws ServiceException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

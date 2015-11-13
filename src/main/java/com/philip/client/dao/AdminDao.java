@@ -6,16 +6,16 @@ public interface AdminDao {
 
 	public Admin queryModel(Long id);
 	
-	public Admin queryModelByName(String loginName);
+	public Admin queryByName(String name);
 	
-	public Admin queryModelByAppKey(String appKey);
+	public Admin queryByAppkey(String appkey);
 	
-	public Long insert(Admin customerAdmin);
+	public Long insert(Admin admin);
 	
 	public Integer delete(Long id);
 	
-	public Integer update(Admin customerAdmin);
+	public Integer update(Admin admin);
 	
-	public Integer countByAppKey(String appKey);
+	public Integer countByAppkey(String appkey);
 	
 }

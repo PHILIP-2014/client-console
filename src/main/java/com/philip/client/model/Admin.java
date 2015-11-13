@@ -9,47 +9,47 @@ public class Admin extends BaseModel {
 	
 	public static final long CUSTOMER_UID_CREATED = 0l;
 	
-	public final static int ACTIVE_FALSE=0;
-	public final static int ACTIVE_TRUE=1;
+	public final static int IS_NORMAL = 0;
+	public final static int IS_DISABLE = 1;
 
-	private String appKey;
+	private String appkey;
 	
-	private String loginName;
+	private String name;
 	
-	private String password;
+	private String pwd;
 	
-	private Integer isActive;
+	private Integer isDisable;
 
-	public String getAppKey() {
-		return appKey;
+	public String getAppkey() {
+		return appkey;
 	}
 
-	public void setAppKey(String appKey) {
-		this.appKey = appKey;
+	public void setAppkey(String appkey) {
+		this.appkey = appkey;
 	}
 
-	public String getLoginName() {
-		return loginName;
-	}
-
-	public void setLoginName(String loginName) {
-		this.loginName = loginName;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
+	public String getName() {
+		return name;
 	}
 	
-	public Integer getIsActive() {
-		return isActive;
-	}
-
-	public void setIsActive(Integer isActive) {
-		this.isActive = isActive;
+	public void setName(String name) {
+		this.name = name;
 	}
 	
+	public String getPwd() {
+		return pwd;
+	}
+	
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
+	}
+	
+	public Integer getIsDisable() {
+		return isDisable;
+	}
+
+	public void setIsDisable(Integer isDisable) {
+		this.isDisable = isDisable;
+	}
+
 }

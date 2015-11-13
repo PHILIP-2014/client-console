@@ -13,7 +13,7 @@
 						http://www.springframework.org/schema/aop  
 						http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 	 <!-- 自动扫描 -->
-	<context:component-scan base-package="com.daoman.client" />
+	<context:component-scan base-package="com.philip.client" />
 
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
 		<property name="url" value="${jdbc_url}" />
@@ -55,7 +55,7 @@
 
 	<!-- DAO接口所在包名，Spring会自动查找其下的类 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.daoman.client.dao" />
+		<property name="basePackage" value="com.philip.client.dao" />
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
 	</bean>
 
@@ -82,7 +82,7 @@
 	</tx:advice>
 	
     <aop:config>  
-        <aop:pointcut id="myPointCut" expression="execution(* com.daoman.client.service.*.*.*(..))"/>  
+        <aop:pointcut id="myPointCut" expression="execution(* com.philip.client.service.*.*.*(..))"/>  
         <aop:advisor advice-ref="txAdvice" pointcut-ref="myPointCut"/>  
     </aop:config> 
 

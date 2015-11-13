@@ -10,10 +10,6 @@ PUBLIC "-//ibatis.apache.org//DTD Config 3.0//EN"
         <setting name="defaultExecutorType" value="REUSE" />  
     </settings>
     <mappers>
-	    <mapper resource="sqlmap/customerAppMapper.xml" />
-	    <mapper resource="sqlmap/customerCompanyMapper.xml" />
-	    <mapper resource="sqlmap/customerAdminMapper.xml" />
-	    <mapper resource="sqlmap/companyMapper.xml" />
-	    <mapper resource="sqlmap/teamMapper.xml" />
+	    <mapper resource="sqlmap/adminMapper.xml" />
     </mappers>   
 </configuration>

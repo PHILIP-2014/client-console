@@ -9,7 +9,7 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd
 	<context:property-placeholder location="classpath:jdbc.properties" />
 
 	<!-- 密码加密bean -->
-	<bean id="pwdEncoder" class="com.daoman.client.utils.security.Md5PwdEncoder">
-		<property name="defaultSalt" value="parox_dm606"/>
+	<bean id="pwdEncoder" class="com.philip.client.utils.security.Md5PwdEncoder">
+		<property name="defaultSalt" value="philip_x2014"/>
 	</bean>
 </beans>

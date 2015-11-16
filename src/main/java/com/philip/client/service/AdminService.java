@@ -6,7 +6,6 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.google.common.base.Strings;
 import com.philip.client.dao.AdminDao;
 import com.philip.client.model.Admin;
 import com.philip.client.utils.ServiceException;
@@ -54,26 +53,6 @@ public class AdminService {
 		sessionUser.setGmtLogin(new Date());
 
 		return sessionUser;
-	}
-	
-	public Boolean checkExist(String column, String value) throws ServiceException {
-
-		if(Strings.isNullOrEmpty(column) || Strings.isNullOrEmpty(value)) {
-			LOG.error("Error params. column: "+ column+" value: "+value);
-			throw new ServiceException("error.param.null.or.empty");
-		}
-
-		//验证 account 字段时否可用
-		if("account".equals(column)) {
-			return accountExist(value);
-		}
-
-		return null;
-	}
-	
-	private Boolean accountExist(String loginName) {
-
-		return false;
 	}
 	
 }

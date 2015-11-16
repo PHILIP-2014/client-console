@@ -22,7 +22,7 @@ public class MemberContextInterceptor extends HandlerInterceptorAdapter{
 	/**登录页面相关的常量*/
 //	public static final String PROCESS_URL = "processUrl";
 	public static final String RETURN_URL = "returnUrl";
-			
+	
 	@Override
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
@@ -63,6 +63,7 @@ public class MemberContextInterceptor extends HandlerInterceptorAdapter{
 		
 		String returnUrl = request.getParameter("returnUrl");
 		
+		//拦截之后的后缀
 		buff.append(loginUrl).append("?");
 		if(returnUrl==null || "".equals(returnUrl)){
 			buff.append(RETURN_URL).append("=").append(encode(getLocation(request)));

@@ -24,7 +24,7 @@
 	href="/awesome/bower_components/font-awesome/css-awe/font-awesome.min.css"
 	rel="stylesheet" type="text/css">
 
-<link rel="icon" href="/img/favicon.ico">
+<link rel="icon" href="/img/philip.png">
 </head>
 
 <body>
@@ -59,7 +59,7 @@
 			<div class="navbar-default sidebar" role="navigation">
 				<div class="sidebar-nav navbar-collapse">
 					<ul class="nav" id="side-menu">
-						<!--<li class="sidebar-search">
+						<li class="sidebar-search">
                             <div class="input-group custom-search-form">
                                 <input type="text" class="form-control" placeholder="Search...">
                                 <span class="input-group-btn">
@@ -68,7 +68,7 @@
                                 </button>
                             </span>
                             </div>
-                        </li>-->
+                        </li>
 						<li><a href="/dashboard"><i class="fa fa-dashboard fa-fw"></i>
 								概览</a></li>
 						<li><a href="/"><i
@@ -114,11 +114,10 @@
 									<#list comp_list as item>
 									<tbody>
 										<tr class="odd gradeX" id="tr_${item.company.id}">
-											<td>${item.company.name}</td>
+											<!-- <td>${item.company.name}</td>
 											<td>${item.company.description}</td>
 											<td>${item.appKey}</td>
-											<td>${item.gmtCreated?string("yyyy-MM-dd HH:mm")!''}</td>
-											<!-- <td class="center">X</td> -->
+											<td>${item.gmtCreated?string("yyyy-MM-dd HH:mm")!''}</td> -->
 											<td>
 												<button type="button" class="btn btn-outline btn-info"
 													data-toggle="modal" onclick="showEditCompModal(this)"

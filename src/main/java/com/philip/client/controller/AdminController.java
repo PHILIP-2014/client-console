@@ -27,7 +27,7 @@ public class AdminController extends BaseController{
 		
 		return null;
 	}
-
+	
 	/**
 	 * 登录
 	 * @param request
@@ -37,29 +37,35 @@ public class AdminController extends BaseController{
 	 * @throws IOException
 	 */
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String postLogin(HttpServletRequest request, HttpServletResponse response, ModelMap model,
+	public String postLogin(HttpServletRequest request, HttpServletResponse response, ModelMap out,
 			Admin admin) throws IOException {
 
 		try {
 			Admin _admin = adminService.doLogin(admin);
 			SessionUser user = adminService.initSessionUser(_admin);
-
 			setSessionUser(request, user);
-			model.put("admin", user);
-//			model.put("countAdmin", adminService.countByAppKey(user.getAppKey()));
-			return "/app/index";
+
+			return "redirect:/main";
+			
 		} catch (ServiceException e) {
 			sendError(request, response, e.getMessage());
 		}
 		return null;
 	}
 	
-	@RequestMapping(value="/dashboard", method=RequestMethod.GET)
-	public String main(HttpServletRequest request, HttpServletResponse response, ModelMap model) {
+	/**
+	 * 系统主入口
+	 * @param request
+	 * @param response
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value="/main", method=RequestMethod.GET)
+	public String main(HttpServletRequest request, HttpServletResponse response, 
+			ModelMap out) {
 		
-		SessionUser user = getSessionUser(request);
-		model.put("admin", user);
-//		model.put("countAdmin", adminService.countByAppKey(user.getAppKey()));
+		out.put("admin", getSessionUser(request));
+		
 		return "/app/index";
 	}
 	

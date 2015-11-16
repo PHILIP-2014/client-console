@@ -30,6 +30,14 @@ public class BaseController {
 		return map;
 	}
 	
+	/**
+	 * 获取当前登录用户uid
+	 * @param request
+	 * @return
+	 */
+	public Long getUid(HttpServletRequest request){
+		return getSessionUser(request).getUid();
+	}
 	
 	public SessionUser getSessionUser(HttpServletRequest request) {
 		return (SessionUser) request.getSession().getAttribute(SESSION_KEY);

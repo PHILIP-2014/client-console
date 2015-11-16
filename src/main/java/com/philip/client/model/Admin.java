@@ -11,12 +11,16 @@ public class Admin extends BaseModel {
 	
 	public final static int IS_NORMAL = 0;
 	public final static int IS_DISABLE = 1;
+	
+	public final static int IS_ADMIN = 1;
 
 	private String appkey;
 	
 	private String name;
 	
 	private String pwd;
+	
+	private Integer role;
 	
 	private Integer isDisable;
 
@@ -44,6 +48,14 @@ public class Admin extends BaseModel {
 		this.pwd = pwd;
 	}
 	
+	public Integer getRole() {
+		return role;
+	}
+
+	public void setRole(Integer role) {
+		this.role = role;
+	}
+
 	public Integer getIsDisable() {
 		return isDisable;
 	}

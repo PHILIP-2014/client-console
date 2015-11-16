@@ -1,6 +1,7 @@
 package com.philip.client.service;
 
 import java.util.Date;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,4 +56,19 @@ public class AdminService {
 		return sessionUser;
 	}
 	
+	public List<Admin> queryByRole(Integer role, Long uid) throws ServiceException {
+		if(!checkPermission(uid)){
+			throw new ServiceException("error.forbidden");
+		}
+		
+		return adminDao.queryByRole(role);
+	}
+	
+	private Boolean checkPermission(Long uid) {
+		Admin _admin = adminDao.queryOne(uid);
+		if(_admin == null || _admin.getRole() != Admin.IS_ADMIN) {
+			return false;
+		}
+		return true;
+	}
 }

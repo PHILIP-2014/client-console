@@ -1,6 +1,7 @@
 package com.philip.client.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -61,12 +62,26 @@ public class AdminController extends BaseController{
 	 * @return
 	 */
 	@RequestMapping(value="/main", method=RequestMethod.GET)
-	public String main(HttpServletRequest request, HttpServletResponse response, 
-			ModelMap out) {
+	public String main(HttpServletRequest request, ModelMap out) {
 		
 		out.put("admin", getSessionUser(request));
 		
-		return "/app/index";
+		return "/client/index";
+	}
+	
+	@RequestMapping(value="/queryAdmins", method=RequestMethod.GET)
+	public String queryAdmins(HttpServletRequest request, HttpServletResponse response, 
+			ModelMap out, Integer role) throws IOException {
+		
+		try {
+			out.put("admin", getSessionUser(request));
+			List<Admin> admins = adminService.queryByRole(role, getUid(request));
+			out.put("admins", adminService.queryByRole(role, getUid(request)));
+			return "/client/admins";
+		} catch (ServiceException e) {
+			sendError(request, response, e.getMessage());
+		}
+		return null;
 	}
 	
 	/**

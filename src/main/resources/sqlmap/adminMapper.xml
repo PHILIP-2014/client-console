@@ -6,15 +6,17 @@
 		admin.appkey,
 		admin.name,
 		admin.pwd,
+		admin.role,
 		admin.is_disable as isDisable,
 		admin.gmt_create as gmtCreate,
 		admin.gmt_modify as gmtModify
 	</sql>
-	<select id="queryModel" resultType="com.philip.client.model.Admin">
+	<select id="queryOne" resultType="com.philip.client.model.Admin">
 		select
 		<include refid="default_column" />
 		from admin
 		where admin.id=#{id}
+			and admin.is_disable = 0
 		limit 1
 	</select>
 	<select id="queryByName" parameterType="java.lang.String" resultType="com.philip.client.model.Admin">
@@ -22,6 +24,7 @@
 		<include refid="default_column" />
 		from admin
 		where admin.name = #{name}
+			and admin.is_disable = 0
 		limit 1
 	</select>
 	<select id="queryByAppKey" parameterType="java.lang.String" resultType="com.philip.client.model.Admin">
@@ -29,15 +32,26 @@
 		<include refid="default_column" />
 		from admin
 		where admin.appkey = #{appkey}
+			and admin.is_disable = 0
 		limit 1
 	</select>
+	<select id="queryByRole" parameterType="java.lang.Integer" resultType="com.philip.client.model.Admin">
+		select
+		<include refid="default_column" />
+		from admin
+		where
+			<if test="role != null">
+				admin.role = #{role} and 
+			</if> 
+			admin.is_disable = 0
+	</select>
 	
-	<insert id="insert" parameterType="com.philip.client.model.Admin"
-		keyProperty="id">
+	<insert id="insert" parameterType="com.philip.client.model.Admin" keyProperty="id">
 		insert into admin (
 			appkey,
 			name,
 			`pwd`,
+			`role`,
 			is_disable,
 			gmt_create,
 			gmt_modify,
@@ -46,6 +60,7 @@
 			#{appkey},
 			#{name},
 			#{pwd},
+			#{role},
 			#{isDisable},
 			now(),now())
 	</insert>
@@ -66,7 +81,10 @@
 			<if test="pwd != null">
 				`pwd` = #{pwd},
 			</if>
-			<if test="isActive != null">
+			<if test="role != null">
+				`role` = #{role},
+			</if>
+			<if test="isDisable != null">
 				is_disable = #{isDisable},
 			</if>
 			gmt_modify = now()

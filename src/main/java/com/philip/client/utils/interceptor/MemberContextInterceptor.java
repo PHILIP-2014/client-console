@@ -63,7 +63,7 @@ public class MemberContextInterceptor extends HandlerInterceptorAdapter{
 		
 		String returnUrl = request.getParameter("returnUrl");
 		
-		//拦截之后的后缀
+		//拦截之后的后缀带着跳转地址
 		buff.append(loginUrl).append("?");
 		if(returnUrl==null || "".equals(returnUrl)){
 			buff.append(RETURN_URL).append("=").append(encode(getLocation(request)));

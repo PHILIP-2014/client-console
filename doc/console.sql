@@ -89,7 +89,7 @@ DROP TABLE IF EXISTS `goods_style`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `goods_style` (
   `id` int(11) NOT NULL,
-  `goods_id` varchar(45) DEFAULT NULL COMMENT '商品名',
+  `gid` varchar(45) DEFAULT NULL COMMENT '商品名',
   `pic_url` varchar(45) DEFAULT NULL COMMENT '图片地址',
   `style` varchar(45) DEFAULT NULL COMMENT '款式名  （例：深蓝）',
   `gmt_created` datetime DEFAULT NULL,
@@ -116,12 +116,13 @@ DROP TABLE IF EXISTS `order_user`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `order_user` (
   `id` bigint(20) NOT NULL,
-  `order_id` bigint(20) DEFAULT NULL,
-  `name` varchar(45) DEFAULT NULL,
-  `mobile` varchar(45) DEFAULT NULL,
-  `address` varchar(200) DEFAULT NULL,
+  `oid` bigint(20) DEFAULT NULL COMMENT '订单号',
+  `name` varchar(45) DEFAULT NULL COMMENT '顾客姓名',
+  `mobile` varchar(45) DEFAULT NULL COMMENT '手机号码',
+  `address` varchar(200) DEFAULT NULL COMMENT '顾客地址',
   `gmt_created` datetime DEFAULT NULL,
   `gmt_modified` datetime DEFAULT NULL,
+  `gmt_setup` datetime DEFAULT NULL COMMENT '安装时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -144,11 +145,15 @@ DROP TABLE IF EXISTS `order`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `order` (
   `id` bigint(20) NOT NULL,
-  `style` varchar(45) DEFAULT NULL,
+  `style` varchar(45) DEFAULT NULL COMMENT '款式',
   `mark` varchar(45) DEFAULT NULL COMMENT '备注',
-  `status` varchar(45) DEFAULT NULL COMMENT '状态：0未接  1已接\n2.已完成 ',
+  `status` tinyint(4) DEFAULT '0' COMMENT '状态：0未处理  1已完成\n2.已删除',
   `gmt_created` datetime DEFAULT NULL,
   `gmt_modified` datetime DEFAULT NULL,
+  `gid` bigint(20) DEFAULT NULL,
+  `num` bigint(20) DEFAULT NULL COMMENT '数量',
+  `name` varchar(45) DEFAULT NULL COMMENT '商品名',
+  `price` double DEFAULT NULL COMMENT '总价格',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -171,4 +176,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-11-16 14:42:39
+-- Dump completed on 2015-11-16 15:24:08

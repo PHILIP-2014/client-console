@@ -2,6 +2,7 @@ package com.philip.client.controller;
 
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -14,6 +15,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
+import com.philip.client.model.Admin;
 import com.philip.client.utils.SessionUser;
 
 public class BaseController {
@@ -28,6 +30,20 @@ public class BaseController {
 		map.put("result", success);
 		map.put("data", arg);
 		return map;
+	}
+	
+	public SessionUser initSessionUser(Admin admin) {
+
+		if(admin==null){
+			return null;
+		}
+		SessionUser sessionUser = new SessionUser();
+		sessionUser.setAppKey(admin.getAppkey());
+		sessionUser.setLoginName(admin.getName());
+		sessionUser.setUid(admin.getId());
+		sessionUser.setGmtLogin(new Date());
+
+		return sessionUser;
 	}
 	
 	/**

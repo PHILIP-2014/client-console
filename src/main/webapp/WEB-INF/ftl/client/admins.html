@@ -61,21 +61,21 @@
                                 <span class="input-group-btn"> 
                                 <button class="btn btn-default" type="button">
                                     <i class="fa fa-search"></i>
-                                </button> 
+                                </button>
                             </span>
                             </div>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-dashboard fa-fw"></i> 概览 </a>
+                            <a href="/main"><i class="fa fa-dashboard fa-fw"></i> 概览 </a>
                         </li>
                         <li>
-                            <a href="/queryAdmins"><i class="fa fa-lock fa-fw"></i> 账号管理 </a>
+                            <a href="/account/management"><i class="fa fa-user-md fa-fw"></i> 账号管理 </a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-list-alt fa-fw"></i> 订单管理 </a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-pinterest fa-fw"></i> 商品管理 </a>
+                            <a href="#"><i class="fa fa-shopping-cart fa-fw"></i> 商品管理 </a>
                         </li>
                     </ul>
                 </div>
@@ -88,14 +88,16 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header"> 账号管理 </h1>
-                </div>
+					<button type="button" class="btn btn-outline btn-primary"
+						data-toggle="modal" data-target=".modal-user-add">新增</button>
+				</div>
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
             <div class="row">
 				<div class="col-lg-9">
 					<div class="panel panel-default">
-						<div class="panel-heading">App Info</div>
+						<div class="panel-heading"> 账号列表 </div>
 						<!-- /.panel-heading -->
 						<div class="panel-body">
 							<div class="table-responsive">
@@ -105,22 +107,30 @@
 											<th>id</th>
 											<th>app_key</th>
 											<th>name</th>
-											<th>upload_url</th>
-											<th>download_url</th>
+											<th>role</th>
+											<th>create_time</th>
 											<th>todo</th>
 										</tr>
 									</thead>
 							<#list admins as item>
 									<tbody>
-										<tr>
+										<tr id="tr_${item.id}">
 											<td>${item.id}</td>
 											<td>${item.appkey}</td>
-											<td>${item.name}</td>
-											<td>${item.name}</td>
-											<td>${item.name}</td>
+											<td id="name_${item.id}">${item.name}</td> 
+											<#if item.role == 1>
+												<td id="admin_${item.id}">管理员</td> 
+											<#else>
+												<td id="user_${item.id}">普通用户</td> 
+											</#if>
+											<td>${item.gmtCreate?string("yyyy-MM-dd")}</td>
 											<td>
-												<button type="button" class="btn btn-outline btn-success">修改</button> 
-												<button type="button" class="btn btn-outline btn-danger">删除</button>
+												<button type="button" class="btn btn-outline btn-success" data-toggle="modal" 
+													data-target=".modal-user-edit" onclick="showEditUserModal(this)"
+													i-name-edit="${item.name}" i-role-edit="${item.role}" i-uid-edit="${item.id}">修改</button>
+												<button type="button" class="btn btn-outline btn-danger" data-toggle="modal"
+													data-target=".modal-user-remove" onclick="showRmvUserModal(this)"
+													i-name-rmv="${item.name}" i-uid-rmv="${item.id}">删除</button>
 											</td>
 										</tr>
 									</tbody>
@@ -137,7 +147,106 @@
         </div>
 	</div>
     <!-- /#wrapper -->
+    
+    <!-- modal-user-add -->
+	<div class="modal fade modal-user-add" id="editUser">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
 
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">新增用户</h4>
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="form-group">
+							<label for="recipient-name" class="control-label">用户名:</label>
+							<input class="form-control" id="name_add">
+						</div>
+						<div class="form-group">
+							<label for="message-text" class="control-label">角色:</label>
+							<select id="role_add" style="line-height: 32px; height: 32px; width: 60%; background: transparent; border-color: #ccc;">
+								<option value="0">普通用户</option>
+								<option value="1">管理员</option>
+							</select>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					<input type="button" class="btn btn-primary" data-dismiss="modal" value="添加" onclick="doCreate()">
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+	<!-- /modal-user-edit -->
+    <!-- modal-user-edit -->
+	<div class="modal fade modal-user-edit" id="editUser">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">编辑用户</h4>
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="form-group">
+							<label for="recipient-name" class="control-label">用户名:</label>
+							<input class="form-control" id="name_edit">
+							<input type="hidden" id="uid_edit" />
+						</div>
+						<div class="form-group">
+							<label for="message-text" class="control-label">角色:</label>
+							<select id="role_edit" style="line-height: 32px; height: 32px; width: 60%; background: transparent; border-color: #ccc;">
+								<option value="0">普通用户</option>
+								<option value="1">管理员</option>
+							</select>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					<input type="button" class="btn btn-primary" data-dismiss="modal" value="保存" onclick="doUpdate()">
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+	<!-- /modal-user-edit -->
+		
+	<!-- modal-user-del -->
+	<div class="modal fade modal-user-remove" id="removeUser">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">移除用户</h4>
+				</div>
+				<div class="modal-body">
+					<p>您确定要删除此用户吗?</p>
+					<input type="hidden" id="uid_rmv" /> 
+					<input type="hidden" id="name_rmv" /> 
+				</div>
+				<div class="modal-footer">
+					<a href="#" class="btn btn-default" data-dismiss="modal">取消</a> 
+					<a href="#" class="btn btn-danger" data-dismiss="modal" onclick="doRemove()">删除</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /modal-user-del -->
     <!-- jQuery -->
     <script src="/awesome/bower_components/jquery-awe/dist/jquery.min.js"></script>
 
@@ -147,6 +256,61 @@
     <!-- Custom Theme JavaScript -->
     <script src="/awesome/dist/js-awe/sb-admin-2.js"></script>
     
+    <!-- jQuery & Ajax -->
+    <script src="/jquery/jquery.min.js"></script>
+    <script src="/js/ajax/ajax.js"></script>
+    
+    <script type="text/javascript">
+    function doCreate(){
+    	var name = $('#name_add').val();
+    	var role = $('#role_add').val();
+    	AjaxPost('/admin/add', {name:name,role:role}, function callback(data){
+    		location.href=location.href;
+    	});
+    };
+    
+    function showEditUserModal(item){
+		var name = $(item).attr('i-name-edit');
+		var role = $(item).attr('i-role-edit');
+		var uid = $(item).attr('i-uid-edit');
+		document.getElementById('name_edit').value=name;
+		document.getElementById('role_edit').value=role;
+		document.getElementById('uid_edit').value=uid;
+		//定位模态框并传值
+		$('#editUser').modal();
+	};
+	
+	function doUpdate(){
+		var name = $('#name_edit').val();
+		var role = $('#role_edit').val();
+		var uid = $('#uid_edit').val();
+		AjaxPost('/admin/edit', {id:uid,name:name,role:role}, function callback(data){
+			/* 
+			document.getElementById('name_'+uid).value=name;
+			if(role == 1){
+				document.getElementById('admin_'+uid).value=1;
+			} */
+			location.href=location.href;
+		});
+	};
+	
+	function showRmvUserModal(item){
+		var id = $(item).attr('i-uid-rmv');
+		var name = $(item).attr('i-name-rmv');
+		document.getElementById('uid_rmv').value=id;
+		document.getElementById('name_rmv').value=name;
+		//定位模态框并传值
+		$('#removeUser').modal();
+	};
+	
+	function doRemove(){
+		var uid = $('#uid_rmv').val();
+		AjaxPost('/admin/remove', {id:uid}, function callback(data){
+			//if(data)
+			$('#tr_'+uid).remove();
+		});
+	};
+    </script>
 </body>
 
 </html>

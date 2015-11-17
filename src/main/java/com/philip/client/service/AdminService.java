@@ -1,6 +1,5 @@
 package com.philip.client.service;
 
-import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -10,7 +9,8 @@ import org.springframework.stereotype.Service;
 import com.philip.client.dao.AdminDao;
 import com.philip.client.model.Admin;
 import com.philip.client.utils.ServiceException;
-import com.philip.client.utils.SessionUser;
+import com.philip.client.utils.javabase.LongUtils;
+import com.philip.client.utils.javabase.StrUtils;
 import com.philip.client.utils.security.PwdEncoder;
 
 @Service("adminService")
@@ -42,26 +42,60 @@ public class AdminService {
 		return _admin;
 	}
 	
-	public SessionUser initSessionUser(Admin admin) {
-
-		if(admin==null){
-			return null;
-		}
-		SessionUser sessionUser = new SessionUser();
-		sessionUser.setAppKey(admin.getAppkey());
-		sessionUser.setLoginName(admin.getName());
-		sessionUser.setUid(admin.getId());
-		sessionUser.setGmtLogin(new Date());
-
-		return sessionUser;
-	}
-	
 	public List<Admin> queryByRole(Integer role, Long uid) throws ServiceException {
 		if(!checkPermission(uid)){
 			throw new ServiceException("error.forbidden");
 		}
 		
 		return adminDao.queryByRole(role);
+	}
+	
+	public Integer countByRole(Integer role, Long uid) throws ServiceException {
+		if(!checkPermission(uid)){
+			throw new ServiceException("error.forbidden");
+		}
+		
+		return adminDao.countByRole(role);
+	}
+	
+	public Boolean doCreate(Admin admin, Long uid) throws ServiceException {
+		if(!checkPermission(uid)){
+			throw new ServiceException("error.forbidden");
+		}
+		if(StrUtils.isEmpty(admin.getName()) || admin.getRole() == null){
+			throw new ServiceException("error.require.params");
+		}
+		return adminDao.insert(init(admin)) > 0;
+	}
+	
+	private Admin init(Admin admin) {
+		admin.setAppkey("lock-seller");
+		admin.setIsDisable(Admin.IS_NORMAL);
+		admin.setPwd(pwdEncoder.encodePassword("111222"));
+		return admin;
+	}
+	
+	public Boolean doEdit(Admin admin, Long uid) throws ServiceException {
+		if(!checkPermission(uid)){
+			throw new ServiceException("error.forbidden");
+		}
+		if(LongUtils.isEmpty(admin.getId())){
+			throw new ServiceException("error.require.params");
+		}
+		return adminDao.update(admin) > 0;
+	}
+	
+	public Boolean doDisable(Long id, Long uid) throws ServiceException {
+		if(!checkPermission(uid)){
+			throw new ServiceException("error.forbidden");
+		}
+		if(LongUtils.isEmpty(id)){
+			throw new ServiceException("error.require.params");
+		}
+		Admin admin = new Admin();
+		admin.setId(id);
+		admin.setIsDisable(Admin.IS_DISABLE);
+		return adminDao.update(admin) > 0;
 	}
 	
 	private Boolean checkPermission(Long uid) {

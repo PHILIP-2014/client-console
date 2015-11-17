@@ -19,7 +19,7 @@
 			and admin.is_disable = 0
 		limit 1
 	</select>
-	<select id="queryByName" parameterType="java.lang.String" resultType="com.philip.client.model.Admin">
+	<select id="queryByName" resultType="com.philip.client.model.Admin">
 		select
 		<include refid="default_column" />
 		from admin
@@ -27,7 +27,7 @@
 			and admin.is_disable = 0
 		limit 1
 	</select>
-	<select id="queryByAppKey" parameterType="java.lang.String" resultType="com.philip.client.model.Admin">
+	<select id="queryByAppKey" resultType="com.philip.client.model.Admin">
 		select
 		<include refid="default_column" />
 		from admin
@@ -35,9 +35,18 @@
 			and admin.is_disable = 0
 		limit 1
 	</select>
-	<select id="queryByRole" parameterType="java.lang.Integer" resultType="com.philip.client.model.Admin">
+	<select id="queryByRole" resultType="com.philip.client.model.Admin">
 		select
 		<include refid="default_column" />
+		from admin
+		where
+			<if test="role != null">
+				admin.role = #{role} and 
+			</if> 
+			admin.is_disable = 0
+	</select>
+	<select id="countByRole" resultType="java.lang.Integer">
+		select count(*)
 		from admin
 		where
 			<if test="role != null">
@@ -54,7 +63,7 @@
 			`role`,
 			is_disable,
 			gmt_create,
-			gmt_modify,
+			gmt_modify
 			)
 		values(
 			#{appkey},
@@ -64,7 +73,8 @@
 			#{isDisable},
 			now(),now())
 	</insert>
-	<delete id="delete" parameterType="java.lang.Long">
+	
+	<delete id="delete">
 		delete from admin
 		where id = #{id}
 	</delete>
@@ -92,7 +102,7 @@
 		where `id` = #{id}
 	</update>
 	
-	<select id="countByAppKey" parameterType="java.lang.String" resultType="java.lang.Integer">
+	<select id="countByAppKey" resultType="java.lang.Integer">
 		select count(*) from admin 
 		where `appkey` = #{appkey}
 	</select>

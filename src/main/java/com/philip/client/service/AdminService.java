@@ -19,6 +19,8 @@ public class AdminService {
 	@Autowired
 	private AdminDao adminDao;
 	@Autowired
+	private ServiceUtil serviceUtil;
+	@Autowired
 	private PwdEncoder pwdEncoder;
 	
 	final static Logger LOG = Logger.getLogger(AdminService.class);
@@ -43,7 +45,7 @@ public class AdminService {
 	}
 	
 	public List<Admin> queryByRole(Integer role, Long uid) throws ServiceException {
-		if(!checkPermission(uid)){
+		if(!serviceUtil.checkPermission(uid)){
 			throw new ServiceException("error.forbidden");
 		}
 		
@@ -51,7 +53,7 @@ public class AdminService {
 	}
 	
 	public Integer countByRole(Integer role, Long uid) throws ServiceException {
-		if(!checkPermission(uid)){
+		if(!serviceUtil.checkPermission(uid)){
 			throw new ServiceException("error.forbidden");
 		}
 		
@@ -59,7 +61,7 @@ public class AdminService {
 	}
 	
 	public Boolean doCreate(Admin admin, Long uid) throws ServiceException {
-		if(!checkPermission(uid)){
+		if(!serviceUtil.checkPermission(uid)){
 			throw new ServiceException("error.forbidden");
 		}
 		if(StrUtils.isEmpty(admin.getName()) || admin.getRole() == null){
@@ -76,7 +78,7 @@ public class AdminService {
 	}
 	
 	public Boolean doEdit(Admin admin, Long uid) throws ServiceException {
-		if(!checkPermission(uid)){
+		if(!serviceUtil.checkPermission(uid)){
 			throw new ServiceException("error.forbidden");
 		}
 		if(LongUtils.isEmpty(admin.getId())){
@@ -86,7 +88,7 @@ public class AdminService {
 	}
 	
 	public Boolean doDisable(Long id, Long uid) throws ServiceException {
-		if(!checkPermission(uid)){
+		if(!serviceUtil.checkPermission(uid)){
 			throw new ServiceException("error.forbidden");
 		}
 		if(LongUtils.isEmpty(id)){
@@ -98,11 +100,4 @@ public class AdminService {
 		return adminDao.update(admin) > 0;
 	}
 	
-	private Boolean checkPermission(Long uid) {
-		Admin _admin = adminDao.queryOne(uid);
-		if(_admin == null || _admin.getRole() != Admin.IS_ADMIN) {
-			return false;
-		}
-		return true;
-	}
 }

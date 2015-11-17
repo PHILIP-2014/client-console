@@ -11,5 +11,6 @@ PUBLIC "-//ibatis.apache.org//DTD Config 3.0//EN"
     </settings>
     <mappers>
 	    <mapper resource="sqlmap/adminMapper.xml" />
+	    <mapper resource="sqlmap/orderMapper.xml" />
     </mappers>   
 </configuration>

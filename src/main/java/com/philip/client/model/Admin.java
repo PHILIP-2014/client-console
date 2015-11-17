@@ -3,7 +3,7 @@ package com.philip.client.model;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Admin extends BaseModel {
+public class Admin extends Base {
 
 	private static final long serialVersionUID = 1397584736693222309L;
 	
@@ -47,7 +47,7 @@ public class Admin extends BaseModel {
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
 	}
-	
+
 	public Integer getRole() {
 		return role;
 	}

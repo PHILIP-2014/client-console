@@ -25,7 +25,7 @@ public class OrderController extends BaseController {
 	 */
 	@RequestMapping(value="/orders/management", method=RequestMethod.GET)
 	public String queryAdmins(HttpServletRequest request, HttpServletResponse response, 
-			ModelMap out, Integer role) throws IOException {
+			ModelMap out) throws IOException {
 		
 		try {
 			out.put("admin", getSessionUser(request));

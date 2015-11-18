@@ -6,6 +6,7 @@
 		orders.order_num as orderNum,
 		orders.cid,
 		orders.gid,
+		orders.gname,
 		orders.sid,
 		orders.mark,
 		orders.num,

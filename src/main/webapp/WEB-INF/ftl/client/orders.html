@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="author" content="philip">
 
     <title>  后台管理  </title>
 
@@ -107,19 +107,21 @@
 											<th>订单号</th>
 											<th>商品</th>
 											<th>数量</th>
-											<th>role</th>
-											<th>create_time</th>
+											<th>价格</th>
+											<th>下单时间</th>
+											<th>安装时间</th>
 											<th>todo</th>
 										</tr>
 									</thead>
-							<#list orders as item>
+								<#list orders as item>
 									<tbody>
 										<tr id="tr_${item.id}">
 											<td>${item.orderNum}</td>
-											<td>${item.gid}</td>
+											<td>${item.gname}</td>
 											<td>${item.num}</td> 
-											<td>${item.num}</td> 
-											<td>${item.gmtCreate?string("yyyy-MM-dd")}</td>
+											<td>${item.totalFee}</td> 
+											<td>${item.gmtCreate?string("yyyy-MM-dd hh:mm")}</td>
+											<td>${item.gmtSetup?string("yyyy-MM-dd hh:mm")}</td>
 											<td>
 												<button type="button" class="btn btn-outline btn-success" data-toggle="modal" 
 													data-target=".modal-user-edit" onclick="showEditUserModal(this)"
@@ -130,7 +132,7 @@
 											</td>
 										</tr>
 									</tbody>
-							</#list>
+								</#list>
 								</table>
 							</div>
 							<!-- /.table-responsive -->

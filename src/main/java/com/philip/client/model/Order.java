@@ -16,6 +16,8 @@ public class Order extends Base {
 	
 	private Long gid;
 	
+	private String gname;
+	
 	private Long sid;
 	
 	private String mark;
@@ -50,6 +52,14 @@ public class Order extends Base {
 
 	public void setGid(Long gid) {
 		this.gid = gid;
+	}
+
+	public String getGname() {
+		return gname;
+	}
+
+	public void setGname(String gname) {
+		this.gname = gname;
 	}
 
 	public Long getSid() {

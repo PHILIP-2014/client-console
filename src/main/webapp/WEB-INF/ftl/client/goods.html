@@ -195,7 +195,7 @@
 	<!-- /modal-goods-add -->
 	
     <!-- modal-user-edit -->
-	<div class="modal fade modal-user-edit" id="editUser">
+	<div class="modal fade modal-goods-edit" id="editGoods">
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
 
@@ -279,7 +279,7 @@
     		location.href=location.href;
     	});
     };
-    
+    //============================//
     function showEditUserModal(item){
 		var name = $(item).attr('i-name-edit');
 		var role = $(item).attr('i-role-edit');
@@ -287,8 +287,6 @@
 		document.getElementById('name_edit').value=name;
 		document.getElementById('role_edit').value=role;
 		document.getElementById('uid_edit').value=uid;
-		//定位模态框并传值
-		$('#editUser').modal();
 	};
 	
 	function doUpdate(){
@@ -310,8 +308,6 @@
 		var name = $(item).attr('i-name-rmv');
 		document.getElementById('uid_rmv').value=id;
 		document.getElementById('name_rmv').value=name;
-		//定位模态框并传值
-		$('#removeUser').modal();
 	};
 	
 	function doRemove(){

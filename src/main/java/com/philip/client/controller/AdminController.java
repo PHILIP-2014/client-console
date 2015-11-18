@@ -56,27 +56,6 @@ public class AdminController extends BaseController{
 	}
 	
 	/**
-	 * 系统主入口
-	 * @param request
-	 * @param response
-	 * @param model
-	 * @return
-	 * @throws IOException 
-	 */
-	@RequestMapping(value="/main", method=RequestMethod.GET)
-	public String main(HttpServletRequest request, HttpServletResponse response, ModelMap out) throws IOException {
-		
-		try {
-			out.put("admin", getSessionUser(request));
-			out.put("adminNum", adminService.countByRole(Admin.IS_ADMIN, getUid(request)));
-			return "/client/index";
-		} catch (ServiceException e) {
-			sendError(request, response, e.getMessage());
-		} 
-		return null;
-	}
-	
-	/**
 	 * 获取用户列表
 	 * @param request
 	 * @param response

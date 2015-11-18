@@ -7,4 +7,6 @@ import com.philip.client.model.Order;
 public interface OrderDao {
 
 	List<Order> queryAll();
+	
+	Integer countAll();
 }

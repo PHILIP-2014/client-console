@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.philip.client.dao.GoodsDao">
+	<sql id="default_column">
+		goods.id,
+		goods.name,
+		goods.price,
+		goods.mark,
+		goods.type,
+		goods.status,
+		goods.gmt_create as gmtCreate,
+		goods.gmt_modify as gmtModify
+	</sql>
+	<select id="queryOne" resultType="com.philip.client.model.Goods">
+		select
+		<include refid="default_column" />
+		from `goods`
+		where `goods`.id=#{id}
+		limit 1
+	</select>
+	<select id="queryAll" resultType="com.philip.client.model.Goods">
+		select
+		<include refid="default_column" />
+		from `goods`
+		where `status` = 0
+		limit 10
+	</select>
+	<select id="countAll" resultType="java.lang.Integer">
+		select count(*)
+		from `goods`
+		where `status` = 0
+	</select>
+	
+</mapper>

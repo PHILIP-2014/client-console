@@ -5,26 +5,26 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.philip.client.dao.OrderDao;
-import com.philip.client.model.Order;
+import com.philip.client.dao.GoodsDao;
+import com.philip.client.model.Goods;
 import com.philip.client.utils.ServiceException;
 
-@Service("orderService")
-public class OrderService {
+@Service("goodsService")
+public class GoodsService {
 
 	@Autowired
-	private OrderDao orderDao;
+	private GoodsDao goodsDao;
 	@Autowired
 	private ServiceUtil serviceUtil;
 	
-	public List<Order> queryAll(Long uid) throws ServiceException {
+	public List<Goods> queryAll(Long uid) throws ServiceException {
 		if(!serviceUtil.checkPermission(uid)){
 			throw new ServiceException("error.forbidden");
 		}
-		return orderDao.queryAll();
+		return goodsDao.queryAll();
+	}
+	public Integer countAll(){
+		return goodsDao.countAll();
 	}
 	
-	public Integer countAll() {
-		return orderDao.countAll();
-	}
 }

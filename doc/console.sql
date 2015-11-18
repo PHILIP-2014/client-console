@@ -44,10 +44,11 @@ DROP TABLE IF EXISTS `goods`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `goods` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) DEFAULT '' COMMENT '商品名',
+  `name` varchar(30) DEFAULT '' COMMENT '商品名',
   `price` decimal(20,2) DEFAULT NULL COMMENT '价格',
   `mark` varchar(200) DEFAULT NULL COMMENT '描述',
   `type` int(4) DEFAULT 1 COMMENT '商品类型（1：指纹锁）',
+  `status` int(4) DEFAULT 0 COMMENT '默认0正常\n 1已下架',
   `gmt_create` datetime DEFAULT NULL,
   `gmt_modify` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -60,7 +61,7 @@ CREATE TABLE `goods` (
 
 LOCK TABLES `goods` WRITE;
 /*!40000 ALTER TABLE `goods` DISABLE KEYS */;
-INSERT INTO `goods` VALUES (101,'自行车锁A01','12.00','锁中之锁',1,'2015-11-13 14:38:59','2015-11-13 14:39:03');
+INSERT INTO `goods` VALUES (101,'自行车锁A01','12.00','锁中之锁',1, 0,'2015-11-13 14:38:59','2015-11-13 14:39:03');
 /*!40000 ALTER TABLE `goods` DISABLE KEYS */;
 UNLOCK TABLES;
 
@@ -103,7 +104,7 @@ DROP TABLE IF EXISTS `customer`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `customer` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) DEFAULT NULL COMMENT '顾客姓名',
+  `name` varchar(30) DEFAULT NULL COMMENT '顾客姓名',
   `mobile` varchar(45) DEFAULT NULL COMMENT '手机号码',
   `address` varchar(200) DEFAULT NULL COMMENT '顾客地址',
   `gmt_create` datetime DEFAULT NULL,
@@ -134,7 +135,7 @@ CREATE TABLE `orders` (
   `order_num` varchar(20) DEFAULT '0' COMMENT '订单编号(系统生成)',
   `cid` bigint(20) DEFAULT 0 COMMENT '下单者ID',
   `gid` bigint(20) DEFAULT 0 COMMENT '商品ID',
-  `gname` varchar(20) DEFAULT '' COMMENT '商品名称',
+  `gname` varchar(30) DEFAULT '' COMMENT '商品名称',
   `sid` bigint(20) DEFAULT 0 COMMENT '款式ID',
   `mark` varchar(45) DEFAULT NULL COMMENT '备注',
   `num` int(10) DEFAULT NULL COMMENT '数量',

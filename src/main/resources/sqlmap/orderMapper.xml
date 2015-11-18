@@ -30,5 +30,10 @@
 		where `status` = 0
 		limit 10
 	</select>
+	<select id="countAll" resultType="java.lang.Integer">
+		select count(*)
+		from `orders`
+		where `status` = 0
+	</select>
 	
 </mapper>

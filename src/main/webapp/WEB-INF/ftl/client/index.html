@@ -44,10 +44,10 @@
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-user fa-fw"></i> ${admin.loginName} <i class="fa fa-caret-down"></i>
                     </a>
-                    <!-- <ul class="dropdown-menu dropdown-user">
+                    <ul class="dropdown-menu dropdown-user">
                         <li><a href="/logout"><i class="fa fa-sign-out fa-fw"></i> 登出</a>
                         </li>
-                    </ul> -->
+                    </ul>
                 </li>
             </ul>
             <!-- /.navbar-top-links -->
@@ -69,13 +69,13 @@
                             <a href="/main"><i class="fa fa-dashboard fa-fw"></i> 概览 </a>
                         </li>
                         <li>
-                            <a href="/account/management"><i class="fa fa-user-md fa-fw"></i> 账号管理 </a>
+                            <a href="/management/accounts"><i class="fa fa-user-md fa-fw"></i> 账号管理 </a>
                         </li>
                         <li>
-                            <a href="/orders/management"><i class="fa fa-list-alt fa-fw"></i> 订单管理 </a>
+                            <a href="/management/goods"><i class="fa fa-shopping-cart fa-fw"></i> 商品管理 </a>
                         </li>
                         <li>
-                            <a href="/goods/management"><i class="fa fa-shopping-cart fa-fw"></i> 商品管理 </a>
+                            <a href="/management/orders"><i class="fa fa-list-alt fa-fw"></i> 订单管理 </a>
                         </li>
                     </ul>
                 </div>
@@ -98,17 +98,17 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <i class="fa fa-shopping-cart fa-5x"></i>
+                                    <i class="fa fa-user-md fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">${goodsNum}</div>
-                                    <div>商品数量</div>
+                                    <div class="huge">${adminNum}</div>
+                                    <div>账号数量</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="/goods/management">
+                        <a href="/management/accounts">
                             <div class="panel-footer">
-                                <span class="pull-left">详情>>></span>
+                                <span class="pull-left">管理>>></span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                 <div class="clearfix"></div>
                             </div>
@@ -120,17 +120,17 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <i class="fa fa-user-md fa-5x"></i>
+                                    <i class="fa fa-shopping-cart fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">${adminNum}</div>
-                                    <div>账号数量</div>
+                                    <div class="huge">${goodsNum}</div>
+                                    <div>商品数量</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="/account/management">
+                        <a href="/management/goods">
                             <div class="panel-footer">
-                                <span class="pull-left">管理>>></span>
+                                <span class="pull-left">详情>>></span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                 <div class="clearfix"></div>
                             </div>
@@ -150,7 +150,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="/orders/management">
+                        <a href="/management/orders">
                             <div class="panel-footer">
                                 <span class="pull-left">详情>>></span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

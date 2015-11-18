@@ -56,30 +56,7 @@ public class AdminController extends BaseController{
 	}
 	
 	/**
-	 * 获取用户列表
-	 * @param request
-	 * @param response
-	 * @param out
-	 * @param role
-	 * @return
-	 * @throws IOException
-	 */
-	@RequestMapping(value="/account/management", method=RequestMethod.GET)
-	public String queryAdmins(HttpServletRequest request, HttpServletResponse response, 
-			ModelMap out, Integer role) throws IOException {
-		
-		try {
-			out.put("admin", getSessionUser(request));
-			out.put("admins", adminService.queryByRole(role, getUid(request)));
-			return "/client/admins";
-		} catch (ServiceException e) {
-			sendError(request, response, e.getMessage());
-		}
-		return null;
-	}
-	
-	/**
-	 * 更新用户信息
+	 * 添加用户
 	 * @param request
 	 * @param response
 	 * @param admin

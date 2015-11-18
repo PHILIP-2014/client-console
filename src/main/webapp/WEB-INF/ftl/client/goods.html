@@ -69,13 +69,13 @@
                             <a href="/main"><i class="fa fa-dashboard fa-fw"></i> 概览 </a>
                         </li>
                         <li>
-                            <a href="/account/management"><i class="fa fa-user-md fa-fw"></i> 账号管理 </a>
+                            <a href="/management/accounts"><i class="fa fa-user-md fa-fw"></i> 账号管理 </a>
                         </li>
                         <li>
-                            <a href="/orders/management"><i class="fa fa-list-alt fa-fw"></i> 订单管理 </a>
+                            <a href="/management/goods"><i class="fa fa-shopping-cart fa-fw"></i> 商品管理 </a>
                         </li>
                         <li>
-                            <a href="/goods/management"><i class="fa fa-shopping-cart fa-fw"></i> 商品管理 </a>
+                            <a href="/management/orders"><i class="fa fa-list-alt fa-fw"></i> 订单管理 </a>
                         </li>
                     </ul>
                 </div>
@@ -89,7 +89,7 @@
                 <div class="col-lg-12">
                     <h1 class="page-header"> 商品管理 </h1>
 					<button type="button" class="btn btn-outline btn-primary"
-						data-toggle="modal" data-target=".modal-user-add">新增</button>
+						data-toggle="modal" data-target=".modal-goods-add"> 新增 </button>
 				</div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -97,7 +97,7 @@
             <div class="row">
 				<div class="col-lg-9">
 					<div class="panel panel-default">
-						<div class="panel-heading"> 订单列表 </div>
+						<div class="panel-heading"> 商品列表 </div>
 						<!-- /.panel-heading -->
 						<div class="panel-body">
 							<div class="table-responsive">
@@ -107,8 +107,8 @@
 											<th>编号</th>
 											<th>商品名</th>
 											<th>单价</th>
-											<th>备注</th>
 											<th>类型</th>
+											<th>备注</th>
 											<th>todo</th>
 										</tr>
 									</thead>
@@ -117,13 +117,13 @@
 										<tr id="tr_${item.id}">
 											<td>${item.id}</td>
 											<td>${item.name}</td>
-											<td>${item.price}</td> 
-											<td>${item.mark}</td>
+											<td>${item.price?string("0.00")}</td> 
 											<#if item.type == 1>
 												<td>指纹锁</td>
 											<#else>
 												<td>其它</td>
 											</#if>
+											<td>${item.mark}</td>
 											<td>
 												<button type="button" class="btn btn-outline btn-success" data-toggle="modal" 
 													data-target=".modal-user-edit" onclick="showEditUserModal(this)"
@@ -148,8 +148,8 @@
 	</div>
     <!-- /#wrapper -->
     
-    <!-- modal-user-add -->
-	<div class="modal fade modal-user-add" id="editUser">
+    <!-- modal-goods-add -->
+	<div class="modal fade modal-goods-add">
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
 
@@ -157,20 +157,28 @@
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title">新增用户</h4>
+					<h4 class="modal-title">新增商品</h4>
 				</div>
 				<div class="modal-body">
 					<form>
 						<div class="form-group">
-							<label for="recipient-name" class="control-label">用户名:</label>
+							<label for="recipient-name" class="control-label">商品名:</label>
 							<input class="form-control" id="name_add">
 						</div>
 						<div class="form-group">
-							<label for="message-text" class="control-label">角色:</label>
-							<select id="role_add" style="line-height: 32px; height: 32px; width: 60%; background: transparent; border-color: #ccc;">
-								<option value="0">普通用户</option>
-								<option value="1">管理员</option>
+							<label for="message-text" class="control-label">单价:</label>
+							<input class="form-control" id="price_add">
+						</div>
+						<div class="form-group">
+							<label for="message-text" class="control-label">类型:</label>
+							<select id="type_add" style="line-height: 32px; height: 32px; width: 60%; background: transparent; border-color: #ccc;">
+								<option value="1">指纹锁</option>
+								<option value="9">其它</option>
 							</select>
+						</div>
+						<div class="form-group">
+							<label for="message-text" class="control-label">备注:</label>
+							<input class="form-control" id="mark_add">
 						</div>
 					</form>
 				</div>
@@ -184,7 +192,8 @@
 		<!-- /.modal-dialog -->
 	</div>
 	<!-- /.modal -->
-	<!-- /modal-user-edit -->
+	<!-- /modal-goods-add -->
+	
     <!-- modal-user-edit -->
 	<div class="modal fade modal-user-edit" id="editUser">
 		<div class="modal-dialog modal-sm">
@@ -263,8 +272,10 @@
     <script type="text/javascript">
     function doCreate(){
     	var name = $('#name_add').val();
-    	var role = $('#role_add').val();
-    	AjaxPost('/admin/add', {name:name,role:role}, function callback(data){
+    	var price = $('#price_add').val();
+    	var type = $('#type_add').val();
+    	var mark = $('#mark_add').val();
+    	AjaxPost('/goods/add', {name:name,price:price,type:type,mark:mark}, function callback(data){
     		location.href=location.href;
     	});
     };

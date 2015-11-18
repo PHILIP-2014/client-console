@@ -18,7 +18,6 @@ import com.philip.client.service.OrderService;
 import com.philip.client.utils.ServiceException;
 
 @Controller
-@RequestMapping("/main")
 public class MainController extends BaseController {
 	
 	@Autowired
@@ -36,7 +35,7 @@ public class MainController extends BaseController {
 	 * @return
 	 * @throws IOException 
 	 */
-	@RequestMapping(method=RequestMethod.GET)
+	@RequestMapping(value="/main", method=RequestMethod.GET)
 	public String main(HttpServletRequest request, HttpServletResponse response, ModelMap out) throws IOException {
 		
 		try {
@@ -48,6 +47,63 @@ public class MainController extends BaseController {
 		} catch (ServiceException e) {
 			sendError(request, response, e.getMessage());
 		} 
+		return null;
+	}
+	
+	/**
+	 * 获取用户列表
+	 * @param request
+	 * @param response
+	 * @param out
+	 * @param role
+	 * @return
+	 * @throws IOException
+	 */
+	@RequestMapping(value="/management/accounts", method=RequestMethod.GET)
+	public String queryAdmins(HttpServletRequest request, HttpServletResponse response, 
+			ModelMap out, Integer role) throws IOException {
+		
+		try {
+			out.put("admin", getSessionUser(request));
+			out.put("admins", adminService.queryByRole(role, getUid(request)));
+			return "/client/admins";
+		} catch (ServiceException e) {
+			sendError(request, response, e.getMessage());
+		}
+		return null;
+	}
+	
+	/**
+	 * 获取商品列表
+	 */
+	@RequestMapping(value="/management/goods", method=RequestMethod.GET)
+	public String queryGoods(HttpServletRequest request, HttpServletResponse response, 
+			ModelMap out) throws IOException {
+		
+		try {
+			out.put("admin", getSessionUser(request));
+			out.put("goods", goodsService.queryAll(getUid(request)));
+			return "/client/goods";
+		} catch (ServiceException e) {
+			sendError(request, response, e.getMessage());
+		}
+		return null;
+	}
+	
+	/**
+	 * 获取订单列表
+	 */
+	@RequestMapping(value="/management/orders", method=RequestMethod.GET)
+	public String queryOrders(HttpServletRequest request, HttpServletResponse response, 
+			ModelMap out) throws IOException {
+		
+		try {
+			out.put("admin", getSessionUser(request));
+			out.put("orders", orderService.queryAll(getUid(request)));
+			return "/client/orders";
+		} catch (ServiceException e) {
+			sendError(request, response, e.getMessage());
+		}
 		return null;
 	}
 

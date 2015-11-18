@@ -30,5 +30,22 @@
 		from `goods`
 		where `status` = 0
 	</select>
-	
+	<insert id="insert" parameterType="com.philip.client.model.Goods" keyProperty="id">
+		insert into goods (
+			name,
+			price,
+			mark,
+			type,
+			status,
+			gmt_create,
+			gmt_modify
+			)
+		values(
+			#{name},
+			#{price},
+			#{mark},
+			#{type},
+			#{status},
+			now(),now())
+	</insert>
 </mapper>

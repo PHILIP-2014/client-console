@@ -13,4 +13,6 @@ public interface GoodsDao {
 	List<Goods> queryAll();
 	
 	Integer countAll();
+	
+	Integer insert(Goods goods);
 }

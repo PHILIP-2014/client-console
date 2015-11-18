@@ -69,13 +69,13 @@
                             <a href="/main"><i class="fa fa-dashboard fa-fw"></i> 概览 </a>
                         </li>
                         <li>
-                            <a href="/account/management"><i class="fa fa-user-md fa-fw"></i> 账号管理 </a>
+                            <a href="/management/accounts"><i class="fa fa-user-md fa-fw"></i> 账号管理 </a>
                         </li>
                         <li>
-                            <a href="/orders/management"><i class="fa fa-list-alt fa-fw"></i> 订单管理 </a>
+                            <a href="/management/goods"><i class="fa fa-shopping-cart fa-fw"></i> 商品管理 </a>
                         </li>
                         <li>
-                            <a href="/goods/management"><i class="fa fa-shopping-cart fa-fw"></i> 商品管理 </a>
+                            <a href="/management/orders"><i class="fa fa-list-alt fa-fw"></i> 订单管理 </a>
                         </li>
                     </ul>
                 </div>
@@ -119,7 +119,7 @@
 											<td>${item.orderNum}</td>
 											<td>${item.gname}</td>
 											<td>${item.num}</td> 
-											<td>${item.totalFee}</td> 
+											<td>${item.totalFee?string("0.00")}</td> 
 											<td>${item.gmtCreate?string("yyyy-MM-dd hh:mm")}</td>
 											<td>${item.gmtSetup?string("yyyy-MM-dd hh:mm")}</td>
 											<td>

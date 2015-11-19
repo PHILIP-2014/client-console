@@ -108,6 +108,7 @@
 											<th>商品</th>
 											<th>数量</th>
 											<th>价格</th>
+											<th>下单者</th>
 											<th>下单时间</th>
 											<th>安装时间</th>
 											<th>todo</th>
@@ -117,9 +118,12 @@
 									<tbody>
 										<tr id="tr_${item.id}">
 											<td>${item.orderNum}</td>
-											<td>${item.gname}</td>
+											
+											<td><a href="#" class="btn btn-large btn-info">${item.gname}</a></td>
+											
 											<td>${item.num}</td> 
 											<td>${item.totalFee?string("0.00")}</td> 
+											<td><a href="#" class="btn btn-large btn-info">${item.cid}</a></td> 
 											<td>${item.gmtCreate?string("yyyy-MM-dd hh:mm")}</td>
 											<td>${item.gmtSetup?string("yyyy-MM-dd hh:mm")}</td>
 											<td>
@@ -128,7 +132,7 @@
 													>修改</button>
 												<button type="button" class="btn btn-outline btn-danger" data-toggle="modal"
 													data-target=".modal-user-remove" onclick="showRmvUserModal(this)"
-													>删除</button>
+													>取消</button>
 											</td>
 										</tr>
 									</tbody>
@@ -145,8 +149,8 @@
         </div>
 	</div>
     <!-- /#wrapper -->
-    
-    <!-- modal-user-add -->
+
+	<!-- modal-user-add -->
 	<div class="modal fade modal-user-add" id="editUser">
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
@@ -230,16 +234,16 @@
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title">移除用户</h4>
+					<h4 class="modal-title">取消订单</h4>
 				</div>
 				<div class="modal-body">
-					<p>您确定要删除此用户吗?</p>
+					<p>您确定要取消此订单吗?</p>
 					<input type="hidden" id="uid_rmv" /> 
 					<input type="hidden" id="name_rmv" /> 
 				</div>
 				<div class="modal-footer">
-					<a href="#" class="btn btn-default" data-dismiss="modal">取消</a> 
-					<a href="#" class="btn btn-danger" data-dismiss="modal" onclick="doRemove()">删除</a>
+					<a href="#" class="btn btn-default" data-dismiss="modal">否</a> 
+					<a href="#" class="btn btn-danger" data-dismiss="modal" onclick="doRemove()">是</a>
 				</div>
 			</div>
 		</div>

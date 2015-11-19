@@ -9,7 +9,9 @@ public class Goods extends Base {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	public static final int IS_NORMAL = 0;
+	public static final int IS_NORMAL = 0;//正常
+	public static final int IS_OFFLINE = 1;//下架
+	
 
 	private String name;
 	

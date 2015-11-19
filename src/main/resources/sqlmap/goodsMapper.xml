@@ -48,4 +48,26 @@
 			#{status},
 			now(),now())
 	</insert>
+	<update id="update" parameterType="com.philip.client.model.Goods">
+		update goods
+		<set>
+			<if test="name != null">
+				name = #{name},
+			</if>
+			<if test="price != null">
+				price = #{price},
+			</if>
+			<if test="mark != null">
+				`mark` = #{mark},
+			</if>
+			<if test="type != null">
+				`type` = #{type},
+			</if>
+			<if test="status != null">
+				status = #{status},
+			</if>
+			gmt_modify = now()
+		</set>
+		where `id` = #{id}
+	</update>
 </mapper>

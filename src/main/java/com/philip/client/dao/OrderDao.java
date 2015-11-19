@@ -9,4 +9,8 @@ public interface OrderDao {
 	List<Order> queryAll();
 	
 	Integer countAll();
+	
+	Integer insert(Order order);
+	
+	Integer update(Order order);
 }

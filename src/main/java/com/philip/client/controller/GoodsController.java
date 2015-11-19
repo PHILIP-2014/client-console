@@ -41,4 +41,44 @@ public class GoodsController extends BaseController {
 		}
 		return null;
 	}
+	
+	/**
+	 * 更新商品信息
+	 * @param request
+	 * @param response
+	 * @param goods
+	 * @return
+	 * @throws IOException
+	 */
+	@RequestMapping(value="/goods/edit", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> edit(HttpServletRequest request, HttpServletResponse response,
+			Goods goods) throws IOException {
+		try {
+			return ajaxResult(goodsService.doEdit(goods, getUid(request)), null);
+		} catch (ServiceException e) {
+			sendError(request, response, e.getMessage());
+		}
+		return null;
+	}
+	
+	/**
+	 * 移除用户
+	 * @param request
+	 * @param response
+	 * @param id
+	 * @return
+	 * @throws IOException
+	 */
+	@RequestMapping(value="/goods/remove", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> remove(HttpServletRequest request, HttpServletResponse response, 
+			Long id) throws IOException {
+		try {
+			return ajaxResult(goodsService.doDisable(id, getUid(request)), null);
+		} catch (ServiceException e) {
+			sendError(request, response, e.getMessage());
+		}
+		return null;
+	}
 }

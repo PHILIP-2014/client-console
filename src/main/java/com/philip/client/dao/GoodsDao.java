@@ -15,4 +15,6 @@ public interface GoodsDao {
 	Integer countAll();
 	
 	Integer insert(Goods goods);
+	
+	Integer update(Goods goods);
 }

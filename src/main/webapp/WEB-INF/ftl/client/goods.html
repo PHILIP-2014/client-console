@@ -126,11 +126,13 @@
 											<td>${item.mark}</td>
 											<td>
 												<button type="button" class="btn btn-outline btn-success" data-toggle="modal" 
-													data-target=".modal-user-edit" onclick="showEditUserModal(this)"
-													>修改</button>
+													data-target=".modal-goods-edit" onclick="showEditGoodsModal(this)"
+													i-name-edit="${item.name}" i-price-edit="${item.price}" i-gid-edit="${item.id}"
+													i-mark-edit="${item.mark}" i-type-edit="${item.type}">修改</button>
 												<button type="button" class="btn btn-outline btn-danger" data-toggle="modal"
-													data-target=".modal-user-remove" onclick="showRmvUserModal(this)"
-													>删除</button>
+													data-target=".modal-goods-remove" onclick="showRmvGoodsModal(this)"
+													i-gid-rmv="${item.id}" i-name-rmv="${item.name}"
+													>停售</button>
 											</td>
 										</tr>
 									</tbody>
@@ -194,8 +196,8 @@
 	<!-- /.modal -->
 	<!-- /modal-goods-add -->
 	
-    <!-- modal-user-edit -->
-	<div class="modal fade modal-goods-edit" id="editGoods">
+    <!-- modal-goods-edit -->
+	<div class="modal fade modal-goods-edit">
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
 
@@ -203,21 +205,29 @@
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title">编辑用户</h4>
+					<h4 class="modal-title">编辑商品</h4>
 				</div>
 				<div class="modal-body">
 					<form>
 						<div class="form-group">
-							<label for="recipient-name" class="control-label">用户名:</label>
+							<label for="recipient-name" class="control-label">商品名:</label>
 							<input class="form-control" id="name_edit">
-							<input type="hidden" id="uid_edit" />
+							<input type="hidden" id="gid_edit">
 						</div>
 						<div class="form-group">
-							<label for="message-text" class="control-label">角色:</label>
-							<select id="role_edit" style="line-height: 32px; height: 32px; width: 60%; background: transparent; border-color: #ccc;">
-								<option value="0">普通用户</option>
-								<option value="1">管理员</option>
+							<label for="message-text" class="control-label">单价:</label>
+							<input class="form-control" id="price_edit">
+						</div>
+						<div class="form-group">
+							<label for="message-text" class="control-label">类型:</label>
+							<select id="type_edit" style="line-height: 32px; height: 32px; width: 60%; background: transparent; border-color: #ccc;">
+								<option value="1">指纹锁</option>
+								<option value="9">其它</option>
 							</select>
+						</div>
+						<div class="form-group">
+							<label for="message-text" class="control-label">备注:</label>
+							<input class="form-control" id="mark_edit">
 						</div>
 					</form>
 				</div>
@@ -231,26 +241,26 @@
 		<!-- /.modal-dialog -->
 	</div>
 	<!-- /.modal -->
-	<!-- /modal-user-edit -->
+	<!-- /modal-goods-edit -->
 		
-	<!-- modal-user-del -->
-	<div class="modal fade modal-user-remove" id="removeUser">
+	<!-- modal-goods-del -->
+	<div class="modal fade modal-goods-remove">
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title">移除用户</h4>
+					<h4 class="modal-title">停售商品</h4>
 				</div>
 				<div class="modal-body">
-					<p>您确定要删除此用户吗?</p>
-					<input type="hidden" id="uid_rmv" /> 
+					<p>您确定要停售此商品吗?</p>
+					<input type="hidden" id="gid_rmv" /> 
 					<input type="hidden" id="name_rmv" /> 
 				</div>
 				<div class="modal-footer">
-					<a href="#" class="btn btn-default" data-dismiss="modal">取消</a> 
-					<a href="#" class="btn btn-danger" data-dismiss="modal" onclick="doRemove()">删除</a>
+					<a href="#" class="btn btn-default" data-dismiss="modal">否</a> 
+					<a href="#" class="btn btn-danger" data-dismiss="modal" onclick="doRemove()">是</a>
 				</div>
 			</div>
 		</div>
@@ -279,21 +289,27 @@
     		location.href=location.href;
     	});
     };
-    //============================//
-    function showEditUserModal(item){
+    
+    function showEditGoodsModal(item){
 		var name = $(item).attr('i-name-edit');
-		var role = $(item).attr('i-role-edit');
-		var uid = $(item).attr('i-uid-edit');
+		var price = $(item).attr('i-price-edit');
+		var gid = $(item).attr('i-gid-edit');
+		var type = $(item).attr('i-type-edit');
+		var mark = $(item).attr('i-mark-edit');
 		document.getElementById('name_edit').value=name;
-		document.getElementById('role_edit').value=role;
-		document.getElementById('uid_edit').value=uid;
+		document.getElementById('price_edit').value=price;
+		document.getElementById('gid_edit').value=gid;
+		document.getElementById('type_edit').value=type;
+		document.getElementById('mark_edit').value=mark;
 	};
 	
 	function doUpdate(){
+		var gid = $('#gid_edit').val();
 		var name = $('#name_edit').val();
-		var role = $('#role_edit').val();
-		var uid = $('#uid_edit').val();
-		AjaxPost('/admin/edit', {id:uid,name:name,role:role}, function callback(data){
+		var price = $('#price_edit').val();
+		var type = $('#type_edit').val();
+		var mark = $('#mark_edit').val();
+		AjaxPost('/goods/edit', {id:gid,name:name,price:price,type:type,mark:mark}, function callback(data){
 			/* 
 			document.getElementById('name_'+uid).value=name;
 			if(role == 1){
@@ -303,18 +319,19 @@
 		});
 	};
 	
-	function showRmvUserModal(item){
-		var id = $(item).attr('i-uid-rmv');
+	function showRmvGoodsModal(item){
+		var gid = $(item).attr('i-gid-rmv');
 		var name = $(item).attr('i-name-rmv');
-		document.getElementById('uid_rmv').value=id;
+		document.getElementById('gid_rmv').value=gid;
 		document.getElementById('name_rmv').value=name;
 	};
 	
 	function doRemove(){
-		var uid = $('#uid_rmv').val();
-		AjaxPost('/admin/remove', {id:uid}, function callback(data){
+		var gid = $('#gid_rmv').val();
+		debugger;
+		AjaxPost('/goods/remove', {id:gid}, function callback(data){
 			//if(data)
-			$('#tr_'+uid).remove();
+			$('#tr_'+gid).remove();
 		});
 	};
     </script>

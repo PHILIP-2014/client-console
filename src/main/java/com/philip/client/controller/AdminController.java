@@ -25,7 +25,7 @@ public class AdminController extends BaseController{
 	private AdminService adminService;
 
 	@RequestMapping(value="/login", method=RequestMethod.GET)
-	public String login(HttpServletRequest request){
+	public String login(){
 		
 		return null;
 	}

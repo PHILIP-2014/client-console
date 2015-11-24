@@ -57,13 +57,13 @@
                     <ul class="nav" id="side-menu">
                         <li class="sidebar-search">
                              <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="Search...">
-                                <span class="input-group-btn"> 
-                                <button class="btn btn-default" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
-                            </div>
+								<input type="text" class="form-control" placeholder="Search..."> 
+									<span class="input-group-btn">
+										<button class="btn btn-default" type="button">
+											<i class="fa fa-search"></i>
+										</button>
+									</span>
+							</div>
                         </li>
                         <li>
                             <a href="/main"><i class="fa fa-dashboard fa-fw"></i> 概览 </a>
@@ -87,9 +87,10 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header"> 订单管理 </h1>
-					<button type="button" class="btn btn-outline btn-primary"
-						data-toggle="modal" data-target=".modal-user-add">新增</button>
+                    <h1 class="page-header"> 订单管理 
+                    <button type="button" class="btn btn-outline btn-primary"
+						data-toggle="modal" data-target=".modal-order-add">新增</button>
+					</h1>
 				</div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -109,6 +110,7 @@
 											<th>数量</th>
 											<th>价格</th>
 											<th>下单者</th>
+											<th>备注</th>
 											<th>下单时间</th>
 											<th>安装时间</th>
 											<th>todo</th>
@@ -124,14 +126,17 @@
 											<td>${item.num}</td> 
 											<td>${item.totalFee?string("0.00")}</td> 
 											<td><a href="#" class="btn btn-large btn-info">${item.cid}</a></td> 
+											<td>${item.mark}</td> 
 											<td>${item.gmtCreate?string("yyyy-MM-dd hh:mm")}</td>
 											<td>${item.gmtSetup?string("yyyy-MM-dd hh:mm")}</td>
 											<td>
 												<button type="button" class="btn btn-outline btn-success" data-toggle="modal" 
-													data-target=".modal-user-edit" onclick="showEditUserModal(this)"
+													data-target=".modal-order-edit" onclick="showEditOrderModal(this)"
+													i-mark-edit="${item.mark}" i-setup-edit="${item.gmtSetup}"
 													>修改</button>
 												<button type="button" class="btn btn-outline btn-danger" data-toggle="modal"
-													data-target=".modal-user-remove" onclick="showRmvUserModal(this)"
+													data-target=".modal-order-remove" onclick="showRmvOrderModal(this)"
+													i-oid-rmv="${item.id}"
 													>取消</button>
 											</td>
 										</tr>
@@ -151,7 +156,7 @@
     <!-- /#wrapper -->
 
 	<!-- modal-user-add -->
-	<div class="modal fade modal-user-add" id="editUser">
+	<div class="modal fade modal-order-add">
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
 
@@ -159,7 +164,7 @@
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title">新增用户</h4>
+					<h4 class="modal-title">新增订单</h4>
 				</div>
 				<div class="modal-body">
 					<form>
@@ -188,7 +193,7 @@
 	<!-- /.modal -->
 	<!-- /modal-user-edit -->
     <!-- modal-user-edit -->
-	<div class="modal fade modal-user-edit" id="editUser">
+	<div class="modal fade modal-order-edit">
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
 
@@ -196,22 +201,22 @@
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title">编辑用户</h4>
+					<h4 class="modal-title">编辑订单</h4>
 				</div>
 				<div class="modal-body">
 					<form>
 						<div class="form-group">
-							<label for="recipient-name" class="control-label">用户名:</label>
-							<input class="form-control" id="name_edit">
-							<input type="hidden" id="uid_edit" />
+							<label for="recipient-name" class="control-label">备注:</label>
+							<input class="form-control" id="mark_edit">
+							<input class="form-control" id="setup_edit">
+							<input type="hidden" id="oid_edit" />
 						</div>
-						<div class="form-group">
-							<label for="message-text" class="control-label">角色:</label>
-							<select id="role_edit" style="line-height: 32px; height: 32px; width: 60%; background: transparent; border-color: #ccc;">
-								<option value="0">普通用户</option>
-								<option value="1">管理员</option>
-							</select>
-						</div>
+						<div id="datetimepicker" class="input-append date">  
+						    <input type="text"></input>  
+						    <span class="add-on">  
+						        <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>  
+						    </span>  
+						</div>  
 					</form>
 				</div>
 				<div class="modal-footer">
@@ -227,7 +232,7 @@
 	<!-- /modal-user-edit -->
 		
 	<!-- modal-user-del -->
-	<div class="modal fade modal-user-remove" id="removeUser">
+	<div class="modal fade modal-order-remove">
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -238,7 +243,7 @@
 				</div>
 				<div class="modal-body">
 					<p>您确定要取消此订单吗?</p>
-					<input type="hidden" id="uid_rmv" /> 
+					<input type="hidden" id="oid_rmv" /> 
 					<input type="hidden" id="name_rmv" /> 
 				</div>
 				<div class="modal-footer">
@@ -262,6 +267,22 @@
     <script src="/jquery/jquery.min.js"></script>
     <script src="/js/ajax/ajax.js"></script>
     
+    <script type="text/javascript" src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js">  
+	</script> 
+    <script type="text/javascript">
+    $(function () {
+    	$('#datetimepicker').datetimepicker({  
+            format: 'MM/dd/yyyy hh:mm',  
+            language: 'en',  
+            pickDate: true,  
+            pickTime: true,  
+            hourStep: 1,  
+            minuteStep: 15,  
+            secondStep: 30,  
+            inputMask: true  
+          });  
+    });
+	</script>
     <script type="text/javascript">
     function doCreate(){
     	var name = $('#name_add').val();
@@ -271,15 +292,13 @@
     	});
     };
     
-    function showEditUserModal(item){
-		var name = $(item).attr('i-name-edit');
-		var role = $(item).attr('i-role-edit');
-		var uid = $(item).attr('i-uid-edit');
-		document.getElementById('name_edit').value=name;
-		document.getElementById('role_edit').value=role;
-		document.getElementById('uid_edit').value=uid;
-		//定位模态框并传值
-		$('#editUser').modal();
+    function showEditOrderModal(item){
+		var mark = $(item).attr('i-mark-edit');
+		var setup = $(item).attr('i-setup-edit');
+		var oid = $(item).attr('i-oid-edit');
+		document.getElementById('mark_edit').value=mark;
+		document.getElementById('setup_edit').value=setup;
+		document.getElementById('oid_edit').value=oid;
 	};
 	
 	function doUpdate(){
@@ -296,20 +315,18 @@
 		});
 	};
 	
-	function showRmvUserModal(item){
-		var id = $(item).attr('i-uid-rmv');
+	function showRmvOrderModal(item){
+		var id = $(item).attr('i-oid-rmv');
 		var name = $(item).attr('i-name-rmv');
-		document.getElementById('uid_rmv').value=id;
+		document.getElementById('oid_rmv').value=id;
 		document.getElementById('name_rmv').value=name;
-		//定位模态框并传值
-		$('#removeUser').modal();
 	};
 	
 	function doRemove(){
-		var uid = $('#uid_rmv').val();
-		AjaxPost('/admin/remove', {id:uid}, function callback(data){
+		var oid = $('#oid_rmv').val();
+		AjaxPost('/order/remove', {id:oid}, function callback(data){
 			//if(data)
-			$('#tr_'+uid).remove();
+			$('#tr_'+oid).remove();
 		});
 	};
     </script>

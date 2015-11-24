@@ -30,10 +30,64 @@
 		where `status` = 0
 		limit 10
 	</select>
+	<select id="queryByCond" parameterType="com.philip.client.model.OrderCond" resultType="com.philip.client.model.Order">
+		select
+		<include refid="default_column" />
+		from `orders`
+		where `status` = #{status}
+		limit 10
+	</select>
 	<select id="countAll" resultType="java.lang.Integer">
 		select count(*)
 		from `orders`
 		where `status` = 0
 	</select>
+	<insert id="insert" parameterType="com.philip.client.model.Order" keyProperty="id">
+		insert into orders (
+			order_num,
+			cid,
+			gid,
+			gname,
+			sid,
+			mark,
+			num,
+			total_fee,
+			status,
+			gmt_setup,
+			gmt_create,
+			gmt_modify
+			)
+		values(
+			#{orderNum},
+			#{cid},
+			#{gid},
+			#{gname},
+			#{sid},
+			#{mark},
+			#{num},
+			#{totalFee},
+			#{status},
+			#{gmtSetup},
+			now(),now())
+	</insert>
+	<update id="update" parameterType="com.philip.client.model.Order">
+		update orders
+		<set>
+			<if test="mark != null">
+				`mark` = #{mark},
+			</if>
+			<if test="num != null">
+				`num` = #{num},
+			</if>
+			<if test="status != null">
+				status = #{status},
+			</if>
+			<if test="gmtSetup != null">
+				gmt_setup = #{gmtSetup},
+			</if>
+			gmt_modify = now()
+		</set>
+		where `id` = #{id}
+	</update>
 	
 </mapper>

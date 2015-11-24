@@ -5,7 +5,7 @@ import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang.StringUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.util.UrlPathHelper;
 
@@ -56,7 +56,7 @@ public class MemberContextInterceptor extends HandlerInterceptorAdapter{
 		StringBuilder buff = new StringBuilder();
 		if (loginUrl.startsWith("/")) {
 			String ctx = request.getContextPath();
-			if (!StringUtils.isBlank(ctx)) {
+			if (!StringUtils.isEmpty(ctx)) {
 				buff.append(ctx);
 			}
 		}
@@ -80,7 +80,7 @@ public class MemberContextInterceptor extends HandlerInterceptorAdapter{
 	
 	public String encode(String url) {
 		String str=url;
-		if(StringUtils.isBlank(str)){
+		if(StringUtils.isEmpty(str)){
 			return str;
 		}
 		try {
@@ -167,7 +167,7 @@ public class MemberContextInterceptor extends HandlerInterceptorAdapter{
 		UrlPathHelper helper = new UrlPathHelper();
 		String uri = helper.getOriginatingRequestUri(request);
 		String ctxPath = helper.getOriginatingContextPath(request);
-		if (!StringUtils.isBlank(ctxPath)) {
+		if (!StringUtils.isEmpty(ctxPath)) {
 			int start = uri.indexOf('/', 1);
 			uri=uri.substring(start);
 		}

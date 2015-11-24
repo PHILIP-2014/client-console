@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.philip.client.model.Admin;
+import com.philip.client.model.Order;
+import com.philip.client.model.OrderCond;
 import com.philip.client.service.AdminService;
 import com.philip.client.service.GoodsService;
 import com.philip.client.service.OrderService;
@@ -99,7 +101,9 @@ public class MainController extends BaseController {
 		
 		try {
 			out.put("admin", getSessionUser(request));
-			out.put("orders", orderService.queryAll(getUid(request)));
+			OrderCond cond = new OrderCond();
+			cond.setStatus(Order.IS_WAITING);
+			out.put("orders", orderService.queryByCond(cond, getUid(request)));
 			return "/client/orders";
 		} catch (ServiceException e) {
 			sendError(request, response, e.getMessage());

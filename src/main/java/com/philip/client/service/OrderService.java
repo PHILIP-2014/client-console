@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.philip.client.dao.OrderDao;
 import com.philip.client.model.Order;
+import com.philip.client.model.OrderCond;
 import com.philip.client.utils.ServiceException;
 import com.philip.client.utils.javabase.LongUtils;
 
@@ -23,6 +24,13 @@ public class OrderService {
 			throw new ServiceException("error.forbidden");
 		}
 		return orderDao.queryAll();
+	}
+	
+	public List<Order> queryByCond(OrderCond cond, Long uid) throws ServiceException {
+		if(!serviceUtil.checkPermission(uid)){
+			throw new ServiceException("error.forbidden");
+		}
+		return orderDao.queryByCond(cond);
 	}
 	
 	public Integer countAll() {
@@ -56,6 +64,19 @@ public class OrderService {
 		Order order = new Order();
 		order.setId(id);
 		order.setStatus(Order.IS_CANCELED);
+		return orderDao.update(order) > 0; 
+	}
+	
+	public Boolean doFinish(Long id, Long uid) throws ServiceException {
+		if(!serviceUtil.checkPermission(uid)){
+			throw new ServiceException("error.forbidden");
+		}
+		if(LongUtils.isEmpty(id)){
+			throw new ServiceException("error.require.params");
+		}
+		Order order = new Order();
+		order.setId(id);
+		order.setStatus(Order.IS_FINISHED);
 		return orderDao.update(order) > 0; 
 	}
 }

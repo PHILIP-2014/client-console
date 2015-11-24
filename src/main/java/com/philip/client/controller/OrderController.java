@@ -63,7 +63,26 @@ public class OrderController extends BaseController {
 	}
 	
 	/**
-	 * 移除用户
+	 * 完成订单
+	 * @param request
+	 * @param response
+	 * @param id
+	 * @return
+	 * @throws IOException
+	 */
+	@RequestMapping(value="/order/finish", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> finish(HttpServletRequest request, HttpServletResponse response, 
+			Long id) throws IOException {
+		try {
+			return ajaxResult(orderService.doFinish(id, getUid(request)), null);
+		} catch (ServiceException e) {
+			sendError(request, response, e.getMessage());
+		}
+		return null;
+	}
+	/**
+	 * 取消订单
 	 * @param request
 	 * @param response
 	 * @param id

@@ -12,6 +12,9 @@
 		orders.num,
 		orders.total_fee as totalFee,
 		orders.status,
+		orders.name_setup as nameSetup,
+		orders.phone_setup as phoneSetup,
+		orders.addr_setup as addrSetup,
 		orders.gmt_setup as gmtSetup,
 		orders.gmt_create as gmtCreate,
 		orders.gmt_modify as gmtModify
@@ -53,6 +56,9 @@
 			num,
 			total_fee,
 			status,
+			name_setup,
+			phone_setup,
+			addr_setup,
 			gmt_setup,
 			gmt_create,
 			gmt_modify
@@ -67,6 +73,9 @@
 			#{num},
 			#{totalFee},
 			#{status},
+			#{nameSetup},
+			#{phoneSetup},
+			#{addrSetup},
 			#{gmtSetup},
 			now(),now())
 	</insert>
@@ -81,6 +90,12 @@
 			</if>
 			<if test="status != null">
 				status = #{status},
+			</if>
+			<if test="phoneSetup != null">
+				phone_setup = #{phoneSetup},
+			</if>
+			<if test="addrSetup != null">
+				addr_setup = #{addrSetup},
 			</if>
 			<if test="gmtSetup != null">
 				gmt_setup = #{gmtSetup},

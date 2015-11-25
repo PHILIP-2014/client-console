@@ -23,7 +23,7 @@ public class OrderController extends BaseController {
 	private OrderService orderService;
 	
 	/**
-	 * 添加商品
+	 * 添加订单
 	 * @param request
 	 * @param response
 	 * @param order
@@ -43,7 +43,7 @@ public class OrderController extends BaseController {
 	}
 	
 	/**
-	 * 更新商品信息
+	 * 更新订单信息
 	 * @param request
 	 * @param response
 	 * @param order
@@ -81,6 +81,7 @@ public class OrderController extends BaseController {
 		}
 		return null;
 	}
+	
 	/**
 	 * 取消订单
 	 * @param request

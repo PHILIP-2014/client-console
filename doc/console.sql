@@ -75,7 +75,6 @@ DROP TABLE IF EXISTS `style`;
 CREATE TABLE `style` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `gid` bigint(20) DEFAULT NULL COMMENT '商品ID',
-  `pic_url` varchar(45) DEFAULT NULL COMMENT '图片地址',
   `content` varchar(45) DEFAULT NULL COMMENT '款式名（例：深蓝）',
   `gmt_create` datetime DEFAULT NULL,
   `gmt_modify` datetime DEFAULT NULL,
@@ -89,42 +88,15 @@ CREATE TABLE `style` (
 
 LOCK TABLES `style` WRITE;
 /*!40000 ALTER TABLE `goods_style` DISABLE KEYS */;
-INSERT INTO `style` VALUES (1001, 101, 'www.xintuzaojiu.com/pic1','深蓝','2015-11-13 14:38:59','2015-11-13 14:39:03');
-INSERT INTO `style` VALUES (1002, 101, 'www.xintuzaojiu.com/pic2','深黑','2015-11-13 14:38:59','2015-11-13 14:39:03');
-INSERT INTO `style` VALUES (1003, 101, 'www.xintuzaojiu.com/pic3','深红','2015-11-13 14:38:59','2015-11-13 14:39:03');
+INSERT INTO `style` VALUES (1001, 101,'深蓝','2015-11-13 14:38:59','2015-11-13 14:39:03');
+INSERT INTO `style` VALUES (1002, 101,'深黑','2015-11-13 14:38:59','2015-11-13 14:39:03');
+INSERT INTO `style` VALUES (1003, 101,'深红','2015-11-13 14:38:59','2015-11-13 14:39:03');
 /*!40000 ALTER TABLE `goods_style` ENABLE KEYS */;
 UNLOCK TABLES;
 
---
--- Table structure for table `order_user`
---
-
-DROP TABLE IF EXISTS `customer`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `customer` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `name` varchar(30) DEFAULT NULL COMMENT '顾客姓名',
-  `mobile` varchar(45) DEFAULT NULL COMMENT '手机号码',
-  `address` varchar(200) DEFAULT NULL COMMENT '顾客地址',
-  `gmt_create` datetime DEFAULT NULL,
-  `gmt_modify` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10001 CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `order_user`
---
-
-LOCK TABLES `customer` WRITE;
-/*!40000 ALTER TABLE `order_user` DISABLE KEYS */;
-INSERT INTO `customer` VALUES (10001, 'luo', '18768171234','杭州滨江','2015-11-13 14:38:59','2015-11-13 14:39:03');
-/*!40000 ALTER TABLE `order_user` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `order`
+-- Table structure for table `orders`
 --
 
 DROP TABLE IF EXISTS `orders`;

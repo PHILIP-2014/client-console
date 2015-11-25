@@ -81,7 +81,7 @@ CREATE TABLE `style` (
 ) ENGINE=InnoDB AUTO_INCREMENT=1004 DEFAULT CHARSET=utf8;
 
 LOCK TABLES `style` WRITE;
-INSERT INTO `style` VALUES (1001,101,'深蓝','2015-11-13 14:38:59','2015-11-13 14:39:03'),(1002,101,'www.xintuzaojiu.com/pic2','深黑','2015-11-13 14:38:59','2015-11-13 14:39:03'),(1003,101,'www.xintuzaojiu.com/pic3','深红','2015-11-13 14:38:59','2015-11-13 14:39:03');
+INSERT INTO `style` VALUES (1001,101,'深蓝','2015-11-13 14:38:59','2015-11-13 14:39:03'),(1002,101,'深黑','2015-11-13 14:38:59','2015-11-13 14:39:03'),(1003,101,'深红','2015-11-13 14:38:59','2015-11-13 14:39:03');
 UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `picture`;
@@ -95,7 +95,7 @@ CREATE TABLE `picture` (
 ) ENGINE=InnoDB AUTO_INCREMENT=10001 DEFAULT CHARSET=utf8;
 
 LOCK TABLES `picture` WRITE;
-INSERT INTO `picture` VALUES (10001,101,'www.xintuzaojiu.com/pic1','2015-11-13 14:38:59','2015-11-13 14:39:03'),(10002,101,'www.xintuzaojiu.com/pic2','深黑','2015-11-13 14:38:59','2015-11-13 14:39:03'),(1003,101,'www.xintuzaojiu.com/pic3','2015-11-13 14:38:59','2015-11-13 14:39:03');
+INSERT INTO `picture` VALUES (10001,101,'www.xintuzaojiu.com/pic1','2015-11-13 14:38:59','2015-11-13 14:39:03'),(10002,101,'www.xintuzaojiu.com/pic2','2015-11-13 14:38:59','2015-11-13 14:39:03'),(10003,101,'www.xintuzaojiu.com/pic3','2015-11-13 14:38:59','2015-11-13 14:39:03');
 UNLOCK TABLES;
 
 

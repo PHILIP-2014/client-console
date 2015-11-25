@@ -32,6 +32,12 @@ public class Order extends Base {
 	
 	private Integer status;
 	
+	private String nameSetup;
+	
+	private String phoneSetup;
+	
+	private String addrSetup;
+	
 	private Date gmtSetup;
 
 	public String getOrderNum() {
@@ -104,6 +110,30 @@ public class Order extends Base {
 
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+
+	public String getNameSetup() {
+		return nameSetup;
+	}
+
+	public void setNameSetup(String nameSetup) {
+		this.nameSetup = nameSetup;
+	}
+
+	public String getPhoneSetup() {
+		return phoneSetup;
+	}
+
+	public void setPhoneSetup(String phoneSetup) {
+		this.phoneSetup = phoneSetup;
+	}
+
+	public String getAddrSetup() {
+		return addrSetup;
+	}
+
+	public void setAddrSetup(String addrSetup) {
+		this.addrSetup = addrSetup;
 	}
 
 	public Date getGmtSetup() {

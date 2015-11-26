@@ -153,7 +153,7 @@
     
     <!-- modal-goods-add -->
 	<div class="modal fade modal-goods-add">
-		<div class="modal-dialog modal-sm">
+		<div class="modal-dialog">
 			<div class="modal-content">
 
 				<div class="modal-header">
@@ -174,10 +174,18 @@
 						</div>
 						<div class="form-group">
 							<label for="message-text" class="control-label">类型:</label>
-							<select id="type_add" style="line-height: 32px; height: 32px; width: 60%; background: transparent; border-color: #ccc;">
+							<select id="type_add" style="line-height: 32px; height: 32px; width: 100%; background: transparent; border-color: #ccc;">
 								<option value="1">指纹锁</option>
 								<option value="9">其它</option>
 							</select>
+						</div>
+						<div class="form-group">
+							<label for="message-text" class="control-label">款式:</label>
+							<div>
+								<span>
+									<input class="form-contol" placeholder="+添加款式">
+								</span>
+							</div>
 						</div>
 						<div class="form-group">
 							<label for="message-text" class="control-label">备注:</label>
@@ -199,7 +207,7 @@
 	
     <!-- modal-goods-edit -->
 	<div class="modal fade modal-goods-edit">
-		<div class="modal-dialog modal-sm">
+		<div class="modal-dialog">
 			<div class="modal-content">
 
 				<div class="modal-header">
@@ -246,7 +254,7 @@
 		
 	<!-- modal-goods-del -->
 	<div class="modal fade modal-goods-remove">
-		<div class="modal-dialog modal-sm">
+		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">

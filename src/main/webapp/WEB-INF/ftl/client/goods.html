@@ -183,7 +183,7 @@
 							<label for="message-text" class="control-label">款式:</label>
 							<div>
 								<span>
-									<input class="form-contol" placeholder="+添加款式">
+									<input id="style_input" class="form-contol" placeholder="+添加款式">
 								</span>
 							</div>
 						</div>
@@ -289,6 +289,16 @@
     <script src="/js/ajax/ajax.js"></script>
     
     <script type="text/javascript">
+    (function() { 
+    	
+    	$('#style_input').bind('keyup', function(event) {
+            if (event.keyCode == "13") {
+                //回车执行查询
+                $('#search_button').click();
+            }
+        }); 
+    
+    })(); 
     function doCreate(){
     	var name = $('#name_add').val();
     	var price = $('#price_add').val();

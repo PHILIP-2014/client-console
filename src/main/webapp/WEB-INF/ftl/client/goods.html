@@ -182,8 +182,9 @@
 						<div class="form-group">
 							<label for="message-text" class="control-label">款式:</label>
 							<div>
+								<ul id="load_style" value=""></ul>
 								<span>
-									<input id="style_input" class="form-contol" placeholder="+添加款式">
+									<input id="style_input" class="form-contol" placeholder="+添加款式" style="width: 15%">
 								</span>
 							</div>
 						</div>
@@ -276,7 +277,7 @@
 	</div>
 	<!-- /modal-user-del -->
     <!-- jQuery -->
-    <script src="/awesome/bower_components/jquery-awe/dist/jquery.min.js"></script>
+    <script src="/jquery/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="/awesome/bower_components/bootstrap-awe/dist/js/bootstrap.min.js"></script>
@@ -286,73 +287,79 @@
     
     <!-- jQuery & Ajax -->
     <script src="/jquery/jquery.min.js"></script>
-    <script src="/js/ajax/ajax.js"></script>
+    <script src="/jquery/ajax.js"></script>
     
     <script type="text/javascript">
-    (function() { 
-    	
+    	var style_content = '';
     	$('#style_input').bind('keyup', function(event) {
-            if (event.keyCode == "13") {
-                //回车执行查询
-                $('#search_button').click();
+    		if (event.keyCode == "13") {
+                //回车执行动作
+                var style = $('#style_input').val();
+            	//load.innerText = style;
+            	style_content += style+',';
+            	$('#load_style').append('<li style="list-style:none;float:left;padding:5px;"> <span>'
+            							+style+
+            							'</span><span class="m-l-5 cur-p icon-hover" data-behavior="remove-style">×</span></li>');
+            	//清空style_input
+            	$('#style_input').prop({value:''});
             }
-        }); 
-    
-    })(); 
-    function doCreate(){
-    	var name = $('#name_add').val();
-    	var price = $('#price_add').val();
-    	var type = $('#type_add').val();
-    	var mark = $('#mark_add').val();
-    	AjaxPost('/goods/add', {name:name,price:price,type:type,mark:mark}, function callback(data){
-    		location.href=location.href;
-    	});
-    };
-    
-    function showEditGoodsModal(item){
-		var name = $(item).attr('i-name-edit');
-		var price = $(item).attr('i-price-edit');
-		var gid = $(item).attr('i-gid-edit');
-		var type = $(item).attr('i-type-edit');
-		var mark = $(item).attr('i-mark-edit');
-		document.getElementById('name_edit').value=name;
-		document.getElementById('price_edit').value=price;
-		document.getElementById('gid_edit').value=gid;
-		document.getElementById('type_edit').value=type;
-		document.getElementById('mark_edit').value=mark;
-	};
-	
-	function doUpdate(){
-		var gid = $('#gid_edit').val();
-		var name = $('#name_edit').val();
-		var price = $('#price_edit').val();
-		var type = $('#type_edit').val();
-		var mark = $('#mark_edit').val();
-		AjaxPost('/goods/edit', {id:gid,name:name,price:price,type:type,mark:mark}, function callback(data){
-			/* 
-			document.getElementById('name_'+uid).value=name;
-			if(role == 1){
-				document.getElementById('admin_'+uid).value=1;
-			} */
-			location.href=location.href;
-		});
-	};
-	
-	function showRmvGoodsModal(item){
-		var gid = $(item).attr('i-gid-rmv');
-		var name = $(item).attr('i-name-rmv');
-		document.getElementById('gid_rmv').value=gid;
-		document.getElementById('name_rmv').value=name;
-	};
-	
-	function doRemove(){
-		var gid = $('#gid_rmv').val();
-		debugger;
-		AjaxPost('/goods/remove', {id:gid}, function callback(data){
-			//if(data)
-			$('#tr_'+gid).remove();
-		});
-	};
+        });
+    	//提交创建
+        function doCreate(){
+        	var name = $('#name_add').val();
+        	var price = $('#price_add').val();
+        	var type = $('#type_add').val();
+        	var styles = style_content;
+        	var mark = $('#mark_add').val();
+        	AjaxPost('/goods/add', {name:name,price:price,type:type,styles:styles,mark:mark}, function callback(data){
+        		location.href=location.href;
+        	});
+        };
+        //display编辑goods的modal
+        function showEditGoodsModal(item){
+    		var name = $(item).attr('i-name-edit');
+    		var price = $(item).attr('i-price-edit');
+    		var gid = $(item).attr('i-gid-edit');
+    		var type = $(item).attr('i-type-edit');
+    		var mark = $(item).attr('i-mark-edit');
+    		document.getElementById('name_edit').value=name;
+    		document.getElementById('price_edit').value=price;
+    		document.getElementById('gid_edit').value=gid;
+    		document.getElementById('type_edit').value=type;
+    		document.getElementById('mark_edit').value=mark;
+    	};
+    	//提交编辑
+    	function doUpdate(){
+    		var gid = $('#gid_edit').val();
+    		var name = $('#name_edit').val();
+    		var price = $('#price_edit').val();
+    		var type = $('#type_edit').val();
+    		var mark = $('#mark_edit').val();
+    		AjaxPost('/goods/edit', {id:gid,name:name,price:price,type:type,mark:mark}, function callback(data){
+    			/* 
+    			document.getElementById('name_'+uid).value=name;
+    			if(role == 1){
+    				document.getElementById('admin_'+uid).value=1;
+    			} */
+    			location.href=location.href;
+    		});
+    	};
+    	//display移除goods的modal
+    	function showRmvGoodsModal(item){
+    		var gid = $(item).attr('i-gid-rmv');
+    		var name = $(item).attr('i-name-rmv');
+    		document.getElementById('gid_rmv').value=gid;
+    		document.getElementById('name_rmv').value=name;
+    	};
+    	//提交移除
+    	function doRemove(){
+    		var gid = $('#gid_rmv').val();
+    		debugger;
+    		AjaxPost('/goods/remove', {id:gid}, function callback(data){
+    			//if(data)
+    			$('#tr_'+gid).remove();
+    		});
+    	};
     </script>
 </body>
 

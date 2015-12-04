@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.philip.client.model.Goods;
+import com.philip.client.model.GoodsModel;
 import com.philip.client.service.GoodsService;
 import com.philip.client.utils.ServiceException;
 
@@ -33,7 +34,7 @@ public class GoodsController extends BaseController {
 	@RequestMapping(value="/goods/add", method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> add(HttpServletRequest request, HttpServletResponse response,
-			Goods goods) throws IOException {
+			GoodsModel goods) throws IOException {
 		try {
 			return ajaxResult(goodsService.doCreate(goods, getUid(request)), null);
 		} catch (ServiceException e) {

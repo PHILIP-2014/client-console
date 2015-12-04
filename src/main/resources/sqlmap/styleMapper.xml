@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.philip.client.dao.StyleDao">
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="commonColumns">
+	    <![CDATA[
+        	id as id ,
+        	gid as gid ,
+        	content as content ,
+        	gmt_create as gmtCreate ,
+        	gmt_modify as gmtModify 
+	    ]]>
+	</sql>
+    
+	<!-- 新增记录 -->
+	<insert id="insert" parameterType="com.philip.client.model.Style" useGeneratedKeys="true" keyProperty="id" >
+    <![CDATA[
+        INSERT INTO style (
+        	id ,
+        	gid ,
+        	content ,
+        	gmt_create ,
+        	gmt_modify 
+        ) VALUES (
+        	#{id} ,
+        	#{gid} ,
+        	#{content} ,
+        	now() ,
+        	now() 
+        )
+    ]]>
+        <selectKey resultType="java.lang.Long" keyProperty="id" >
+            select last_insert_id()
+        </selectKey>
+    </insert>
+	
+	<!-- 更新记录 -->
+	<update id="update" parameterType="com.philip.client.model.Style">
+        UPDATE style
+        <set>
+	        <if test="gid != null">
+				gid = #{gid},
+			</if>
+	        <if test="content != null">
+				content = #{content},
+			</if>
+			gmt_modify = now(),
+		</set>
+	    <![CDATA[ WHERE 
+	        id = #{id} 
+        ]]>
+    </update>
+
+	<!-- 根据主键查询 -->
+    <select id="queryOne" parameterType="java.lang.Long" resultType="com.philip.client.model.Style">
+	    select <include refid="commonColumns"/>
+	    <![CDATA[ from style where 
+		        id = #{id} 
+	    ]]>
+    </select>
+
+	<select id="countExist" parameterType="com.philip.client.model.Style" resultType="java.lang.Integer">
+		select count(*)
+		from `style` 
+		where gid = #{gid} and content = #{content}
+	</select>
+</mapper>

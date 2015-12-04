@@ -30,7 +30,7 @@
 		from `goods`
 		where `status` = 0
 	</select>
-	<insert id="insert" parameterType="com.philip.client.model.Goods" keyProperty="id">
+	<insert id="insert" parameterType="com.philip.client.model.Goods" useGeneratedKeys="true" keyProperty="id">
 		insert into goods (
 			name,
 			price,
@@ -47,6 +47,9 @@
 			#{type},
 			#{status},
 			now(),now())
+		<selectKey resultType="java.lang.Long" keyProperty="id" >
+           select last_insert_id()
+        </selectKey>
 	</insert>
 	<update id="update" parameterType="com.philip.client.model.Goods">
 		update goods

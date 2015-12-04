@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.philip.client.dao.GoodsDao;
+import com.philip.client.dao.StyleDao;
 import com.philip.client.model.Goods;
+import com.philip.client.model.GoodsModel;
+import com.philip.client.model.Style;
 import com.philip.client.utils.ServiceException;
 import com.philip.client.utils.javabase.LongUtils;
 import com.philip.client.utils.javabase.StrUtils;
@@ -16,6 +19,8 @@ public class GoodsService {
 
 	@Autowired
 	private GoodsDao goodsDao;
+	@Autowired
+	private StyleDao styleDao;
 	@Autowired
 	private ServiceUtil serviceUtil;
 	
@@ -30,7 +35,7 @@ public class GoodsService {
 		return goodsDao.countAll();
 	}
 	
-	public Boolean doCreate(Goods goods, Long uid) throws ServiceException {
+	public Boolean doCreate(GoodsModel goods, Long uid) throws ServiceException {
 		if(!serviceUtil.checkPermission(uid)){
 			throw new ServiceException("error.forbidden");
 		}
@@ -38,7 +43,22 @@ public class GoodsService {
 			throw new ServiceException("error.require.params");
 		}
 		goods.setStatus(Goods.IS_NORMAL);
-		return goodsDao.insert(goods) > 0;
+		if(goodsDao.insert(goods) <= 0){
+			throw new ServiceException("error.create.failed");
+		}
+		//deal styles
+		List<String> styles = StrUtils.splitToString(goods.getStyles());
+		for(String content : styles){
+			Style style = new Style();
+			style.setContent(content);
+			style.setGid(goods.getId());
+			if(styleDao.countExist(style) > 0){
+				continue;
+			}
+			styleDao.insert(style);
+		}
+		
+		return true;
 	}
 	
 	public Boolean doEdit(Goods goods, Long uid) throws ServiceException {

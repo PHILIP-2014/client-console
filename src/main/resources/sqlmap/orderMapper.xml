@@ -4,7 +4,6 @@
 	<sql id="default_column">
 		orders.id,
 		orders.order_num as orderNum,
-		orders.cid,
 		orders.gid,
 		orders.gname,
 		orders.sid,
@@ -48,7 +47,6 @@
 	<insert id="insert" parameterType="com.philip.client.model.Order" keyProperty="id">
 		insert into orders (
 			order_num,
-			cid,
 			gid,
 			gname,
 			sid,
@@ -65,7 +63,6 @@
 			)
 		values(
 			#{orderNum},
-			#{cid},
 			#{gid},
 			#{gname},
 			#{sid},

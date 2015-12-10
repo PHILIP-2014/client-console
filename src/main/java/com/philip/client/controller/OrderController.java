@@ -2,12 +2,14 @@ package com.philip.client.controller;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,11 +33,15 @@ public class OrderController extends BaseController {
 	 * @throws IOException
 	 */
 	@RequestMapping(value="/order/add", method=RequestMethod.POST)
-	@ResponseBody
-	public Map<String, Object> add(HttpServletRequest request, HttpServletResponse response,
-			Order order) throws IOException {
+
+	public String add(HttpServletRequest request, HttpServletResponse response,
+			Order order,ModelMap model) throws IOException {
 		try {
-			return ajaxResult(orderService.doCreate(order, getUid(request)), null);
+			order.setOrderNum(UUID.randomUUID().toString());
+			model.put("order", order);
+			orderService.doCreate(order, getUid(request));
+			return "order/order";
+//			return ajaxResult(orderService.doCreate(order, getUid(request)), null);
 		} catch (ServiceException e) {
 			sendError(request, response, e.getMessage());
 		}

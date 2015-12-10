@@ -59,5 +59,12 @@
 		        id = #{id} 
 	    ]]>
     </select>
+    <!--  根据商品id查询-->
+    <select id="queryByGid" parameterType="java.lang.Long" resultType="com.philip.client.model.Picture">
+	    select <include refid="commonColumns"/>
+	    <![CDATA[ from picture where 
+		        gid = #{id} 
+	    ]]>
+    </select>
 
 </mapper>

@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.philip.client.cond.GoodsCond;
 import com.philip.client.model.Goods;
+import com.philip.client.model.GoodsModel;
 
 public interface GoodsDao {
 
@@ -17,4 +19,8 @@ public interface GoodsDao {
 	Integer insert(Goods goods);
 	
 	Integer update(Goods goods);
+
+	GoodsModel queryModel(Long id);
+
+	List<GoodsModel> queryByCond(@Param("cond")GoodsCond cond);
 }

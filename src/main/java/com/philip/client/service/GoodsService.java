@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.philip.client.cond.GoodsCond;
 import com.philip.client.dao.GoodsDao;
 import com.philip.client.dao.StyleDao;
+import com.philip.client.dao.PictureDao;
 import com.philip.client.model.Goods;
 import com.philip.client.model.GoodsModel;
 import com.philip.client.model.Style;
@@ -21,6 +23,8 @@ public class GoodsService {
 	private GoodsDao goodsDao;
 	@Autowired
 	private StyleDao styleDao;
+	@Autowired
+	private PictureDao pictureDao;
 	@Autowired
 	private ServiceUtil serviceUtil;
 	
@@ -42,7 +46,7 @@ public class GoodsService {
 		if(StrUtils.isEmpty(goods.getName()) || goods.getPrice() == null || goods.getType() == null){
 			throw new ServiceException("error.require.params");
 		}
-		goods.setStatus(Goods.IS_NORMAL);
+		goods.setStatus(Goods.STATUS_OFF);
 		if(goodsDao.insert(goods) <= 0){
 			throw new ServiceException("error.create.failed");
 		}
@@ -80,7 +84,22 @@ public class GoodsService {
 		}
 		Goods goods = new Goods();
 		goods.setId(id);
-		goods.setStatus(Goods.IS_OFFLINE);
+		goods.setStatus(Goods.STATUS_ON);
 		return goodsDao.update(goods) > 0; 
+	}
+
+	public GoodsModel queryModel(Long id) {
+		// TODO Auto-generated method stub
+		GoodsModel goodsModel =  goodsDao.queryModel(id);
+		goodsModel.setStyleList(styleDao.queryByGid(id));
+		goodsModel.setPictureList(pictureDao.queryByGid(id));
+		return goodsModel;
+	}
+
+	public List<GoodsModel> queryByCond(GoodsCond cond) {
+		if(cond.getStatus() == null){
+			cond.setStatus(Goods.STATUS_ON);
+		}
+		return goodsDao.queryByCond(cond);
 	}
 }

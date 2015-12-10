@@ -123,6 +123,11 @@
 					<value>/js*</value>
 					<value>/jquery*</value>
 					<value>/img*</value>
+					<value>/address-edit.html</value>
+					<value>/order.html</value>
+					<value>/product-detail.html</value>
+					<value>/images*</value>
+					<value>/fonts*</value>
 				</list>
 			</property>
 		</bean>

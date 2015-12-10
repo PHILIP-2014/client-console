@@ -11,7 +11,28 @@
 		goods.gmt_create as gmtCreate,
 		goods.gmt_modify as gmtModify
 	</sql>
+	<sql id="style_column">
+		style.content		
+	</sql>
+	<sql id="picture_column">
+		picture.pic_url as picUrl
+	</sql>
+	<sql id="goods_cond">
+		<where>
+			<if test="cond.status !=null">
+				and stauts=#{cond.stauts}
+			</if>
+		</where>
+	</sql>
+	
 	<select id="queryOne" resultType="com.philip.client.model.Goods">
+		select
+		<include refid="default_column" />
+		from `goods`
+		where `goods`.id=#{id}
+		limit 1
+	</select>
+	<select id="queryModel" resultType="com.philip.client.model.GoodsModel">
 		select
 		<include refid="default_column" />
 		from `goods`
@@ -73,4 +94,10 @@
 		</set>
 		where `id` = #{id}
 	</update>
+	<select id="queryByCond" parameterType="com.philip.client.cond.GoodsCond" resultType="com.philip.client.model.GoodsModel">
+		select 
+		<include refid="default_column"/>
+		from goods
+		<include refid="goods_cond"></include>
+	</select>
 </mapper>

@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>Document</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/cart.css" rel="stylesheet">
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+<div class="container">
+    <div id="slideList"></div>
+
+    <div class="product-content">
+        <h4 class="title">白鹿原女裤2015秋加绒小脚裤高腰长裤修身显瘦休闲裤</h4>
+        <div class="product-condition">
+            <div class="price"><strong>￥190</strong><span class="tag">新品特价</span></div>
+            <div class="row">
+                <div class="col-sm-4 col-xs-4">上门安装</div>
+                <div class="col-sm-4 col-xs-4">货到付款</div>
+                <div class="col-sm-4 col-xs-4">杭州萧山</div>
+            </div>
+        </div>
+    </div>
+    <div class="product-select">
+        <span>产品详情</span>
+    </div>
+    <div class="product-detail">
+        <p><img src="images/product/1.jpg" /></p>
+        <p><img src="images/product/2.jpg" /></p>
+        <p><img src="images/product/3.jpg" /></p>
+    </div>
+</div>
+
+<div class="footer">
+    <button class="btn btn-order">立即下单</button>
+</div>
+
+<div class="popup">
+    <form class="menu-block" name="orderForm" >
+        <input type="hidden" name="count" value="1" required="required" />
+        <input type="hidden" name="color" value="" required="required" />
+        <input type="hidden" name="size" value="l" required="required" />
+        <input type="hidden" name="id" value="" required="required" />
+        <div>
+            <img src="images/product/a.jpg" class="thumbnail" />
+        </div>
+        <div id="color-list" class="order-item">
+            <h5>颜色分类</h5>
+            <button type="button" class="btn" data-color="black">黑色</button>
+            <button type="button" class="btn" data-color="red">红色</button>
+            <button type="button" class="btn" data-color="grey">酒红色</button>
+        </div>
+        <div id="size-list" class="order-item">
+            <h5>尺寸</h5>
+            <button type="button" class="btn" data-size="xl">xl</button>
+            <button type="button" class="btn" data-size="l">L</button>
+        </div>
+        <div id="count-set" class="order-item">
+            <span>购买数量</span>
+            <div class="counter">
+                <button type="button" class="btn" data-count="reduce">-</button>
+                <span class="number">1</span>
+                <button type="button" class="btn" data-count="plus">+</button>
+            </div>
+        </div>
+        <div class="col-xs-12 text-center">
+            <button type="submit" class="btn add-order">立即下订</button>
+        </div>
+    </form>
+    <button class="close-btn" id="popup-close-btn">x</button>
+</div>
+<script src="js/cart.js"></script>
+<script src="js/slider.js"></script>
+<script>
+    slider({
+        slideElement:$('#slideList'),
+        childElementClassName:'slide-list',
+        images:['images/product/a.jpg','images/product/b.jpg','images/product/c.jpg'],
+        belt:true,
+        beltType:'point'
+    });
+
+
+</script>
+</body>
+</html>

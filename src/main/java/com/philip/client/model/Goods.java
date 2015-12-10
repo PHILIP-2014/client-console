@@ -9,19 +9,18 @@ public class Goods extends Base {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	public static final int IS_NORMAL = 0;//正常
-	public static final int IS_OFFLINE = 1;//下架
+	public static final int STATUS_ON = 0;//正常
+	public static final int STATUS_OFF = 1;//下架
 	
-
-	private String name;
+	private String name;//商品名
 	
-	private BigDecimal price;
+	private BigDecimal price;//价格
 	
-	private String mark;
+	private String mark;//备注
 	
-	private Integer type;
+	private Integer type;//类型
 	
-	private Integer status;
+	private Integer status;//默认0正常\n 1已下架
 
 	public String getName() {
 		return name;

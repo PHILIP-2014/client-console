@@ -1,6 +1,7 @@
 package com.philip.client.controller;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -8,10 +9,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.philip.client.cond.GoodsCond;
 import com.philip.client.model.Goods;
 import com.philip.client.model.GoodsModel;
 import com.philip.client.service.GoodsService;
@@ -41,6 +44,47 @@ public class GoodsController extends BaseController {
 			sendError(request, response, e.getMessage());
 		}
 		return null;
+	}
+	
+	/**
+	 * 商品详情
+	 * @param request
+	 * @param response
+	 * @param goods
+	 * @return
+	 * @throws IOException
+	 */
+	@RequestMapping(value="/goods/{id}", method=RequestMethod.GET)
+	@ResponseBody
+	public String getOne(HttpServletRequest request, HttpServletResponse response,
+			Long  id,ModelMap model) throws IOException {
+		//TODO 
+		GoodsModel goodsModel = goodsService.queryModel(id);
+		model.put("goodsModel", goodsModel);
+			return "/client/index";
+		
+		
+	}
+	
+	/**
+	 * 商品列表
+	 * @param request
+	 * @param response
+	 * @param goods
+	 * @return
+	 * @throws IOException
+	 */
+	@RequestMapping(value="/goods", method=RequestMethod.GET)
+	@ResponseBody
+	public String getList(HttpServletRequest request, HttpServletResponse response,
+			GoodsCond cond ,ModelMap model) throws IOException {
+		//TODO 
+		
+		List<GoodsModel> goodsModel = goodsService.queryByCond(cond);
+		model.put("goodsModel", goodsModel);
+		return "/client/index";
+		
+		
 	}
 	
 	/**

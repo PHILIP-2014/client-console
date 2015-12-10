@@ -59,6 +59,13 @@
 		        id = #{id} 
 	    ]]>
     </select>
+    
+    <select id="queryByGid" parameterType="java.lang.Long" resultType="com.philip.client.model.Style">
+	    select <include refid="commonColumns"/>
+	    <![CDATA[ from style where 
+		        gid = #{id} 
+	    ]]>
+    </select>
 
 	<select id="countExist" parameterType="com.philip.client.model.Style" resultType="java.lang.Integer">
 		select count(*)

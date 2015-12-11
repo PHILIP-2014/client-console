@@ -63,7 +63,7 @@
     <select id="queryByGid" parameterType="java.lang.Long" resultType="com.philip.client.model.Style">
 	    select <include refid="commonColumns"/>
 	    <![CDATA[ from style where 
-		        gid = #{id} 
+		        gid = #{gid} 
 	    ]]>
     </select>
 

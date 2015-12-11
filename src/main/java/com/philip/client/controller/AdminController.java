@@ -41,7 +41,7 @@ public class AdminController extends BaseController{
 	 */
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String postLogin(HttpServletRequest request, HttpServletResponse response, ModelMap out,
-			@RequestBody Admin admin) throws IOException {
+			Admin admin) throws IOException {
 
 		try {
 			Admin _admin = adminService.doLogin(admin);

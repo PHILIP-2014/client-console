@@ -1,6 +1,8 @@
 package com.philip.client.service;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.philip.client.dao.OrderDao;
 import com.philip.client.model.Order;
 import com.philip.client.model.OrderCond;
+import com.philip.client.utils.DateUtil;
 import com.philip.client.utils.ServiceException;
 import com.philip.client.utils.javabase.LongUtils;
 
@@ -42,6 +45,7 @@ public class OrderService {
 			throw new ServiceException("error.forbidden");
 		}
 		//checkParam
+		order.setOrderNum(getOrderNum());
 		order.setStatus(Order.IS_WAITING);
 		return orderDao.insert(order) > 0;
 	}
@@ -79,4 +83,19 @@ public class OrderService {
 		order.setStatus(Order.IS_FINISHED);
 		return orderDao.update(order) > 0; 
 	}
+	
+	private String getOrderNum(){
+		Integer count =0;
+		String orderNum ="";
+		do{
+			orderNum = DateUtil.dateToStr(new Date(), DateUtil.DATE_TIME_NO_SLASH );
+			count = orderDao.countExist(orderNum);
+		}while(count > 0);
+		Random random = new Random();
+		int r = random.nextInt(9999-1000+1)+1000;
+		orderNum =orderNum +r;
+		return orderNum;
+	}
+	
+	
 }

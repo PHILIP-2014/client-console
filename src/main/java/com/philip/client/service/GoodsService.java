@@ -92,7 +92,7 @@ public class GoodsService {
 		// TODO Auto-generated method stub
 		GoodsModel goodsModel =  goodsDao.queryModel(id);
 		goodsModel.setStyleList(styleDao.queryByGid(id));
-		goodsModel.setPictureList(pictureDao.queryByGid(id));
+//		goodsModel.setPictureList(pictureDao.queryByGid(id));
 		return goodsModel;
 	}
 

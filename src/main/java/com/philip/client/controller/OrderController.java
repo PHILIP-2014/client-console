@@ -2,7 +2,6 @@ package com.philip.client.controller;
 
 import java.io.IOException;
 import java.util.Map;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -33,9 +33,8 @@ public class OrderController extends BaseController {
 	 * @throws IOException
 	 */
 	@RequestMapping(value="/order/add", method=RequestMethod.POST)
-
 	public String add(HttpServletRequest request, HttpServletResponse response,
-			Order order,ModelMap model) throws IOException {
+			@RequestBody Order order,ModelMap model) throws IOException {
 		try {
 //			order.setOrderNum(UUID.randomUUID().toString());
 			model.put("order", order);

@@ -102,4 +102,10 @@
 		where `id` = #{id}
 	</update>
 	
+	<select id="countExist" parameterType="java.lang.String" resultType="java.lang.Integer">
+		select count(*)
+			from orders
+		where order_num = #{orderNum}
+	</select>
+	
 </mapper>

@@ -14,6 +14,6 @@ public interface StyleDao {
 	
 	Integer countExist(Style style);
 
-	List<Style> queryByGid(Long id);
+	List<Style> queryByGid(Long gid);
 	
 }

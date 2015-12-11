@@ -22,6 +22,9 @@
 			<if test="cond.status !=null">
 				and stauts=#{cond.stauts}
 			</if>
+			<if test="cond.gid !=null">
+				and gid=#{cond.gid}
+			</if>
 		</where>
 	</sql>
 	

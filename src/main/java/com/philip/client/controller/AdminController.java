@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -40,7 +41,7 @@ public class AdminController extends BaseController{
 	 */
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String postLogin(HttpServletRequest request, HttpServletResponse response, ModelMap out,
-			Admin admin) throws IOException {
+			@RequestBody Admin admin) throws IOException {
 
 		try {
 			Admin _admin = adminService.doLogin(admin);

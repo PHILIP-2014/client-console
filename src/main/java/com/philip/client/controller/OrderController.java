@@ -37,7 +37,7 @@ public class OrderController extends BaseController {
 	public String add(HttpServletRequest request, HttpServletResponse response,
 			Order order,ModelMap model) throws IOException {
 		try {
-			order.setOrderNum(UUID.randomUUID().toString());
+//			order.setOrderNum(UUID.randomUUID().toString());
 			model.put("order", order);
 			orderService.doCreate(order, getUid(request));
 			return "order/order";

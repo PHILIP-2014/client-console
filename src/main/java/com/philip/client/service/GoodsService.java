@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.philip.client.cond.GoodsCond;
 import com.philip.client.dao.GoodsDao;
-import com.philip.client.dao.StyleDao;
 import com.philip.client.dao.PictureDao;
+import com.philip.client.dao.StyleDao;
 import com.philip.client.model.Goods;
 import com.philip.client.model.GoodsModel;
 import com.philip.client.model.Style;

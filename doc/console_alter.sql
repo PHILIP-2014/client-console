@@ -7,3 +7,5 @@ alter table orders add column `addr_setup` varchar(45) Default '' COMMENT '安�
 alter table orders drop column `cid` ;
 
 drop table customer;
+
+alter table orders change column `order_num` `order_num` VARCHAR(200) NOT NULL DEFAULT '0' COMMENT '订单编号(系统生成)' ;

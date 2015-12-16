@@ -7,10 +7,10 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.support.RequestContextUtils;
@@ -20,7 +20,7 @@ import com.philip.client.utils.SessionUser;
 
 public class BaseController {
 	
-	@Resource
+	@Autowired
 	public MessageSource messageSource;
 	
 	public final static String SESSION_KEY = "sessionuserkey";

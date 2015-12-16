@@ -1,4 +1,4 @@
-package com.philip.client.model;
+package com.philip.client.cond;
 
 public class OrderCond {
 	

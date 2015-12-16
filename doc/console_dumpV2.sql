@@ -176,5 +176,4 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2015-12-08 15:01:43
-ALTER TABLE `study`.`orders` 
-CHANGE COLUMN `order_num` `order_num` VARCHAR(200) NULL DEFAULT '0' COMMENT '订单编号(系统生成)' ;
+

@@ -7,9 +7,9 @@ import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.philip.client.cond.OrderCond;
 import com.philip.client.dao.OrderDao;
 import com.philip.client.model.Order;
-import com.philip.client.model.OrderCond;
 import com.philip.client.utils.DateUtil;
 import com.philip.client.utils.ServiceException;
 import com.philip.client.utils.javabase.LongUtils;

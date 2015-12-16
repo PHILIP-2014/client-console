@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.philip.client.cond.OrderCond;
 import com.philip.client.model.Order;
-import com.philip.client.model.OrderCond;
 
 public interface OrderDao {
 

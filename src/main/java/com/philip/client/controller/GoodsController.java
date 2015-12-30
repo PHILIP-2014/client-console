@@ -80,8 +80,8 @@ public class GoodsController extends BaseController {
 		//TODO 
 		
 		List<GoodsModel> goodsModel = goodsService.queryByCond(cond);
-		model.put("goodsModel", goodsModel);
-		return "/client/index";
+		model.put("goods", goodsModel);
+		return "/goods/product-list";
 		
 		
 	}

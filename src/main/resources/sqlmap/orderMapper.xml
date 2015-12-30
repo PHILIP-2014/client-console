@@ -32,11 +32,11 @@
 		where `status` = 0
 		limit 10
 	</select>
-	<select id="queryByCond" parameterType="com.philip.client.model.OrderCond" resultType="com.philip.client.model.Order">
+	<select id="queryByCond" parameterType="com.philip.client.cond.OrderCond" resultType="com.philip.client.model.Order">
 		select
 		<include refid="default_column" />
 		from `orders`
-		where `status` = #{status}
+		where `status` = #{cond.status}
 		limit 10
 	</select>
 	<select id="countAll" resultType="java.lang.Integer">

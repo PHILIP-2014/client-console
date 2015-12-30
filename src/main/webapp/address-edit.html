@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,user-scalable=no,maximum-scale=1,initial-scale=1" >
     <title>Document</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/cart.css" rel="stylesheet">
@@ -9,7 +10,7 @@
     <script src="js/bootstrap.min.js"></script>
 
 </head>
-<body>
+<body id="address-center">
 <div class="header">
     <button class="icon-btn back"></button>
     <h2 class="title">确认订单</h2>
@@ -17,7 +18,7 @@
 <div class="container">
     <div class="express-info">
         <ul id="address-list">
-            <li class="active">
+            <li class="active" data-address-index="0">
                 <div>
                     <span>收件人：小黄</span>
                     <span>13706717427</span>
@@ -27,7 +28,7 @@
                 </div>
 
             </li>
-            <li>
+            <li data-address-index="1">
                 <div>
                     <span>小黄</span>
                     <span>13706717427</span>
@@ -44,6 +45,10 @@
                 <input type="text" name="recipient" class="form-control" required="required" />
             </div>
             <div>
+                <label>手机</label>
+                <input type="text" name="phone" class="form-control" required="required" />
+            </div>
+            <div>
                 <label>送货地址：</label>
                 <input type="text" name="address" class="form-control" required="required" />
             </div>
@@ -56,6 +61,29 @@
 
 </div>
 
-<script src="js/cart.js"></script>
+<script src="js/cart-mvc.js"></script>
+<script>
+    window.addressesData=[
+        {
+            recipient:'小黄',
+            phone:'13786695847',
+            address:'杭州橡树公馆',
+            isSelect:true
+        },
+        {
+            recipient:'小红',
+            phone:'13709876547',
+            address:'杭州橡树公馆',
+            isSelect:false
+        }
+    ];
+    $(function(){
+        var model=new addressList.Model({addressList:window.addressesData});
+        var view =new addressList.View(model,{
+            rootElement:$('#address-center')
+        });
+        var control=new addressList.Controller(model,view);
+    });
+</script>
 </body>
 </html>

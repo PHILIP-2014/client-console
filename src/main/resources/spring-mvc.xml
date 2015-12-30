@@ -126,6 +126,7 @@
 					<value>/address-edit.html</value>
 					<value>/order.html</value>
 					<value>/product-detail.html</value>
+					<value>/product-list.html</value>
 					<value>/images*</value>
 					<value>/fonts*</value>
 				</list>

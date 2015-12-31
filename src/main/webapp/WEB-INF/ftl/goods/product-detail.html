@@ -4,10 +4,10 @@
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <meta name="viewport" content="width=device-width,minimum-scale=1,user-scalable=no,maximum-scale=1,initial-scale=1" >
     <title>Document</title>
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/cart.css" rel="stylesheet">
-    <script src="/js/jquery-1.10.2.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/cart.css" rel="stylesheet">
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 
 </head>
 <body id="productDetail">
@@ -16,9 +16,9 @@
     <div id="slideList"></div>
 
     <div class="product-content">
-        <h4 class="title">${goods.name}</h4>
+        <h4 class="title">白鹿原女裤2015秋加绒小脚裤高腰长裤修身显瘦休闲裤</h4>
         <div class="product-condition">
-            <div class="price"><strong>￥${goods.price}</strong><span class="tag">新品特价</span></div>
+            <div class="price"><strong>￥190</strong><span class="tag">新品特价</span></div>
             <div class="row">
                 <div class="col-sm-4 col-xs-4">上门安装</div>
                 <div class="col-sm-4 col-xs-4">货到付款</div>
@@ -30,9 +30,9 @@
         <span>产品详情</span>
     </div>
     <div class="product-detail">
-        <p><img src="/images/product/goods1-pic1.jpg" /></p>
-        <p><img src="/images/product/goods1-pic2.jpg" /></p>
-        <p><img src="/images/product/goods1-pic3.jpg" /></p>
+        <p><img src="images/product/1.jpg" /></p>
+        <p><img src="images/product/2.jpg" /></p>
+        <p><img src="images/product/3.jpg" /></p>
     </div>
 </div>
 
@@ -49,13 +49,13 @@
         <input type="hidden" name="size" value="l" required="required" />
         <input type="hidden" name="id" value="" required="required" />
         <div>
-            <img src="/images/product/image4.jpg" class="thumbnail" />
+            <img src="images/product/a.jpg" class="thumbnail" />
         </div>
         <div id="color-list" class="order-item">
             <h5>颜色分类</h5>
-           <!--  <#list goods.styleList as style>
-           			<button type="button" class="btn" data-color="black">${style}</button>
-            </#list> -->
+            <button type="button" class="btn" data-color="black">黑色</button>
+            <button type="button" class="btn" data-color="red">红色</button>
+            <button type="button" class="btn" data-color="grey">酒红色</button>
         </div>
         <div id="size-list" class="order-item">
             <h5>尺寸</h5>
@@ -76,27 +76,36 @@
     </form>
     <button class="close-btn" id="popup-close-btn">x</button>
 </div>
-<script src="/js/slider.js"></script>
+<script src="js/slider.js"></script>
 <script>
     slider({
         slideElement:$('#slideList'),
         childElementClassName:'slide-list',
-        images:['/images/title1.jpg','/images/title2.jpg','/images/title3.jpg'],
+        images:['images/product/a.jpg','images/product/b.jpg','images/product/c.jpg'],
         belt:true,
         beltType:'point'
     });
 
 
 </script>
-<script src="/js/cart-mvc.js"></script>
+<script src="js/cart-mvc.js"></script>
 <script>
-	#if (${goods})
-	window.detailData=${goods};
-	#else 
-	window.detailData=null;
-	#end
-   
-    
+    var detailData={
+        title:'白鹿原女裤2015秋加绒小脚裤高腰长裤修身显瘦休闲裤',
+        size:['s','m','l'],
+        style:['红色','黄色','绿色'],
+        carouselImgs:['images/product/1.jpg','images/product/2.jpg','images/product/3.jpg'],
+        detail:'<p><img src="images/product/1.jpg" /></p><p><img src="images/product/2.jpg" /></p><p><img src="images/product/3.jpg" /></p>',
+        maxCount:1000,
+        count:0,
+        price:190,
+        isNew:true,
+        express:'送货上门',
+        payType:'货到付款',
+        area:'杭州萧山',
+        id:3332
+
+    };
     $(function(){
         var model=new detail.Model({detail:detailData});
         var view=new detail.View(model,{

@@ -21,6 +21,16 @@ public class Goods extends Base {
 	private Integer type;//类型
 	
 	private Integer status;//默认0正常\n 1已下架
+	
+	private String cover;//默认0正常\n 1已下架
+
+	public String getCover() {
+		return cover;
+	}
+
+	public void setCover(String cover) {
+		this.cover = cover;
+	}
 
 	public String getName() {
 		return name;

@@ -18,7 +18,7 @@
     <div class="product-list">
         <h4 class="block-title">产品列表</h4>
         <ul class="row">
-            <li class="col-xs-6 col-sm-3" id="xf-list">
+            <!-- <li class="col-xs-6 col-sm-3" id="xf-list">
                 <a href="javascript:;">
                     <img src="/images/product/a.jpg" />
                     <h5 class="title">
@@ -26,11 +26,11 @@
                     </h5>
                     <span class="price">￥15555.00</span>
                 </a>
-            </li>
+            </li> -->
             <#list goods as good>
 	             <li class="col-xs-6 col-sm-3">
 	                <a href="/goods/${good.id}">
-	                    <img src="images/product/a.jpg" />
+	                    <img src="${good.cover}" />
 	                    <h5 class="title">
 	                       ${good.name}
 	                    </h5>
@@ -138,7 +138,7 @@
     slider({
         slideElement:$('#slideList'),
         childElementClassName:'slide-list',
-        images:['images/product/a.jpg','images/product/b.jpg','images/product/c.jpg'],
+        images:['images/title1.jpg','images/title2.jpg','images/title3.jpg'],
         belt:true,
         beltType:'point'
     });

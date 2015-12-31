@@ -60,10 +60,8 @@ public class GoodsController extends BaseController {
 			@PathVariable Long  id,ModelMap model) throws IOException {
 		//TODO 获取
 		GoodsModel goodsModel = goodsService.queryModel(id);
-		model.put("goodsModel", goodsModel);
+		model.put("goods", goodsModel);
 			return "/goods/goods-detail";
-		
-		
 	}
 	
 	/**
@@ -78,11 +76,10 @@ public class GoodsController extends BaseController {
 	public String getList(HttpServletRequest request, HttpServletResponse response,
 			GoodsCond cond ,ModelMap model) throws IOException {
 		//TODO 
-		
 		List<GoodsModel> goodsModel = goodsService.queryByCond(cond);
 		model.put("goods", goodsModel);
-		return "/goods/product-list";
-		
+		model.put("baseAddr", "127.0.0.1:8080");
+		return "/goods/goods-list";
 		
 	}
 	

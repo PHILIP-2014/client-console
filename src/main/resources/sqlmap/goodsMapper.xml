@@ -20,11 +20,11 @@
 	<sql id="goods_cond">
 		<where>
 			<if test="cond.status !=null">
-				and stauts=#{cond.stauts}
+				and status=#{cond.status}
 			</if>
-			<if test="cond.gid !=null">
+			<!-- <if test="cond.gid !=null">
 				and gid=#{cond.gid}
-			</if>
+			</if> -->
 		</where>
 	</sql>
 	

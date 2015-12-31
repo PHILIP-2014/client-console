@@ -20,22 +20,26 @@
         <ul class="row">
             <li class="col-xs-6 col-sm-3" id="xf-list">
                 <a href="javascript:;">
-                    <img src="images/product/a.jpg" />
+                    <img src="/images/product/a.jpg" />
                     <h5 class="title">
                         白鹿原女裤2015秋加绒小脚裤高腰长裤修身显瘦休闲裤
                     </h5>
-                    <span class="price">￥130.00</span>
+                    <span class="price">￥15555.00</span>
                 </a>
             </li>
-            <li class="col-xs-6 col-sm-3">
+            <#list goods as good>
+             <li class="col-xs-6 col-sm-3">
                 <a href="javascript:;">
                     <img src="images/product/a.jpg" />
                     <h5 class="title">
-                        白鹿原女裤2015秋加绒小脚裤高腰长裤修身显瘦休闲裤
+                       ${good.name}
                     </h5>
-                    <span class="price">￥130.00</span>
+                    <span class="price">￥${good.price}</span>
                 </a>
             </li>
+            	
+            </#list>
+           
 
             <li class="col-xs-6 col-sm-3">
                 <a href="javascript:;">
@@ -109,6 +113,7 @@
                     <span class="price">￥130.00</span>
                 </a>
             </li>
+            
             <li class="col-xs-6 col-sm-3">
                 <a href="javascript:;">
                     <img src="images/product/a.jpg" />
@@ -118,33 +123,8 @@
                     <span class="price">￥130.00</span>
                 </a>
             </li>
-            <li class="col-xs-6 col-sm-3">
-                <a href="javascript:;">
-                    <img src="images/product/a.jpg" />
-                    <h5 class="title">
-                        白鹿原女裤2015秋加绒小脚裤高腰长裤修身显瘦休闲裤
-                    </h5>
-                    <span class="price">￥130.00</span>
-                </a>
-            </li>
-            <li class="col-xs-6 col-sm-3">
-                <a href="javascript:;">
-                    <img src="images/product/a.jpg" />
-                    <h5 class="title">
-                        白鹿原女裤2015秋加绒小脚裤高腰长裤修身显瘦休闲裤
-                    </h5>
-                    <span class="price">￥130.00</span>
-                </a>
-            </li>
-            <li class="col-xs-6 col-sm-3">
-                <a href="javascript:;">
-                    <img src="images/product/a.jpg" />
-                    <h5 class="title">
-                        白鹿原女裤2015秋加绒小脚裤高腰长裤修身显瘦休闲裤
-                    </h5>
-                    <span class="price">￥130.00</span>
-                </a>
-            </li>
+            
+            
         </ul>
         <div class="load-more text-center">加载中…</div>
     </div>
@@ -169,7 +149,8 @@
 <script src="js/cart-mvc.js">
 </script>
 <script>
-    window.goods=[
+	 window.goods=${goods} 
+    /* window.goods=[
         {id:24,
             title:'白鹿原女裤2015秋加绒小脚裤高腰长裤修身显瘦休闲裤',
             price:190,
@@ -242,7 +223,7 @@
         }
 
 
-    ];
+    ]; */
     $(function(){
         var model=new productList.Model({list:window.goods,pageNumber:20});
         var view=new productList.View(model,{

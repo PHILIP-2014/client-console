@@ -90,7 +90,7 @@
         },
         services:{
             addToCart:function(params){
-                return $.post('/addTocart',params);
+                return $.post('/order',params);
             },
             setExpressHttp:function(params){
                 return $.post('/express',params);
@@ -127,6 +127,7 @@
 /*****************************产品详情页*************************************/
     var detail={
         Model:function(obj){
+        	debugger;
             this.addedItem={
                 id:obj.id,
                 count:0,
@@ -207,6 +208,7 @@
     };
     detail.Controller.prototype={
         addToCart:function(e){
+        	debugger;
             var target=$(e.currentTarget);
             var type=target.attr('data-submit-type');
 

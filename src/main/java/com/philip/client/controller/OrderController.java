@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.philip.client.model.GoodsModel;
 import com.philip.client.model.Order;
 import com.philip.client.service.OrderService;
 import com.philip.client.utils.ServiceException;
@@ -106,4 +107,52 @@ public class OrderController extends BaseController {
 		}
 		return null;
 	}
+	
+	
+	/**
+	 * 预览/确定下单
+	 * @param request
+	 * @param response
+	 * @param order
+	 * @return
+	 * @throws IOException
+	 */
+	@RequestMapping(value="/order/preview", method=RequestMethod.POST)
+	public String preview(HttpServletRequest request, HttpServletResponse response,
+			@RequestBody GoodsModel goods,ModelMap model) throws IOException {
+//		try {
+//			order.setOrderNum(UUID.randomUUID().toString());
+			model.put("goods", goods);
+//			orderService.doCreate(order, getUid(request));
+			return "order/order";
+//			return ajaxResult(orderService.doCreate(order, getUid(request)), null);
+//		} catch (ServiceException e) {
+//			sendError(request, response, e.getMessage());
+//		}
+//		return null;
+	}
+	
+	/**
+	 * 提交订单
+	 * @param request
+	 * @param response
+	 * @param order
+	 * @return
+	 * @throws IOException
+	 */
+	@RequestMapping(value="/order", method=RequestMethod.POST)
+	public String postOrder(HttpServletRequest request, HttpServletResponse response,
+			 Order order,ModelMap model) throws IOException {
+//		try {
+//			order.setOrderNum(UUID.randomUUID().toString());
+		model.put("order", order);
+//			orderService.doCreate(order, getUid(request));
+		return "order/send-success";
+//			return ajaxResult(orderService.doCreate(order, getUid(request)), null);
+//		} catch (ServiceException e) {
+//			sendError(request, response, e.getMessage());
+//		}
+//		return null;
+	}
+	
 }

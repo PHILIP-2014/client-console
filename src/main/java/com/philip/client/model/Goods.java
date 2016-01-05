@@ -23,6 +23,26 @@ public class Goods extends Base {
 	private Integer status;//默认0正常\n 1已下架
 	
 	private String cover;//默认0正常\n 1已下架
+	
+	private String detail;
+	
+	private Integer payType;
+
+	public String getDetail() {
+		return detail;
+	}
+
+	public void setDetail(String detail) {
+		this.detail = detail;
+	}
+
+	public Integer getPayType() {
+		return payType;
+	}
+
+	public void setPayType(Integer payType) {
+		this.payType = payType;
+	}
 
 	public String getCover() {
 		return cover;

@@ -63,7 +63,7 @@
     <select id="queryByGid" parameterType="java.lang.Long" resultType="com.philip.client.model.Picture">
 	    select <include refid="commonColumns"/>
 	    <![CDATA[ from picture where 
-		        gid = #{id} 
+		        gid = #{gid} 
 	    ]]>
     </select>
 

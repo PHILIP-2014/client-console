@@ -8,6 +8,7 @@
     <link href="/css/cart.css" rel="stylesheet">
     <script src="/js/jquery-1.10.2.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
+    
 
 </head>
 <body id="productDetail">
@@ -49,13 +50,13 @@
         <input type="hidden" name="size" value="l" required="required" />
         <input type="hidden" name="id" value="" required="required" />
         <div>
-            <img src="/images/product/image4.jpg" class="thumbnail" />
+            <img src="/images/product/goods8.jpg" class="thumbnail" />
         </div>
         <div id="color-list" class="order-item">
             <h5>颜色分类</h5>
-           <!--  <#list goods.styleList as style>
-           			<button type="button" class="btn" data-color="black">${style}</button>
-            </#list> -->
+            <#list goods.styleList as style>
+           			<button type="button" class="btn" data-color="black">${style.content}</button>
+            </#list>
         </div>
         <div id="size-list" class="order-item">
             <h5>尺寸</h5>
@@ -90,14 +91,12 @@
 </script>
 <script src="/js/cart-mvc.js"></script>
 <script>
-	#if (${goods})
-	window.detailData=${goods};
-	#else 
-	window.detailData=null;
-	#end
-   
+
+	
+window.detailData="${goods.name}";
     
     $(function(){
+    	debugger;
         var model=new detail.Model({detail:detailData});
         var view=new detail.View(model,{
             rootElement:$('#productDetail')

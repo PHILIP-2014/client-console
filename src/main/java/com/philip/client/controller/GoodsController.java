@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.alibaba.fastjson.JSONObject;
 import com.philip.client.cond.GoodsCond;
 import com.philip.client.model.Goods;
 import com.philip.client.model.GoodsModel;
@@ -56,12 +58,15 @@ public class GoodsController extends BaseController {
 	 * @throws IOException
 	 */
 	@RequestMapping(value="/goods/{id}", method=RequestMethod.GET)
-	public String getOne(HttpServletRequest request, HttpServletResponse response,
+	public ModelAndView getOne(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable Long  id,ModelMap model) throws IOException {
 		//TODO 获取
 		GoodsModel goodsModel = goodsService.queryModel(id);
-		model.put("goods", goodsModel);
-			return "/goods/goods-detail";
+		model.put("goods", JSONObject.toJSON( goodsModel));
+//		model.put("good", goodsModel);
+		
+		return new ModelAndView("/goods/goods-detail");
+//		return goodsModel;
 	}
 	
 	/**

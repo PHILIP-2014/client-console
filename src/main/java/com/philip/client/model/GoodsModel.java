@@ -12,6 +12,8 @@ public class GoodsModel extends Goods {
 
 	private String styles;
 	
+	private String styleChoosed;
+	
 	private List<Style> styleList;
 	
 	private List<Picture> pictureList;
@@ -39,6 +41,14 @@ public class GoodsModel extends Goods {
 
 	public void setStyles(String styles) {
 		this.styles = styles;
+	}
+
+	public String getStyleChoosed() {
+		return styleChoosed;
+	}
+
+	public void setStyleChoosed(String styleChoosed) {
+		this.styleChoosed = styleChoosed;
 	}
 	
 }

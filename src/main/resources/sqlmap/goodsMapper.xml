@@ -9,6 +9,8 @@
 		goods.type,
 		goods.status,
 		goods.cover,
+		goods.detail,
+		goods.pay_type as payType,
 		goods.gmt_create as gmtCreate,
 		goods.gmt_modify as gmtModify
 	</sql>

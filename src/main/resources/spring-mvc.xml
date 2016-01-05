@@ -85,6 +85,10 @@
 		<property name="messageConverters">
 			<list>
 				<ref bean="mappingJacksonHttpMessageConverter" />	<!-- JSON转换器 -->
+<!-- 				 新增的StringMessageConverter bean
+				<ref bean= "stringHttpMessageConverter" />
+				<ref bean= "jsonHttpMessageConverter" />
+				<ref bean= "formHttpMessageConverter" /> -->
 			</list>
 		</property>
 	</bean>

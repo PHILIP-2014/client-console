@@ -9,6 +9,7 @@ alter table orders drop column `cid` ;
 drop table customer;
 
 alter table orders change column `order_num` `order_num` VARCHAR(200) NOT NULL DEFAULT '0' COMMENT '订单编号(系统生成)' ;
+
 ALTER TABLE `goods` 
 ADD COLUMN `cover` VARCHAR(200) NULL AFTER `status`;
 
@@ -30,6 +31,4 @@ ALTER TABLE `console`.`goods` CHANGE COLUMN `payType` `pay_type` INT(11) NULL DE
 UPDATE `console`.`picture` SET `pic_url`='/images/product/goods1.jpg' WHERE `id`='10001';
 UPDATE `console`.`picture` SET `pic_url`='/images/product/goods2.jpg' WHERE `id`='10002';
 UPDATE `console`.`picture` SET `pic_url`='/images/product/goods3.jpg' WHERE `id`='10003';
-
-
 

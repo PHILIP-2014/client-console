@@ -1,8 +1,12 @@
 package com.philip.client.model;
 
 import java.math.BigDecimal;
-import java.sql.Date;
+import java.util.Date;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.springframework.format.annotation.DateTimeFormat;
+
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class Order extends Base {
 
 	/**
@@ -10,13 +14,12 @@ public class Order extends Base {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public static final int IS_WAITING = 0;
-	public static final int IS_FINISHED = 1;
-	public static final int IS_CANCELED = 2;
+	public static final int STATUS_WAITING = 0; //准备下单
+	public static final int STATUS_FINISHED = 1;//客户完成下单
+	public static final int STATUS_COMPLETE = 2;//订单已完成
+	public static final int STATUS_CANCELED = 3;//订单已取消
 	
 	private String orderNum;
-	
-	private Long cid;
 	
 	private Long gid;
 	
@@ -38,9 +41,30 @@ public class Order extends Base {
 	
 	private String addrSetup;
 	
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date gmtSetup;
 	
 	private String size;
+	
+	private String color;
+	
+	private BigDecimal price;
+
+	public BigDecimal getPrice() {
+		return price;
+	}
+
+	public void setPrice(BigDecimal price) {
+		this.price = price;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
 
 	public String getSize() {
 		return size;
@@ -56,14 +80,6 @@ public class Order extends Base {
 
 	public void setOrderNum(String orderNum) {
 		this.orderNum = orderNum;
-	}
-
-	public Long getCid() {
-		return cid;
-	}
-
-	public void setCid(Long cid) {
-		this.cid = cid;
 	}
 
 	public Long getGid() {
@@ -145,6 +161,7 @@ public class Order extends Base {
 	public void setAddrSetup(String addrSetup) {
 		this.addrSetup = addrSetup;
 	}
+
 
 	public Date getGmtSetup() {
 		return gmtSetup;

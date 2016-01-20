@@ -5,6 +5,23 @@
 <title>Insert title here</title>
 </head>
 <body>
-	Hello World!
+<script src="../jquery/jquery.min.js"></script>
+	<script type="text/javascript">
+	function onSubmit(){
+		alert("i have in haha ");
+	 console.log($(".test").text()+$(".test").val()); 
+	}
+	function click2(){
+		alert("i have in");
+	 console.log($(".test")); 
+	}
+	</script>
+	<input type="button" id="input" onclick="onSubmit()" value="haha"/>
+	<input class="test" value="h"></input>
+	<input class="test" value="e"></input>
+	<input class="test" value="l"></input>
+	<input class="test" value="l"></input>
+	<input class="test" value="0"></input>
+	<button type="button"   id="dd" onclick="click2()" value="dd">ddd</button>
 </body>
 </html>

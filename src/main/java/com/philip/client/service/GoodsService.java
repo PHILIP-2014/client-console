@@ -11,7 +11,6 @@ import com.philip.client.dao.PictureDao;
 import com.philip.client.dao.StyleDao;
 import com.philip.client.model.Goods;
 import com.philip.client.model.GoodsModel;
-import com.philip.client.model.Style;
 import com.philip.client.utils.ServiceException;
 import com.philip.client.utils.javabase.LongUtils;
 import com.philip.client.utils.javabase.StrUtils;
@@ -51,16 +50,15 @@ public class GoodsService {
 			throw new ServiceException("error.create.failed");
 		}
 		//deal styles
-		List<String> styles = StrUtils.splitToString(goods.getStyles());
+		/*List<String> styles = StrUtils.splitToString(goods.getStyles());
+		goods.setColor(goods.getStyles());
 		for(String content : styles){
 			Style style = new Style();
 			style.setContent(content);
 			style.setGid(goods.getId());
 			if(styleDao.countExist(style) > 0){
 				continue;
-			}
-			styleDao.insert(style);
-		}
+			}*/
 		
 		return true;
 	}
@@ -91,8 +89,17 @@ public class GoodsService {
 	public GoodsModel queryModel(Long id) {
 		// TODO Auto-generated method stub
 		GoodsModel goodsModel =  goodsDao.queryModel(id);
+		if(goodsModel ==null){
+			return null;
+		}
 		goodsModel.setStyleList(styleDao.queryByGid(id));
 		goodsModel.setPictureList(pictureDao.queryByGid(id));
+		if(goodsModel.getColor()!=null){
+			goodsModel.setColors(goodsModel.getColor().split(","));
+		}
+		if(goodsModel.getSize()!=null){
+			goodsModel.setSizes(goodsModel.getSize().split(","));
+		}
 //		goodsModel.setPictureList(pictureDao.queryByGid(id));
 		return goodsModel;
 	}

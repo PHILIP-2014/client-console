@@ -12,8 +12,11 @@
  */
 package com.philip.client.utils;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import com.philip.client.utils.javabase.StrUtils;
 
 public class DateUtil
 {
@@ -74,5 +77,17 @@ public class DateUtil
       return dateToStr(date, "yyyy-MM-dd HH:mm:ss");
     }
     throw new IllegalArgumentException("Type undefined : " + type);
+  }
+  
+  public static Date strToDate(String date,String type){
+	  SimpleDateFormat sdf = new SimpleDateFormat(type);
+	  try {
+		  if(StrUtils.isEmpty(date)){
+				return new Date();
+			}
+		return sdf.parse(date);
+	} catch (ParseException e) {
+		return new Date();
+	}
   }
 }

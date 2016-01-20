@@ -12,14 +12,17 @@
 		orders.total_fee as totalFee,
 		orders.status,
 		orders.size,
+		orders.color,
+		orders.price,
 		orders.name_setup as nameSetup,
+		orders.phone_setup as phoneSetup,
 		orders.phone_setup as phoneSetup,
 		orders.addr_setup as addrSetup,
 		orders.gmt_setup as gmtSetup,
 		orders.gmt_create as gmtCreate,
 		orders.gmt_modify as gmtModify
 	</sql>
-	<select id="queryOne" resultType="com.philip.client.model.Order">
+	<select id="queryOne" resultType="com.philip.client.model.Order"  >
 		select
 		<include refid="default_column" />
 		from `orders`
@@ -56,6 +59,8 @@
 			total_fee,
 			status,
 			size,
+			color,
+			price,
 			name_setup,
 			phone_setup,
 			addr_setup,
@@ -73,12 +78,15 @@
 			#{totalFee},
 			#{status},
 			#{size},
+			#{color},
+			#{price},
 			#{nameSetup},
 			#{phoneSetup},
 			#{addrSetup},
 			#{gmtSetup},
 			now(),now())
 	</insert>
+	
 	<update id="update" parameterType="com.philip.client.model.Order">
 		update orders
 		<set>
@@ -90,6 +98,15 @@
 			</if>
 			<if test="status != null">
 				status = #{status},
+			</if>
+			<if test="price != null">
+				price = #{price},
+			</if>
+			<if test="totalFee != null">
+				total_fee = #{totalFee},
+			</if>
+			<if test="nameSetup != null">
+				name_setup = #{nameSetup},
 			</if>
 			<if test="phoneSetup != null">
 				phone_setup = #{phoneSetup},
@@ -110,5 +127,14 @@
 			from orders
 		where order_num = #{orderNum}
 	</select>
+	
+	<select id="queryModel" parameterType="java.lang.Long" resultType="com.philip.client.model.OrderModel">
+		select 
+		<include refid="default_column"/>,goods.cover 
+		from orders
+		inner join goods on goods.id =orders.gid
+		where  orders.id = #{id}
+	</select>
+	
 	
 </mapper>

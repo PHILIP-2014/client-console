@@ -10,14 +10,37 @@ public class GoodsModel extends Goods {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	@Deprecated
 	private String styles;
 	
+	@Deprecated
 	private String styleChoosed;
 	
 	private List<Style> styleList;
 	
 	private List<Picture> pictureList;
 	
+	private String[] colors;
+	
+	private String[] sizes;
+	
+
+
+	public String[] getColors() {
+		return colors;
+	}
+
+	public void setColors(String[] colors) {
+		this.colors = colors;
+	}
+
+	public String[] getSizes() {
+		return sizes;
+	}
+
+	public void setSizes(String[] sizes) {
+		this.sizes = sizes;
+	}
 
 	public List<Style> getStyleList() {
 		return styleList;

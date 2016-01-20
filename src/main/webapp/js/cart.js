@@ -1,6 +1,7 @@
 (function(document){
-    var $countInput=$('input[name="count"]');
+    var $countInput=$('input[name="num"]');
     var $colorInput=$('input[name="color"]');
+    var $totalFee=$('input[name="totalFee"]');                    //总价格
     var $sizeInput=$('input[name="size"]');
     var $popup=$('.popup');                             //购物设置弹层
     var $orderForm=$('[name="orderForm"]');             //购物设置表单
@@ -15,6 +16,8 @@
     var $editBtn=$('#edit-btn');                        //订单编辑按钮
     var $selectBtn=$('.select-btn');                    //单个勾选按钮
     var $selectAll=$('.select-all');                    //全选按钮
+    var $total=$('.total');                    //总价格
+    var $price=$('.price');                    //单价
 
     //加入购物车、立即购买按钮点击
     $('.btn-order').on('click',function(e){
@@ -43,11 +46,13 @@
     });
     //购物设置表单的确认操作
     $orderForm.on('submit',function(e){
+    	debugger;
         var target=$(e.currentTarget);
         var type=target.attr('data-form-type');
 
         var arr=$(e.currentTarget).serializeArray();
         var params=convertArrayToObject(arr);
+       
         if(!params.color||!params.size){
             return;
         }
@@ -71,7 +76,7 @@
     $confirmOrderForm.on('submit',function(e){
         var arr=$(e.currentTarget).serializeArray();
         var params=convertArrayToObject(arr);
-        if(!params.color||!params.size||!params.address){
+        if(!params.color||!params.num||!params.addrSetup){
             return;
         }
         onSubmit(params);
@@ -148,6 +153,56 @@
         });*/
         $orderList.html(html);
     }
+    
+    function dateConvert(dateParms){ 
+    	debugger;
+        // 对传入的时间参数进行判断
+        if(dateParms instanceof Date){
+            var datetime=dateParms;
+        }
+        //判断是否为字符串
+        if((typeof dateParms=="string")&&dateParms.constructor==String){
+            
+            //将字符串日期转换为日期格式
+            var datetime= new Date(Date.parse(dateParms.replace(/-/g,   "/")));
+        
+        }
+        
+        //获取年月日时分秒
+         var year = datetime.getFullYear();
+         var month = datetime.getMonth()+1; 
+         var date = datetime.getDate(); 
+         var hour = datetime.getHours(); 
+         var minutes = datetime.getMinutes(); 
+         var second = datetime.getSeconds();
+        
+         //月，日，时，分，秒 小于10时，补0
+         if(month<10){
+          month = "0" + month;
+         }
+         if(date<10){
+          date = "0" + date;
+         }
+         if(hour <10){
+          hour = "0" + hour;
+         }
+         if(minutes <10){
+          minutes = "0" + minutes;
+         }
+         if(second <10){
+          second = "0" + second ;
+         }
+         
+         //拼接日期格式【例如：yyyy-mm-dd】
+         var time = year+"-"+month+"-"+date; 
+         
+         //或者：其他格式等
+         //var time = year+"年"+month+"月"+date+"日"+hour+":"+minutes+":"+second; 
+         
+         //返回处理结果
+         return time;
+        }
+    
 
     function getUnique(arr,key){
         var obj={},resultArr=[];
@@ -213,7 +268,7 @@
 
     function setItemCount(e){
         var target=$(e.currentTarget);
-        var type=target.attr('data-count');
+        var type=target.attr('data-num');
         //
     }
     function toggleSetBlock(isShow){
@@ -235,7 +290,7 @@
     }
     function setCount(e){
         var target=$(e.currentTarget);
-        var type=target.attr('data-count');
+        var type=target.attr('data-num');
         var num=Number($countInput.attr('value'));
 
         if((num<=1&&type==='reduce')||(num>=100&&type==='plus')){
@@ -244,6 +299,10 @@
 
         num=type==='plus'?num+1:num-1;
         $numberDiv.html(num);
+        var price = $price.text();
+        var totalFee = num*price;
+        $total.html(totalFee);
+        $totalFee.prop({value:totalFee});
         $countInput.prop({value:num});
     }
     function select(e,type,input){
@@ -256,7 +315,24 @@
     }
     function onSubmit(param){
         //todo 替换提交接口
-        $.post('/order',param);
+    	debugger;
+        $.post('/p/order',param,function(res){
+        	Dialog.open({URL:"/test.html"});
+//        	 alert("提交成功,到时会有工作人员和你联系"); // John
+        },"json"
+        );
+    	console.log(param);
+    	/*$.ajax(
+    				{
+    					"type":"post",
+    					"dataType":"json",
+    					"data":param,
+    					"url":"/order",
+    					"success":function(data){
+    						alert(data.data.size);
+    					}
+    				}
+    	);*/
     }
 
     function convertArrayToObject(arr){

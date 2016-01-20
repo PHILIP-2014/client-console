@@ -1,7 +1,6 @@
 package com.philip.client.controller;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,14 +9,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.alibaba.fastjson.JSONObject;
-import com.philip.client.cond.GoodsCond;
 import com.philip.client.model.Goods;
 import com.philip.client.model.GoodsModel;
 import com.philip.client.service.GoodsService;
@@ -49,25 +44,29 @@ public class GoodsController extends BaseController {
 		return null;
 	}
 	
-	/**
+/*	*//**
 	 * 商品详情
 	 * @param request
 	 * @param response
 	 * @param goods
 	 * @return
 	 * @throws IOException
-	 */
+	 *//*
 	@RequestMapping(value="/goods/{id}", method=RequestMethod.GET)
 	public ModelAndView getOne(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable Long  id,ModelMap model) throws IOException {
 		//TODO 获取
 		GoodsModel goodsModel = goodsService.queryModel(id);
-		model.put("goods", JSONObject.toJSON( goodsModel));
-//		model.put("good", goodsModel);
+		if(goodsModel !=null){
+			model.put("good", JSONObject.toJSON( goodsModel).toString());
+			model.put("goods", goodsModel);
+			return new ModelAndView("/goods/goods-detail");
+		}else{
+			return new ModelAndView("/goods/empty");
+		}
 		
-		return new ModelAndView("/goods/goods-detail");
 //		return goodsModel;
-	}
+	}*/
 	
 	/**
 	 * 商品列表
@@ -76,17 +75,17 @@ public class GoodsController extends BaseController {
 	 * @param goods
 	 * @return
 	 * @throws IOException
-	 */
+	 *//*
 	@RequestMapping(value="/goods", method=RequestMethod.GET)
 	public String getList(HttpServletRequest request, HttpServletResponse response,
 			GoodsCond cond ,ModelMap model) throws IOException {
 		//TODO 
 		List<GoodsModel> goodsModel = goodsService.queryByCond(cond);
 		model.put("goods", goodsModel);
-		model.put("baseAddr", "127.0.0.1:8080");
+		model.put("good", goodsModel.toString());
 		return "/goods/goods-list";
 		
-	}
+	}*/
 	
 	/**
 	 * 更新商品信息
@@ -126,5 +125,32 @@ public class GoodsController extends BaseController {
 			sendError(request, response, e.getMessage());
 		}
 		return null;
+	}
+	
+	
+	/**
+	 * 展示订单页面
+	 * @param request
+	 * @param response
+	 * @param order
+	 * @return
+	 * @throws IOException
+	 */
+	@RequestMapping(value="/preview", method=RequestMethod.GET)
+	public String showOrder(HttpServletRequest request, HttpServletResponse response,
+			String backurl,ModelMap model) throws IOException {
+		String[] strings= backurl.split("/");
+		Long id = Long.valueOf(strings[strings.length-1]);
+		
+//		try {
+//			order.setOrderNum(UUID.randomUUID().toString());
+		model.put("goods", goodsService.queryModel(id));
+//			orderService.doCreate(order, getUid(request));
+		return "order/order";
+//			return ajaxResult(orderService.doCreate(order, getUid(request)), null);
+//		} catch (ServiceException e) {
+//			sendError(request, response, e.getMessage());
+//		}
+//		return null;
 	}
 }

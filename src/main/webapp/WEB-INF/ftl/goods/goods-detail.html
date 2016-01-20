@@ -11,6 +11,7 @@
     
 
 </head>
+
 <body id="productDetail">
 
 <div class="container">
@@ -31,6 +32,7 @@
         <span>产品详情</span>
     </div>
     <div class="product-detail">
+    ${goods.detail}
         <p><img src="/images/product/goods1-pic1.jpg" /></p>
         <p><img src="/images/product/goods1-pic2.jpg" /></p>
         <p><img src="/images/product/goods1-pic3.jpg" /></p>
@@ -39,36 +41,45 @@
 
 <div class="footer">
     <a href="#" class="btn cart">购物车</a>
-    <button type="submit" class="btn btn-order add-to-cart" data-submit-type="cart">加入购物车</button>
+    <!-- <button type="submit" class="btn btn-order add-to-cart" data-submit-type="cart">加入购物车</button> -->
     <button type="submit" class="btn btn-order" data-submit-type="buy">立即下单</button>
 </div>
 
 <div class="popup">
     <form class="menu-block" name="orderForm" data-form-type="cart">
-        <input type="hidden" name="count" value="1" required="required" />
         <input type="hidden" name="color" value="" required="required" />
-        <input type="hidden" name="size" value="l" required="required" />
-        <input type="hidden" name="id" value="" required="required" />
+        <input type="hidden" name="size" value="" required="required" />
+        <input type="hidden" name="gid" value=${goods.id} required="required" />
+        <input type="hidden" name="gname" value=${goods.name} required="required" />
+        <input type="hidden" name="totalFee" value="" required="required" />
+        <input type="hidden" name="num" value="1" required="required" />
+        <input type="hidden" name="price" value=${goods.price} required="required" />
         <div>
-            <img src="/images/product/goods8.jpg" class="thumbnail" />
+            <img src="${goods.cover}" class="thumbnail" />
         </div>
         <div id="color-list" class="order-item">
-            <h5>颜色分类</h5>
-            <#list goods.styleList as style>
-           			<button type="button" class="btn" data-color="black">${style.content}</button>
-            </#list>
+            <h5>款式分类</h5>
+            <#if goods.colors??>
+	            <#list goods.colors as color>
+	           			<button type="button" class="btn" data-color="black">${color}</button>
+	            </#list>
+            </#if>
         </div>
         <div id="size-list" class="order-item">
             <h5>尺寸</h5>
-            <button type="button" class="btn" data-size="xl">xl</button>
-            <button type="button" class="btn" data-size="l">L</button>
+            <#if goods.sizes??>
+	        	<#list goods.sizes as size>
+	            <button type="button" class="btn" data-size="${size}">${size}</button>
+	            </#list>
+            </#if>
+           <!--  <button type="button" class="btn" data-size="l">L</button> -->
         </div>
         <div id="count-set" class="order-item" count-set>
             <span>购买数量</span>
             <div class="counter">
-                <button type="button" class="btn" data-count="reduce">-</button>
+                <button type="button" class="btn" data-num="reduce">-</button>
                 <span class="number">1</span>
-                <button type="button" class="btn" data-count="plus">+</button>
+                <button type="button" class="btn" data-num="plus">+</button>
             </div>
         </div>
         <div class="col-xs-12 text-center">
@@ -93,10 +104,10 @@
 <script>
 
 	
-window.detailData="${goods.name}";
+window.detailData=${good};
+
     
     $(function(){
-    	debugger;
         var model=new detail.Model({detail:detailData});
         var view=new detail.View(model,{
             rootElement:$('#productDetail')

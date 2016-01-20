@@ -12,6 +12,7 @@
 	
 	<!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->
 	<context:component-scan base-package="com.philip.client.controller" />
+	<context:component-scan base-package="com.philip.client.controller.p" />
 	
 	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 		<property name="cacheSeconds" value="-1"/>
@@ -134,6 +135,7 @@
 					<value>/product-list.html</value>
 					<value>/images*</value>
 					<value>/fonts*</value>
+					<value>/p*</value>
 				</list>
 			</property>
 		</bean>

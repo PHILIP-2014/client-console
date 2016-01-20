@@ -69,6 +69,7 @@
             target.addClass('active').siblings().removeClass('active');
         },
         expressFormSubmit:function(e,callback){
+        	debugger;
             var target=$(e.currentTarget);
             var array=target.serializeArray();
             var params=common.convertArrayToObject(array);
@@ -90,31 +91,32 @@
         },
         services:{
             addToCart:function(params){
-                return $.post('/order',params);
+                return $.post('/p/order/preview',params);
             },
             setExpressHttp:function(params){
-                return $.post('/express',params);
+                return $.post('/p/order',params);
             },
             sendOrderHttp:function(params){
-                return $.post('/order',params);
+            	debugger;
+                return $.post('/p/order',params);
             },
             cancelOrder:function(params){
-                return $.post('/cancel',params)
+                return $.post('/p/cancel',params)
             },
             takeDelivery:function(params){
-                return $.post('/finish',params);
+                return $.post('/p/finish',params);
             },
             deleteOrder:function(id){
-                return $.post('/delete',id);
+                return $.post('/p/delete',id);
             },
             deleteCartList:function(param){
-                return $.post('/delete',param);
+                return $.post('/p/delete',param);
             },
             getPopupTemplate:function(id){
                 return $.post('/page',id);
             },
             getProductList:function(param){
-                return $.post('/list',param);
+                return $.post('/p/list',param);
             }
         }
     };
@@ -127,9 +129,13 @@
 /*****************************产品详情页*************************************/
     var detail={
         Model:function(obj){
-        	debugger;
             this.addedItem={
-                id:obj.id,
+                id:obj.detail.id,
+                gname:obj.detail.name,
+                gid:obj.detail.gid,
+                sid:'',
+                num:5,
+                totalFee:16,
                 count:0,
                 size:'',
                 color:''
@@ -151,7 +157,7 @@
 
             this._colorInput=this._orderForm.find('[name="color"]');
             this._sizeInput=this._orderForm.find('[name="size"]');
-            this._countInput=this._orderForm.find('[name="count"]');
+            this._countInput=this._orderForm.find('[name="num"]');
 
 
             this.closePopupBtnClicked=new Event(this);
@@ -208,7 +214,6 @@
     };
     detail.Controller.prototype={
         addToCart:function(e){
-        	debugger;
             var target=$(e.currentTarget);
             var type=target.attr('data-submit-type');
 
@@ -234,7 +239,7 @@
             var numberElement=target.siblings('.number');
             var countInput=this._view._countInput;
 
-            var type=target.attr('data-count');
+            var type=target.attr('data-num');
             var num=Number(countInput.attr('value'));
 
             if((num<=1&&type==='reduce')||(num>=100&&type==='plus')){
@@ -253,13 +258,16 @@
             var arr=target.serializeArray();
             var params=common.convertArrayToObject(arr);
             if(!params.color||!params.size){
+            	alert("未选择款式或颜色");
                 return;
             }
 
             common.services.addToCart(params)
-                .success(function(){
+                .success(function(res){
                     if(type==='buy'){
                         //todo 跳转到确认页面
+                    	alert("提交成功"+res.data.id );
+                    	parent.location.href="/p/order?id="+res.data.id;
                     }else{
                         alert('添加成功');
                     }
@@ -442,7 +450,7 @@
             this._deleteItemBtn=    this._orderItem.find('[data-delete="item"]');
             this._selectAllBtn=     this._rootElement.find('.select-all');
             this._deleteMoreBtn=    this._rootElement.find('.delete-more');
-            this._countBtn=         this._cartList.find('[data-count]');
+            this._countBtn=         this._cartList.find('[data-num]');
             this._resetBtn=         this._orderItem.find('[data-reselect]');
             this._selectBtn=        this._cartList.find('.select-btn');
             this._buyBtn=           this._rootElement.find('#buy');
@@ -804,7 +812,7 @@
     order.View.prototype={
         insertToExpressView:function(data){
             var html='<div>' +
-                '<span>收件人：'+data.recipient+'</span>' +
+                '<span>收件人：'+data.nameSetup+'</span>' +
                 '<span>'+data.phone+'</span>' +
                 '</div>' +
                 '<div>' +
@@ -847,10 +855,12 @@
             var self=this;
             var target=$(e.currentTarget);
             var array=target.serializeArray();
+            debugger;
             var params=common.convertArrayToObject(array);
-
+            
             common.services.sendOrderHttp(params)
                 .success(function(data){
+                	alert("订单提交成功");
                     //TODO 跳转到订单中心
                 });
         },
@@ -912,7 +922,7 @@
         insertToAddressListView:function(data,index){
             var li=$('<li class="active" data-address-index="'+index+'">' +
                         '<div>' +
-                            '<span>'+data.recipient+'</span>' +
+                            '<span>'+data.nameSetup+'</span>' +
                             '<span>'+data.phone+'</span>' +
                         '</div>' +
                         '<div>' +

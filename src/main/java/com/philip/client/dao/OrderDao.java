@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.philip.client.cond.OrderCond;
 import com.philip.client.model.Order;
+import com.philip.client.model.OrderModel;
 
 public interface OrderDao {
 
@@ -20,4 +21,8 @@ public interface OrderDao {
 	Integer update(Order order);
 
 	Integer countExist(String orderNum);
+
+	Order queryOne(Long id);
+
+	OrderModel queryModel(Long id);
 }

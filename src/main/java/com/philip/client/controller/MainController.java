@@ -102,7 +102,7 @@ public class MainController extends BaseController {
 		try {
 			out.put("admin", getSessionUser(request));
 			OrderCond cond = new OrderCond();
-			cond.setStatus(Order.IS_WAITING);
+			cond.setStatus(Order.STATUS_FINISHED);
 			out.put("orders", orderService.queryByCond(cond, getUid(request)));
 			return "/client/orders";
 		} catch (ServiceException e) {

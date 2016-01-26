@@ -136,6 +136,7 @@
 					<value>/images*</value>
 					<value>/fonts*</value>
 					<value>/p*</value>
+					<value>/test*</value>
 				</list>
 			</property>
 		</bean>

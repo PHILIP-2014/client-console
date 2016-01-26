@@ -41,37 +41,23 @@ function fun2()
 }
 function fun3()
 {
-	/* var diag = new Dialog();
-	diag.Width = 900;
-	diag.Height = 400;
-	diag.Title = "内容页为外部连接的窗口";
-	diag.URL = "http://www.5icool.org/";
-	diag.show(); */
 	parent.location.href="/p/goods";
 }
 
 </script>
 </head>
-<body><div id="forlogin">
-      <table width="100%" border="0" align="center" cellpadding="4" cellspacing="4" bordercolor="#666666">
-        <tr>
-          <td colspan="2" bgcolor="#eeeeee">订单已经提交，到时工作人员会联系你</td>
-        </tr>
-      <!--   <tr>
-          <td width="150" align="right">你的QQ：</td>
-          <td><input type="text" id="qq" /></td>
-        </tr>
-        <tr>
-          <td width="150" align="right">你的E-mail：</td>
-          <td><input type="text" id="mail" /></td>
-        </tr>
-        <tr>
-          <td align="right">你从哪儿获知本程序的？</td>
-          <td><input type="text" id="track"  /></td>
-        </tr> -->
-        <tr>
-          <td colspan="2" align="left" style="padding-left:160px;"><input type="button" onClick="fun3()" value="确定" class="buttonStyle" /> <input onClick="fun2()" class="buttonStyle" type="button" value="关闭" /></td>
-        </tr>
-      </table>
-</div></body>
+<body>
+	<div id="forlogin">
+	      <table width="100%" border="0" align="center" cellpadding="4" cellspacing="4" bordercolor="#666666">
+	        <tr>
+	          <td colspan="2" bgcolor="#eeeeee">订单已经提交，到时工作人员会联系你</td>
+	        </tr>
+	        <tr>
+	          <td colspan="2" align="left" style="padding-left:160px;">
+	          <input type="button" onClick="fun3()" value="确定" class="buttonStyle" /> 
+			</td>
+	        </tr>
+	      </table>
+	</div>
+</body>
 </html>

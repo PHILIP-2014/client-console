@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8" />
+	<title>404-页面没有找到 | 夏腾建筑有限公司</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description" content="夏腾建筑有限公司是一家建筑材料有限公司，现在销售的主要有指纹锁，防盗门等" />
+	<meta name="keywords" content="指纹锁，防盗门" />
+	<meta name="author" content="夏腾建筑" />
+	<meta name="application-name" content="mgc.parox.cn" />
+	<link rel="shortcut icon" href="/images/favicon.ico">
+	<link rel="stylesheet" href="/css/bootstrap/bootstrap.css" media="screen">
+	<link rel="stylesheet" href="/css/parox-prompt.css" media="screen">
+	<script src="/js/lib/jquery/jquery-1.11.2.js"></script>
+	<script src="/js/lib/bootstrap/bootstrap.min.js"></script>
+	<!--[if lt IE 9]>
+	<script src="/js/component/ie8-responsive-file-warning.js"></script>
+	<script src="/js/component/html5shiv.min.js"></script>
+	<script src="/js/component/respond.js"></script>
+	<![endif]-->
+</head>
+
+<body id="wrong-404">
+	<div class="wrap" id="wrap">
+		<div class="container">
+			<img src="/images/images1.6/404-tp.png" class="tp" />
+			<div class="wrong">
+				<h1> My God……页面居然丢失！</h1>
+				<p> 俺的忧伤你永远不懂，<span>5</span>秒后结束忧伤去首页!</p>
+				<a href="http://mgc.parox.cn" class="btn btn-warning sp">去首页</a>
+			</div>
+			<img src="/images/images1.6/404-bt.png" class="bt" />
+		</div>
+
+	</div>
+
+	<script>
+		(function(){
+			var st=5;
+			setInterval(function(){
+				if(st>1){
+					--st;
+					$('span').eq(0).text(st);
+				}else{
+					window.location.href='http://mgc.parox.cn';
+				}
+			},1000);
+		})(jQuery);
+	</script>
+	<div class="sr-only">
+		<script type="text/javascript">
+			var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+			document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F961cbb61b7bb0da66c1b62cb6f834d53' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+	</div>
+</body>
+</html>

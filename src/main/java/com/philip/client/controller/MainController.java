@@ -104,6 +104,7 @@ public class MainController extends BaseController {
 			OrderCond cond = new OrderCond();
 			cond.setStatus(Order.STATUS_FINISHED);
 			out.put("orders", orderService.queryByCond(cond, getUid(request)));
+			orderService.queryByCond(cond, getUid(request)).size();
 			return "/client/orders";
 		} catch (ServiceException e) {
 			sendError(request, response, e.getMessage());

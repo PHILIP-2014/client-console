@@ -18,7 +18,7 @@
     var $selectAll=$('.select-all');                    //全选按钮
     var $total=$('.total');                    //总价格
     var $price=$('.price');                    //单价
-
+    var $dialog=$('#modal-comfirm'); //确定框
     //加入购物车、立即购买按钮点击
     $('.btn-order').on('click',function(e){
         var target=$(e.currentTarget);
@@ -315,13 +315,14 @@
     }
     function onSubmit(param){
         //todo 替换提交接口
-    	debugger;
         $.post('/p/order',param,function(res){
-        	Dialog.open({URL:"/test.html"});
+        	debugger;
+//        	$("#modal-comfirm").show();
+        	$dialog.modal('show');
+//        	Dialog.open({URL:"/test.html"});
 //        	 alert("提交成功,到时会有工作人员和你联系"); // John
         },"json"
         );
-    	console.log(param);
     	/*$.ajax(
     				{
     					"type":"post",

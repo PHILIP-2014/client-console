@@ -266,7 +266,6 @@
                 .success(function(res){
                     if(type==='buy'){
                         //todo 跳转到确认页面
-                    	alert("提交成功"+res.data.id );
                     	parent.location.href="/p/order?id="+res.data.id;
                     }else{
                         alert('添加成功');

@@ -111,7 +111,10 @@
 											<th>价格</th>
 											<th>备注</th>
 											<th>下单时间</th>
+											<th>下单者名字</th>
 											<th>安装时间</th>
+											<th>安装地点</th>
+											<th>联系电话</th>
 											<th>todo</th>
 										</tr>
 									</thead>
@@ -120,17 +123,20 @@
 										<tr id="tr_${item.id}">
 											<td>${item.orderNum}</td>
 											
-											<td><a href="#" class="btn btn-large btn-info">${item.gname}</a></td>
+											<td><a href="#" class="btn btn-large btn-info" data-target=".modal-good-info">${item.gname}</a></td>
 											
 											<td>${item.num}</td> 
 											<td>${item.totalFee?string("0.00")}</td> 
 											<td>${item.mark}</td> 
 											<td>${item.gmtCreate?string("yyyy-MM-dd hh:mm")}</td>
+											<td>${item.nameSetup!}</td>
 											<td>${item.gmtSetup?string("yyyy-MM-dd hh:mm")}</td>
+											<td>${item.addrSetup!}</td>
+											<td>${item.phoneSetup!}</td>
 											<td>
 												<button type="button" class="btn btn-outline btn-success" data-toggle="modal" 
 													data-target=".modal-order-edit" onclick="showEditOrderModal(this)"
-													i-mark-edit="${item.mark}" i-setup-edit="${item.gmtSetup!""}"
+													i-mark-edit="${item.mark}" i-setup-edit="${item.gmtSetup?string("yyyy-MM-dd hh:mm")}"
 													>修改</button>
 												<button type="button" class="btn btn-outline btn-danger" data-toggle="modal"
 													data-target=".modal-order-remove" onclick="showRmvOrderModal(this)"
@@ -204,7 +210,7 @@
 				<div class="modal-body">
 					<form>
 						<div class="form-group">
-							<label for="recipient-name" class="control-label">备注:</label>
+							<label for="recipient-name" class="control-label">安装地点:</label>
 							<input class="form-control" id="mark_edit">
 							<input class="form-control" id="setup_edit">
 							<input type="hidden" id="oid_edit" />
@@ -252,6 +258,27 @@
 		</div>
 	</div>
 	<!-- /modal-user-del -->
+	<!-- modal-goods-info -->
+	<div class="modal fade modal-good-info" >
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">商品信息</h4>
+				</div>
+				<div class="modal-body">
+					<input type="hidden" id="oid_rmv" /> 
+					<input type="hidden" id="name_rmv" /> 
+				</div>
+				<div class="modal-footer">
+					<a href="#" class="btn btn-danger" data-dismiss="modal">关闭</a> 
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /modal-goods-info -->
     <!-- jQuery -->
     <script src="/awesome/bower_components/jquery-awe/dist/jquery.min.js"></script>
 

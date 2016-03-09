@@ -3,12 +3,19 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <meta name="viewport" content="width=device-width,minimum-scale=1,user-scalable=no,maximum-scale=1,initial-scale=1" >
-    <title>Document</title>
+    <title>商品展示</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/cart.css" rel="stylesheet">
     <script src="../js/jquery-1.10.2.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
 
+	<style type="text/css">
+		.img{
+					width:200px;
+					height:200px;
+					border:1px solid gray; /*意思就是设置边框样式为实线，宽度1像素，颜色黑色  */
+				}
+	</style>
 </head>
 <body id="productList" style="overflow:auto;position:fixed;top:0;bottom:0;left:0;right:0;">
 
@@ -30,7 +37,7 @@
             <#list goods as good>
 	             <li class="col-xs-6 col-sm-3">
 	                <a href="/p/goods/${good.id}">
-	                    <img src="${good.cover}" />
+	                    <img class="img" src="${good.cover!"/images/default_cover.jpg"}" />
 	                    <h5 class="title">
 	                       ${good.name}
 	                    </h5>

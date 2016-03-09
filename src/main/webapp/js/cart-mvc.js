@@ -224,7 +224,7 @@
         },
         togglePopup:function(isShow){
             var method=isShow?'show':'hide';
-            var bottom=isShow?0:'-400px';
+            var bottom=isShow?'60px':'-400px';
             this._view._popup.animate({bottom:bottom},'fast')[method]();
         },
         setOptions:function(e,type,input){

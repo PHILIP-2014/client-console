@@ -8,7 +8,13 @@
     <link href="/css/cart.css" rel="stylesheet">
     <script src="/js/jquery-1.10.2.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
-    
+    <style type="text/css">
+    	.img{
+    			width:150px;
+    			height:150px;
+    			border:1px solid gray;
+    			}
+    </style>
 
 </head>
 
@@ -32,10 +38,15 @@
         <span>产品详情</span>
     </div>
     <div class="product-detail">
-    ${goods.detail}
-        <p><img src="/images/product/goods1-pic1.jpg" /></p>
+    ${goods.detail!}
+    	<#if goods.detail??>
+    		 ${goods.detail}
+        <!-- <p><img src="/images/product/goods1-pic1.jpg" /></p>
         <p><img src="/images/product/goods1-pic2.jpg" /></p>
-        <p><img src="/images/product/goods1-pic3.jpg" /></p>
+        <p><img src="/images/product/goods1-pic3.jpg" /></p> -->
+        <#else>
+        <h3 class="btn btn danger">暂无详情介绍</h3>
+        </#if>
     </div>
 </div>
 
@@ -45,7 +56,7 @@
     <button type="submit" class="btn btn-order" data-submit-type="buy">立即下单</button>
 </div>
 
-<div class="popup">
+<div class="popup"  style="bottom:30px; margin-bottom="40px;overflow:hidden" >
     <form class="menu-block" name="orderForm" data-form-type="cart">
         <input type="hidden" name="color" value="" required="required" />
         <input type="hidden" name="size" value="" required="required" />
@@ -55,7 +66,7 @@
         <input type="hidden" name="num" value="1" required="required" />
         <input type="hidden" name="price" value=${goods.price} required="required" />
         <div>
-            <img src="${goods.cover}" class="thumbnail" />
+            <img class="img" src="${goods.cover!"/images/default_cover.jpg"}" class="thumbnail" />
         </div>
         <div id="color-list" class="order-item">
             <h5>款式分类</h5>

@@ -407,6 +407,8 @@ a,button,input{
   display:none;
   position: fixed;
   bottom: -400px;
+  bottom:60px;
+  padding-bottom:40px;
   background: #fff;
   max-height: 70%;
   left:0;

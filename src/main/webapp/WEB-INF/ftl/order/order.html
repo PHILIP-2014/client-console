@@ -1,13 +1,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />  
-    <title>Document</title>
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" /> -->  
+    <title>商品详情</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1,user-scalable=no,maximum-scale=1,initial-scale=1" >
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/cart.css" rel="stylesheet">
     <script src="../js/jquery-1.10.2.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/bootstrap-datetimepicker.min.js"></script>
+    <style type="text/css">
+    	.img{
+    			width:200px;
+    			height:200px;
+    			margin-top:10px;
+    			border:1px solid gray;
+    			}
+    </style>
 </head>
 <body>
 <#assign webroot="http://localhost:8080"/>
@@ -26,10 +35,10 @@
 
         <div class="col-sm-12 col-xs-12 main-info">
             <div class="col-sm-3 col-xs-3">
-                <img src="${order.cover!"images/product/a.jpg"}"/>
+                <img class="img" src="${order.cover!"/images/default_cover.jpg"}"/>
             </div>
             <div class="col-xs-9 col-sm-9">
-                <h5 class="title">${order.gname}</h5>
+                <h3 class="title">${order.gname}</h3>
                 <div class="specification"><span>颜色分类：${order.color}</span><span>尺寸：${order.size}</span></div>
                 <div>
                     ￥<span class="price">${order.price}</span>
@@ -65,7 +74,7 @@
         
             <div class="col-sm-12 col-xs-12 result-item">
                 <label>收件人</label>
-                <input type="text" name="nameSetup" class="form-control" required="required" value="ddd"  placeholder="请填写姓名"/>
+                <input type="text" name="nameSetup" class="form-control" required="required" value="小张"  placeholder="请填写姓名"/>
             </div>
             <div class="col-sm-12 col-xs-12 result-item">
                 <label>联系方式</label>

@@ -1,22 +1,19 @@
 package com.philip.client.controller;
 
-import java.io.IOException;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.philip.client.model.Admin;
 import com.philip.client.service.AdminService;
 import com.philip.client.utils.ServiceException;
 import com.philip.client.utils.SessionUser;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.Map;
 
 @Controller
 public class AdminController extends BaseController{
@@ -34,13 +31,11 @@ public class AdminController extends BaseController{
 	 * 登录
 	 * @param request
 	 * @param response
-	 * @param account
 	 * @return
 	 * @throws IOException
 	 */
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String postLogin(HttpServletRequest request, HttpServletResponse response, ModelMap out,
-			Admin admin) throws IOException {
+	public String postLogin(HttpServletRequest request, HttpServletResponse response, Admin admin) throws IOException {
 
 		try {
 			Admin _admin = adminService.doLogin(admin);

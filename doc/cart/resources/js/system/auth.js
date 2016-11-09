@@ -1,4 +1,0 @@
-
-function postLogin(username, password) {
-	
-}
